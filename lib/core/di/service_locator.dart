@@ -1,3 +1,6 @@
+import 'package:cure/features/home/data/data_source/home_remote_data_source.dart';
+import 'package:cure/features/home/data/repos/home_repo_impl.dart';
+import 'package:cure/features/home/domain/repos/home_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:cure/core/services/api_service.dart';
@@ -17,5 +20,13 @@ void serverLocator() {
 
   getIt.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(authRemoteDataSource: getIt<AuthRemoteDataSource>()),
+  );
+
+  getIt.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+
+  getIt.registerLazySingleton<HomeRepo>(
+    () => HomeRepoImpl(homeRemoteDataSource: getIt<HomeRemoteDataSource>()),
   );
 }
