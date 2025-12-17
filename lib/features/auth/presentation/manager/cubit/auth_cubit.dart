@@ -1,4 +1,5 @@
 import 'package:cure/core/helper/open_google_get_token.dart';
+import 'package:cure/features/auth/data/models/requests/register_request.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cure/features/auth/domain/entities/user_entity.dart';
 import 'package:cure/features/auth/domain/repo/auth_repo.dart';
@@ -19,23 +20,9 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  Future<void> register({
-    required String name,
-    required String email,
-    required String password,
-    required String phone,
-    required String gender,
-    required String birthdate,
-  }) async {
+  Future<void> register({required RegisterRequest registerRequest}) async {
     emit(AuthLoading());
-    var result = await authRepo.register(
-      name: name,
-      email: email,
-      password: password,
-      phone: phone,
-      birthdate: birthdate,
-      gender: gender,
-    );
+    var result = await authRepo.register(registerRequest: registerRequest);
     result.fold(
       (l) => emit(AuthError(message: l.message)),
       (r) => emit(AuthLoaded(user: r)),

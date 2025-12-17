@@ -17,7 +17,7 @@ class RegisterViewBody extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         children: [
-          112.hs,
+          32.hs,
           HeaderAuth(title: 'Create New Account'),
           32.hs,
           RegisterForm(),

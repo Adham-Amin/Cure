@@ -1,17 +1,11 @@
 import 'package:cure/core/services/api_service.dart';
 import 'package:cure/features/auth/data/models/auth_response/auth_response.dart';
+import 'package:cure/features/auth/data/models/requests/register_request.dart';
 import 'package:dio/dio.dart';
 
 abstract class AuthRemoteDataSource {
   Future<AuthResponse> login({required String email, required String password});
-  Future<AuthResponse> register({
-    required String name,
-    required String email,
-    required String password,
-    required String phone,
-    required String gender,
-    required String birthdate,
-  });
+  Future<AuthResponse> register({required RegisterRequest registerRequest});
   Future<void> forgotPassword({required String email});
   Future<void> verifyCode({required String email, required String code});
   Future<void> resetPassword({
@@ -54,24 +48,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<AuthResponse> register({
-    required String name,
-    required String email,
-    required String password,
-    required String phone,
-    required String gender,
-    required String birthdate,
+    required RegisterRequest registerRequest,
   }) async {
     final response = await apiService.post(
       endPoint: '/register',
-      data: FormData.fromMap({
-        'name': name,
-        'email': email,
-        'password': password,
-        'birthdate': birthdate,
-        'gender': gender,
-        'mobile': phone,
-        'email_otp': '1234',
-      }),
+      data: FormData.fromMap(await registerRequest.toJson()),
     );
     return AuthResponse.fromJson(response);
   }

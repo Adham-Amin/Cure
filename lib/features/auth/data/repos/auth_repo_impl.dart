@@ -1,3 +1,4 @@
+import 'package:cure/features/auth/data/models/requests/register_request.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:cure/core/errors/failure.dart';
@@ -64,21 +65,11 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Either<Failure, UserEntity>> register({
-    required String name,
-    required String email,
-    required String password,
-    required String phone,
-    required String gender,
-    required String birthdate,
+    required RegisterRequest registerRequest,
   }) async {
     try {
       var data = await authRemoteDataSource.register(
-        name: name,
-        email: email,
-        password: password,
-        phone: phone,
-        gender: gender,
-        birthdate: birthdate,
+        registerRequest: registerRequest,
       );
       await Prefs.setUser(data.toEntity());
       return Right(data.toEntity());

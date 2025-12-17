@@ -1,3 +1,4 @@
+import 'package:cure/features/auth/data/models/requests/register_request.dart';
 import 'package:dartz/dartz.dart';
 import 'package:cure/core/errors/failure.dart';
 import 'package:cure/features/auth/domain/entities/user_entity.dart';
@@ -8,12 +9,7 @@ abstract class AuthRepo {
     required String password,
   });
   Future<Either<Failure, UserEntity>> register({
-    required String name,
-    required String email,
-    required String phone,
-    required String password,
-    required String gender,
-    required String birthdate,
+    required RegisterRequest registerRequest,
   });
   Future<Either<Failure, void>> forgotPassword({required String email});
   Future<Either<Failure, void>> verifyCode({
