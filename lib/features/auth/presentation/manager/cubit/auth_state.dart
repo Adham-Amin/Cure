@@ -11,6 +11,11 @@ final class AuthLoaded extends AuthState {
   AuthLoaded({this.user});
 }
 
+final class AuthSocialLoaded extends AuthState {
+  final UserEntity? user;
+  AuthSocialLoaded({this.user});
+}
+
 final class AuthError extends AuthState {
   final String message;
   AuthError({required this.message});

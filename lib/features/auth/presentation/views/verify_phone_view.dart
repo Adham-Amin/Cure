@@ -4,6 +4,7 @@ import 'package:cure/core/di/service_locator.dart';
 import 'package:cure/features/auth/domain/repo/auth_repo.dart';
 import 'package:cure/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:cure/features/auth/presentation/widgets/verify_email_view_bod.dart';
+import 'package:go_router/go_router.dart';
 
 class VerifyPhoneView extends StatelessWidget {
   final String phone;
@@ -14,7 +15,12 @@ class VerifyPhoneView extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthCubit(authRepo: getIt<AuthRepo>()),
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios_new_rounded),
+            onPressed: () => context.pop(),
+          ),
+        ),
         body: VerifyPhoneViewBody(phone: phone),
       ),
     );

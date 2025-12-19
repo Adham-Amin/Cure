@@ -62,7 +62,7 @@ class SocialButtonsAndOr extends StatelessWidget {
                 type: AnimatedSnackBarType.error,
               );
             }
-            if (state is AuthLoaded) {
+            if (state is AuthSocialLoaded) {
               customSnackBar(
                 context: context,
                 message: 'Welcome ${state.user!.name}',
