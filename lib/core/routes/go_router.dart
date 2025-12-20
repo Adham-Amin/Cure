@@ -9,6 +9,8 @@ import 'package:cure/features/auth/presentation/views/verify_phone_view.dart';
 import 'package:cure/features/intro/onbording/presentation/views/onbording_view.dart';
 import 'package:cure/features/intro/splash/presentation/views/splash_view.dart';
 import 'package:cure/features/main/main_view.dart';
+import 'package:cure/features/specialties/presentation/views/doctors_specialty_view.dart';
+import 'package:cure/features/specialties/presentation/views/specialties_view.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class AppGoRouter {
@@ -56,6 +58,16 @@ abstract class AppGoRouter {
       GoRoute(
         path: AppRoutes.main,
         builder: (context, state) => MainView(key: MainView.mainViewKey),
+      ),
+      GoRoute(
+        path: AppRoutes.specialties,
+        builder: (context, state) =>
+            SpecialtiesView(specialties: state.extra as List<String>),
+      ),
+      GoRoute(
+        path: AppRoutes.doctorsBySpecialties,
+        builder: (context, state) =>
+            DoctorsBySpecialtyView(specialty: state.extra as String),
       ),
     ],
   );

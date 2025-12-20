@@ -1,8 +1,10 @@
+import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:cure/features/home/presentation/widgets/specialties_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SpecialtiesList extends StatelessWidget {
   const SpecialtiesList({super.key});
@@ -18,7 +20,12 @@ class SpecialtiesList extends StatelessWidget {
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.only(right: 8),
           child: SpecialtiesCard(
-            onTap: () {},
+            onTap: () {
+              context.push(
+                AppRoutes.doctorsBySpecialties,
+                extra: context.read<HomeCubit>().home.specialities[index],
+              );
+            },
             title: context.read<HomeCubit>().home.specialities[index],
           ),
         ),

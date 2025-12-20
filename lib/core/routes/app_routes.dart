@@ -9,4 +9,6 @@ abstract class AppRoutes {
   static const resetPassword = '/resetPassword';
   static const verifyPhone = '/verifyEmail';
   static const main = '/main';
+  static const specialties = '/specialties';
+  static const doctorsBySpecialties = '/doctorsBySpecialties';
 }

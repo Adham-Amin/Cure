@@ -1,4 +1,5 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:cure/core/services/shared_preferences_service.dart';
 import 'package:cure/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cure/core/utils/app_colors.dart';
@@ -20,7 +21,14 @@ class MainViewState extends State<MainView> {
     HomeView(),
     Center(child: Text('Wishlist')),
     Center(child: Text('Compare')),
-    Center(child: Text('Profile')),
+    Center(
+      child: IconButton(
+        onPressed: () {
+          Prefs.clearUserData();
+        },
+        icon: const Icon(Icons.logout),
+      ),
+    ),
   ];
 
   void changeTab(int index) {

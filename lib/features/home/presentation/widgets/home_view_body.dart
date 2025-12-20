@@ -1,4 +1,5 @@
 import 'package:cure/core/functions/extentions.dart';
+import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/core/utils/app_assets.dart';
 import 'package:cure/core/utils/app_styles.dart';
 import 'package:cure/core/widgets/custom_error.dart';
@@ -14,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -40,7 +42,13 @@ class HomeViewBody extends StatelessWidget {
                   prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass),
                 ),
                 24.hs,
-                TitleAndSeeAll(onTap: () {}, title: 'Specialties'),
+                TitleAndSeeAll(
+                  onTap: () => context.push(
+                    AppRoutes.specialties,
+                    extra: context.read<HomeCubit>().home.specialities,
+                  ),
+                  title: 'Specialties',
+                ),
                 16.hs,
                 SpecialtiesList(),
                 24.hs,

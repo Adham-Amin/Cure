@@ -40,7 +40,7 @@ class DoctorCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Dr. ${doctor.name}',
+                  doctor.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppStyles.textRegular16.copyWith(

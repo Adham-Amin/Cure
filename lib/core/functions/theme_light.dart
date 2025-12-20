@@ -14,6 +14,14 @@ ThemeData themeLight() {
       brightness: Brightness.light,
       surfaceTint: Colors.transparent,
     ),
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      backgroundColor: AppColors.white,
+      titleTextStyle: AppStyles.textRegular24.copyWith(
+        fontFamily: AppStyles.fontGeorgia,
+        color: AppColors.black,
+      ),
+    ),
     textTheme: TextTheme(
       bodyMedium: AppStyles.textRegular14.copyWith(color: AppColors.black),
       labelLarge: AppStyles.textRegular14.copyWith(color: AppColors.primary),

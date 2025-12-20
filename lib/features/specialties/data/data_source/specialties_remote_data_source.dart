@@ -14,7 +14,7 @@ class SpecialtiesRemoteDataSourceImpl implements SpecialtiesRemoteDataSource {
   Future<SpecialtiesModel> getDoctorBySpecialties({
     required String specialties,
   }) async {
-    final response = await apiService.get(
+    final response = await apiService.post(
       endPoint: '/search/history?search_query=$specialties',
     );
     return SpecialtiesModel.fromJson(response);
