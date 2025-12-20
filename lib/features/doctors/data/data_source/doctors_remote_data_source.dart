@@ -28,7 +28,7 @@ class DoctorsRemoteDataSourceImpl implements DoctorsRemoteDataSource {
   Future<List<DoctorEntity>> getDoctorsbySpecialties({
     required String specialties,
   }) async {
-    final response = await apiService.get(
+    final response = await apiService.post(
       endPoint: '/search/history?search_query=$specialties',
     );
     List<DoctorEntity> doctors = [];

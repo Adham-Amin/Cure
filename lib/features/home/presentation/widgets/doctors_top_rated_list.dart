@@ -16,8 +16,14 @@ class DoctorsTopRatedList extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: doctors.length,
       separatorBuilder: (context, index) => 16.hs,
-      itemBuilder: (context, index) =>
-          DoctorCard(image: AppAssets.imagesDocOne, doctor: doctors[index]),
+      itemBuilder: (context, index) {
+        final sortedDoctors = doctors
+          ..sort((a, b) => b.averageRating.compareTo(a.averageRating));
+        return DoctorCard(
+          image: AppAssets.imagesDocOne,
+          doctor: sortedDoctors[index],
+        );
+      },
     );
   }
 }

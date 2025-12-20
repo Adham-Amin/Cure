@@ -11,4 +11,5 @@ abstract class AppRoutes {
   static const main = '/main';
   static const specialties = '/specialties';
   static const doctorsBySpecialties = '/doctorsBySpecialties';
+  static const doctors = '/doctors';
 }

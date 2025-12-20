@@ -6,6 +6,7 @@ import 'package:cure/features/auth/presentation/views/otp_view.dart';
 import 'package:cure/features/auth/presentation/views/register_view.dart';
 import 'package:cure/features/auth/presentation/views/reset_password_view.dart';
 import 'package:cure/features/auth/presentation/views/verify_phone_view.dart';
+import 'package:cure/features/doctors/presentation/views/doctors_view.dart';
 import 'package:cure/features/intro/onbording/presentation/views/onbording_view.dart';
 import 'package:cure/features/intro/splash/presentation/views/splash_view.dart';
 import 'package:cure/features/main/main_view.dart';
@@ -68,6 +69,11 @@ abstract class AppGoRouter {
         path: AppRoutes.doctorsBySpecialties,
         builder: (context, state) =>
             DoctorsBySpecialtyView(specialty: state.extra as String),
+      ),
+      GoRoute(
+        path: AppRoutes.doctors,
+        builder: (context, state) =>
+            DoctorsView(specialties: state.extra as List<String>),
       ),
     ],
   );

@@ -69,7 +69,15 @@ class HomeViewBody extends StatelessWidget {
                   doctors: context.read<HomeCubit>().home.doctors,
                 ),
                 24.hs,
-                TitleAndSeeAll(onTap: () {}, title: 'Top Rated Doctors'),
+                TitleAndSeeAll(
+                  onTap: () {
+                    context.push(
+                      AppRoutes.doctors,
+                      extra: context.read<HomeCubit>().home.specialities,
+                    );
+                  },
+                  title: 'Top Rated Doctors',
+                ),
                 16.hs,
                 DoctorsTopRatedList(doctors: context.read<HomeCubit>().doctors),
                 24.hs,

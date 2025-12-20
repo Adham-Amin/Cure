@@ -12,7 +12,6 @@ class DoctorModel {
   double? sessionPrice;
   num? averageRating;
   num? reviewsCount;
-  String? availability;
   String? consultation;
   User? user;
 
@@ -25,7 +24,6 @@ class DoctorModel {
     this.sessionPrice,
     this.averageRating,
     this.reviewsCount,
-    this.availability,
     this.consultation,
     this.user,
   });
@@ -41,9 +39,6 @@ class DoctorModel {
     sessionPrice: (json['session_price'] as num?)?.toDouble(),
     averageRating: json['average_rating'] as num?,
     reviewsCount: json['reviews_count'] as num?,
-    availability: json['availability'] == null
-        ? null
-        : json['availability']['monday']['09:00'] as String,
     consultation: json['consultation'] as String?,
     user: json['user'] == null
         ? null
@@ -59,7 +54,6 @@ class DoctorModel {
     'session_price': sessionPrice,
     'average_rating': averageRating,
     'reviews_count': reviewsCount,
-    'availability': availability,
     'consultation': consultation,
     'user': user?.toJson(),
   };
