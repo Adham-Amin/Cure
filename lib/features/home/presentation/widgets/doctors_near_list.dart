@@ -1,0 +1,23 @@
+import 'package:cure/core/functions/extentions.dart';
+import 'package:cure/core/utils/app_assets.dart';
+import 'package:cure/features/home/domain/entities/doctor_entity.dart';
+import 'package:cure/features/home/presentation/widgets/doctor_card.dart';
+import 'package:flutter/material.dart';
+
+class DoctorsNearList extends StatelessWidget {
+  const DoctorsNearList({super.key, required this.doctors});
+
+  final List<DoctorEntity> doctors;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: doctors.length,
+      separatorBuilder: (context, index) => 16.hs,
+      itemBuilder: (context, index) =>
+          DoctorCard(image: AppAssets.imagesDocOne, doctor: doctors[index]),
+    );
+  }
+}

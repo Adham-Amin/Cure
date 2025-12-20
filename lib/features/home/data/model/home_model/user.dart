@@ -1,7 +1,7 @@
 import 'location.dart';
 
 class User {
-  int? id;
+  num? id;
   String? name;
   String? greeting;
   Location? location;
@@ -10,7 +10,7 @@ class User {
   User({this.id, this.name, this.greeting, this.location, this.profilePhoto});
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json['id'] as int?,
+    id: json['id'] as num?,
     name: json['name'] as String?,
     greeting: json['greeting'] as String?,
     location: json['location'] == null

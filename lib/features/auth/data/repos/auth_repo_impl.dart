@@ -52,6 +52,7 @@ class AuthRepoImpl implements AuthRepo {
         email: email,
         password: password,
       );
+      await Prefs.setToken(response.token!);
       await Prefs.setUser(response.toEntity());
       return Right(response.toEntity());
     } catch (e) {
@@ -71,6 +72,7 @@ class AuthRepoImpl implements AuthRepo {
       var data = await authRemoteDataSource.register(
         registerRequest: registerRequest,
       );
+      await Prefs.setToken(data.token!);
       await Prefs.setUser(data.toEntity());
       return Right(data.toEntity());
     } catch (e) {

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppStyles {
   static const String fontFamily = 'Montserrat';
+  static const String fontGeorgia = 'Georgia';
 
   static TextStyle textRegular12 = TextStyle(
     fontSize: 12.sp,
@@ -23,6 +24,12 @@ abstract class AppStyles {
     fontSize: 18.sp,
     fontWeight: FontWeight.w400,
   );
+
+  static TextStyle textRegular20 = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w400,
+  );
+
   static TextStyle textRegular24 = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeight.w400,

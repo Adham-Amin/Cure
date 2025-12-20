@@ -7,7 +7,7 @@ class Datum {
   String? licenseNumber;
   String? clinicAddress;
   Location? location;
-  double? sessionPrice;
+  num? sessionPrice;
   int? averageRating;
   int? reviewsCount;
   String? availability;

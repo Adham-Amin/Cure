@@ -4,14 +4,14 @@ import 'location.dart';
 import 'user.dart';
 
 class DoctorModel {
-  int? id;
+  num? id;
   String? specialty;
   String? licenseNumber;
   String? clinicAddress;
   Location? location;
   double? sessionPrice;
-  int? averageRating;
-  int? reviewsCount;
+  num? averageRating;
+  num? reviewsCount;
   String? availability;
   String? consultation;
   User? user;
@@ -31,7 +31,7 @@ class DoctorModel {
   });
 
   factory DoctorModel.fromJson(Map<String, dynamic> json) => DoctorModel(
-    id: json['id'] as int?,
+    id: json['id'] as num?,
     specialty: json['specialty'] as String?,
     licenseNumber: json['license_number'] as String?,
     clinicAddress: json['clinic_address'] as String?,
@@ -39,8 +39,8 @@ class DoctorModel {
         ? null
         : Location.fromJson(json['location'] as Map<String, dynamic>),
     sessionPrice: (json['session_price'] as num?)?.toDouble(),
-    averageRating: json['average_rating'] as int?,
-    reviewsCount: json['reviews_count'] as int?,
+    averageRating: json['average_rating'] as num?,
+    reviewsCount: json['reviews_count'] as num?,
     availability: json['availability'] == null
         ? null
         : json['availability']['monday']['09:00'] as String,

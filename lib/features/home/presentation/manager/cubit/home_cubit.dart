@@ -15,7 +15,14 @@ class HomeCubit extends Cubit<HomeState> {
   HomeEntity home = HomeEntity(
     greeting: 'Welcome Back, User',
     address: '13 Street, New York, USA',
-    specialities: ['speciality', 'speciality', 'speciality'],
+    specialities: [
+      'speciality',
+      'speciality',
+      'speciality',
+      'speciality',
+      'speciality',
+      'speciality',
+    ],
     doctors: [
       DoctorEntity(
         id: 0,

@@ -12,17 +12,19 @@ class HomeModel {
 
   HomeModel({this.user, this.specialties, this.doctorsNearYou});
 
-  factory HomeModel.fromJson(Map<String, dynamic> json) => HomeModel(
-    user: json['user'] == null
-        ? null
-        : User.fromJson(json['user'] as Map<String, dynamic>),
-    specialties: (json['specialties'] as List<dynamic>?)
-        ?.map((e) => Specialty.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    doctorsNearYou: (json['doctors_near_you'] as List<dynamic>?)
-        ?.map((e) => DoctorsNearYou.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
+  factory HomeModel.fromJson(Map<String, dynamic> json) {
+    return HomeModel(
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      specialties: (json['specialties'] as List<dynamic>?)
+          ?.map((e) => Specialty.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      doctorsNearYou: (json['doctors_near_you'] as List<dynamic>?)
+          ?.map((e) => DoctorsNearYou.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     'user': user?.toJson(),

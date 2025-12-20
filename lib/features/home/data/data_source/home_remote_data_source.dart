@@ -15,7 +15,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   @override
   Future<HomeModel> getHomeData() async {
     final response = await apiService.get(endPoint: '/');
-    return HomeModel.fromJson(response.data);
+    return HomeModel.fromJson(response['data']);
   }
 
   @override
