@@ -1,0 +1,37 @@
+import 'package:cure/features/favourite/domain/repositories/favourite_repo.dart';
+import 'package:cure/features/home/domain/entities/doctor_entity.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+part 'favourite_state.dart';
+
+class FavouriteCubit extends Cubit<FavouriteState> {
+  FavouriteCubit({required this.favouriteRepo}) : super(FavouriteInitial());
+
+  final FavouriteRepo favouriteRepo;
+
+  Future<void> getFavourite() async {
+    emit(FavouriteLoading());
+    final result = await favouriteRepo.getFavourite();
+    result.fold(
+      (l) => emit(FavouriteError(message: l.message)),
+      (r) => emit(FavouriteLoaded(doctors: r)),
+    );
+  }
+
+  Future<void> toggleFavourite({required String doctorId}) async {
+    emit(FavouriteLoading());
+    final result = await favouriteRepo.toggleFavourite(doctorId: doctorId);
+    result.fold(
+      (l) => emit(FavouriteError(message: l.message)),
+      (r) => emit(FavouriteToggleLoaded(message: r)),
+    );
+  }
+
+  Future<void> checkFavourite({required String doctorId}) async {
+    emit(FavouriteLoading());
+    final result = await favouriteRepo.checkFavourite(doctorId: doctorId);
+    result.fold(
+      (l) => emit(FavouriteError(message: l.message)),
+      (r) => emit(FavouriteCheckLoaded(isFavourite: r)),
+    );
+  }
+}
