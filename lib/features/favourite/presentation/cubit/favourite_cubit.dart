@@ -20,10 +20,10 @@ class FavouriteCubit extends Cubit<FavouriteState> {
   Future<void> toggleFavourite({required String doctorId}) async {
     emit(FavouriteLoading());
     final result = await favouriteRepo.toggleFavourite(doctorId: doctorId);
-    result.fold(
-      (l) => emit(FavouriteError(message: l.message)),
-      (r) => emit(FavouriteToggleLoaded(message: r)),
-    );
+    result.fold((l) => emit(FavouriteError(message: l.message)), (r) async {
+      await getFavourite();
+      emit(FavouriteToggleLoaded(message: r));
+    });
   }
 
   Future<void> checkFavourite({required String doctorId}) async {
