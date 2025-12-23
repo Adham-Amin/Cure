@@ -32,11 +32,13 @@ class SearchHistorySection extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                TextButton(
-                  onPressed: () =>
-                      context.read<SearchCubit>().clearSearchHistory(),
-                  child: Text('Clear', style: AppStyles.textRegular16),
-                ),
+                context.read<SearchCubit>().searchHistory.isNotEmpty
+                    ? TextButton(
+                        onPressed: () =>
+                            context.read<SearchCubit>().clearSearchHistory(),
+                        child: Text('Clear', style: AppStyles.textRegular16),
+                      )
+                    : const SizedBox(),
               ],
             ),
             BlocSelector<SearchCubit, SearchState, List<SearchHistoryEntity>>(
