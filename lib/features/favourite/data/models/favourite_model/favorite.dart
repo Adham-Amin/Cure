@@ -4,14 +4,14 @@ import 'location.dart';
 import 'user.dart';
 
 class Favorite {
-  int? id;
+  num? id;
   String? specialty;
   String? licenseNumber;
   String? clinicAddress;
   Location? location;
-  double? sessionPrice;
-  int? averageRating;
-  int? reviewsCount;
+  num? sessionPrice;
+  num? averageRating;
+  num? reviewsCount;
   String? consultation;
   User? user;
 
@@ -29,7 +29,7 @@ class Favorite {
   });
 
   factory Favorite.fromJson(Map<String, dynamic> json) => Favorite(
-    id: json['id'] as int?,
+    id: json['id'] as num?,
     specialty: json['specialty'] as String?,
     licenseNumber: json['license_number'] as String?,
     clinicAddress: json['clinic_address'] as String?,
@@ -37,8 +37,8 @@ class Favorite {
         ? null
         : Location.fromJson(json['location'] as Map<String, dynamic>),
     sessionPrice: (json['session_price'] as num?)?.toDouble(),
-    averageRating: json['average_rating'] as int?,
-    reviewsCount: json['reviews_count'] as int?,
+    averageRating: json['average_rating'] as num?,
+    reviewsCount: json['reviews_count'] as num?,
     consultation: json['consultation'] as String?,
     user: json['user'] == null
         ? null
@@ -59,7 +59,7 @@ class Favorite {
   };
 
   DoctorEntity toEntity() => DoctorEntity(
-    id: user?.id ?? 0,
+    id: id ?? 0,
     name: user?.name ?? '',
     specialty: specialty ?? '',
     clinicAddress: clinicAddress ?? '',

@@ -1,8 +1,8 @@
 import 'package:cure/core/functions/extentions.dart';
 import 'package:cure/core/utils/app_assets.dart';
 import 'package:cure/features/doctors/presentation/cubit/doctors_cubit.dart';
-import 'package:cure/features/home/presentation/widgets/doctor_card.dart';
-import 'package:cure/features/home/presentation/widgets/specialties_card.dart';
+import 'package:cure/core/widgets/doctor_card.dart';
+import 'package:cure/core/widgets/specialties_card.dart';
 import 'package:cure/core/widgets/empty_doctors.dart';
 import 'package:cure/core/widgets/loading_doctor.dart';
 import 'package:flutter/material.dart';

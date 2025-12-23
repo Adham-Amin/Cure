@@ -1,7 +1,7 @@
 import 'package:cure/core/functions/extentions.dart';
 import 'package:cure/core/utils/app_assets.dart';
 import 'package:cure/features/home/domain/entities/doctor_entity.dart';
-import 'package:cure/features/home/presentation/widgets/doctor_card.dart';
+import 'package:cure/core/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
 
 class DoctorsTopRatedList extends StatelessWidget {

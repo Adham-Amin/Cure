@@ -4,7 +4,7 @@ import 'package:cure/core/widgets/custom_error.dart';
 import 'package:cure/core/widgets/custom_text_form_field.dart';
 import 'package:cure/core/widgets/empty_doctors.dart';
 import 'package:cure/core/widgets/loading_doctor.dart';
-import 'package:cure/features/home/presentation/widgets/doctor_card.dart';
+import 'package:cure/core/widgets/doctor_card.dart';
 import 'package:cure/features/search/presentation/cubit/search_cubit.dart';
 import 'package:cure/features/search/presentation/widgets/search_history_section.dart';
 import 'package:flutter/material.dart';

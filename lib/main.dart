@@ -4,6 +4,8 @@ import 'package:cure/core/functions/theme_light.dart';
 import 'package:cure/core/routes/go_router.dart';
 import 'package:cure/core/services/custom_observer_bloc.dart';
 import 'package:cure/core/services/shared_preferences_service.dart';
+import 'package:cure/features/favourite/domain/repositories/favourite_repo.dart';
+import 'package:cure/features/favourite/presentation/cubit/favourite_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,15 +25,19 @@ class Cure extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(428, 926),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) => MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        theme: themeLight(),
-        darkTheme: themeDark(),
-        routerConfig: AppGoRouter.router,
+    return BlocProvider(
+      create: (context) =>
+          FavouriteCubit(favouriteRepo: getIt<FavouriteRepo>())..getFavourite(),
+      child: ScreenUtilInit(
+        designSize: const Size(428, 926),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) => MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: themeLight(),
+          darkTheme: themeDark(),
+          routerConfig: AppGoRouter.router,
+        ),
       ),
     );
   }

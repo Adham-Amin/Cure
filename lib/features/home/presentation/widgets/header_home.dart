@@ -1,4 +1,5 @@
 import 'package:cure/core/functions/extentions.dart';
+import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/core/services/shared_preferences_service.dart';
 import 'package:cure/core/utils/app_colors.dart';
 import 'package:cure/core/utils/app_styles.dart';
@@ -7,6 +8,7 @@ import 'package:cure/features/home/presentation/widgets/container_with_shadow.da
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class HeaderHome extends StatelessWidget {
   const HeaderHome({super.key, required this.home});
@@ -62,12 +64,16 @@ class HeaderHome extends StatelessWidget {
             ),
           ),
           ContainerWithShadow(
-            onTap: () {},
+            onTap: () {
+              context.push(AppRoutes.favourite);
+            },
             child: Icon(FontAwesomeIcons.heart, size: 20),
           ),
           16.ws,
           ContainerWithShadow(
-            onTap: () {},
+            onTap: () {
+              context.push(AppRoutes.notifications);
+            },
             child: Icon(FontAwesomeIcons.bell, size: 20),
           ),
         ],

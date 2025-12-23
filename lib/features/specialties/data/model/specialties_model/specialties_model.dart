@@ -23,7 +23,7 @@ class SpecialtiesModel {
       data
           ?.map(
             (e) => DoctorEntity(
-              id: e.user?.id ?? 0,
+              id: e.id ?? 0,
               name: e.user?.name ?? '',
               specialty: e.specialty ?? '',
               clinicAddress: e.clinicAddress ?? '',

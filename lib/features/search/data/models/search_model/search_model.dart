@@ -59,7 +59,7 @@ class SearchModel {
   };
 
   DoctorEntity toEntity() => DoctorEntity(
-    id: user?.id ?? 0,
+    id: id ?? 0,
     name: user?.name ?? '',
     specialty: specialty ?? '',
     clinicAddress: clinicAddress ?? '',

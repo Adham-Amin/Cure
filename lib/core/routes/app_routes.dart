@@ -12,4 +12,6 @@ abstract class AppRoutes {
   static const specialties = '/specialties';
   static const doctorsBySpecialties = '/doctorsBySpecialties';
   static const doctors = '/doctors';
+  static const favourite = '/favourite';
+  static const notifications = '/notifications';
 }

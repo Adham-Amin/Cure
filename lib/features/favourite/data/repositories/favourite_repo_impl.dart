@@ -40,14 +40,12 @@ class FavouriteRepoImpl implements FavouriteRepo {
   }
 
   @override
-  Future<Either<Failure, String>> toggleFavourite({
+  Future<Either<Failure, void>> toggleFavourite({
     required String doctorId,
   }) async {
     try {
-      final data = await favouriteRemoteDataSource.toggleFavourite(
-        doctorId: doctorId,
-      );
-      return Right(data);
+      await favouriteRemoteDataSource.toggleFavourite(doctorId: doctorId);
+      return Right(null);
     } catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioException(e));

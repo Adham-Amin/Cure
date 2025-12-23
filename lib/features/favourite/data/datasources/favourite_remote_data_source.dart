@@ -3,7 +3,7 @@ import 'package:cure/features/favourite/data/models/favourite_model/favourite_mo
 
 abstract class FavouriteRemoteDataSource {
   Future<FavouriteModel> getFavourite();
-  Future<String> toggleFavourite({required String doctorId});
+  Future<void> toggleFavourite({required String doctorId});
   Future<bool> checkFavourite({required String doctorId});
 }
 
@@ -22,14 +22,11 @@ class FavouriteRemoteDataSourceImpl implements FavouriteRemoteDataSource {
   @override
   Future<FavouriteModel> getFavourite() async {
     final response = await apiService.get(endPoint: '/favorites');
-    return FavouriteModel.fromJson(response);
+    return FavouriteModel.fromJson(response['data']);
   }
 
   @override
-  Future<String> toggleFavourite({required String doctorId}) async {
-    final response = await apiService.post(
-      endPoint: '/favorites/toggle/$doctorId',
-    );
-    return response['data']['message'];
+  Future<void> toggleFavourite({required String doctorId}) async {
+    await apiService.post(endPoint: '/favorites/toggle/$doctorId');
   }
 }
