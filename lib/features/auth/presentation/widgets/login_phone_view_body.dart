@@ -8,6 +8,7 @@ import 'package:cure/core/widgets/custom_button.dart';
 import 'package:cure/core/widgets/custom_snack_bar.dart';
 import 'package:cure/core/widgets/custom_text_form_field.dart';
 import 'package:cure/features/auth/presentation/manager/cubit/auth_cubit.dart';
+import 'package:cure/features/favourite/presentation/cubit/favourite_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,6 +80,7 @@ class _LoginPhoneViewBodyState extends State<LoginPhoneViewBody> {
                   );
                 }
                 if (state is AuthLoaded) {
+                  context.read<FavouriteCubit>().getFavourite();
                   customSnackBar(
                     context: context,
                     message: 'Please enter the code we just sent to phone',
