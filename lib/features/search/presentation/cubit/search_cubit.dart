@@ -9,6 +9,13 @@ class SearchCubit extends Cubit<SearchState> {
 
   final SearchRepo searchRepo;
 
+  List<SearchHistoryEntity> searchHistory = [
+    SearchHistoryEntity(id: 0, name: 'Cure Doctor'),
+    SearchHistoryEntity(id: 0, name: 'Cure Doctor'),
+    SearchHistoryEntity(id: 0, name: 'Cure Doctor'),
+    SearchHistoryEntity(id: 0, name: 'Cure Doctor'),
+  ];
+
   Future<void> getSearchData({required String query}) async {
     emit(SearchLoading());
     final result = await searchRepo.getSearchData(query: query);
@@ -19,20 +26,19 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   Future<void> getSearchHistory() async {
-    emit(SearchLoading());
     final result = await searchRepo.getSearchHistory();
-    result.fold(
-      (l) => emit(SearchError(message: l.message)),
-      (r) => emit(SearchHistoryLoaded(search: r)),
-    );
+    result.fold((l) => emit(SearchError(message: l.message)), (r) {
+      searchHistory = r;
+      emit(SearchHistoryLoaded());
+    });
   }
 
   Future<void> clearSearchHistory() async {
     final result = await searchRepo.clearSearchHistory();
-    result.fold(
-      (l) => emit(SearchError(message: l.message)),
-      (r) => emit(SearchHistoryLoaded(search: [])),
-    );
+    result.fold((l) => emit(SearchError(message: l.message)), (r) {
+      searchHistory = [];
+      emit(SearchHistoryLoaded());
+    });
   }
 
   Future<void> deleteSpecificSearch({required String id}) async {

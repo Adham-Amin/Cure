@@ -11,10 +11,9 @@ class SearchLoaded extends SearchState {
   SearchLoaded({required this.doctors});
 }
 
-class SearchHistoryLoaded extends SearchState {
-  final List<SearchHistoryEntity> search;
-  SearchHistoryLoaded({required this.search});
-}
+class SearchHistoryLoading extends SearchState {}
+
+class SearchHistoryLoaded extends SearchState {}
 
 class SearchError extends SearchState {
   final String message;

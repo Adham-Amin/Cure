@@ -1,4 +1,5 @@
 import 'package:cure/core/functions/extentions.dart';
+import 'package:cure/core/functions/navigate_to_tab.dart';
 import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/core/utils/app_assets.dart';
 import 'package:cure/core/utils/app_styles.dart';
@@ -36,7 +37,9 @@ class HomeViewBody extends StatelessWidget {
                 HeaderHome(home: context.read<HomeCubit>().home),
                 24.hs,
                 CustomTextFormField(
-                  onTap: () {},
+                  onTap: () {
+                    navigateToTab(context, 1);
+                  },
                   readOnly: true,
                   hintText: 'Search for specialty, doctor',
                   prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass),

@@ -11,6 +11,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.onChanged,
     this.textAlign = TextAlign.start,
+    this.onFieldSubmitted,
     this.maxLines = 1,
     this.inputFormatters,
     this.prefixIcon,
@@ -23,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final void Function(String)? onFieldSubmitted;
   final VoidCallback? onTap;
   final TextAlign textAlign;
   final int maxLines;
@@ -37,6 +39,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       onTapOutside: (_) => FocusScope.of(context).unfocus(),
       onTap: onTap,
+      onFieldSubmitted: onFieldSubmitted,
       readOnly: readOnly,
       onChanged: onChanged,
       controller: controller,
