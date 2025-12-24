@@ -1,3 +1,6 @@
+import 'package:cure/features/doctor_details/data/datasources/doctor_details_remote_data_source.dart';
+import 'package:cure/features/doctor_details/data/repositories/doctor_details_repo_impl.dart';
+import 'package:cure/features/doctor_details/domain/repositories/doctor_details_repo.dart';
 import 'package:cure/features/doctors/data/data_source/doctors_remote_data_source.dart';
 import 'package:cure/features/doctors/data/repos/doctors_repo_impl.dart';
 import 'package:cure/features/doctors/domain/repo/doctor_repo.dart';
@@ -72,6 +75,15 @@ void serverLocator() {
   getIt.registerLazySingleton<FavouriteRepo>(
     () => FavouriteRepoImpl(
       favouriteRemoteDataSource: getIt<FavouriteRemoteDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<DoctorDetailsRemoteDataSource>(
+    () => DoctorDetailsRemoteDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<DoctorDetailsRepo>(
+    () => DoctorDetailsRepoImpl(
+      doctorDetailsRemoteDataSource: getIt<DoctorDetailsRemoteDataSource>(),
     ),
   );
 }

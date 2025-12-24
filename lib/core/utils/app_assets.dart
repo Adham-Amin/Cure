@@ -26,6 +26,18 @@ class AppAssets {
   /// assets/images/on_two.png
   static const String imagesOnTwo = "assets/images/on_two.png";
 
+  /// Assets for imagesReviewer
+  /// assets/images/reviewer.png
+  static const String imagesReviewer = "assets/images/reviewer.png";
+
+  /// Assets for imagesReviewerThree
+  /// assets/images/reviewer_three.png
+  static const String imagesReviewerThree = "assets/images/reviewer_three.png";
+
+  /// Assets for imagesReviewerTwo
+  /// assets/images/reviewer_two.png
+  static const String imagesReviewerTwo = "assets/images/reviewer_two.png";
+
   /// Assets for lottiesLoading
   /// assets/lotties/loading.json
   static const String lottiesLoading = "assets/lotties/loading.json";
@@ -34,9 +46,41 @@ class AppAssets {
   /// assets/svgs/empty_fav.svg
   static const String svgsEmptyFav = "assets/svgs/empty_fav.svg";
 
+  /// Assets for svgsIcChat
+  /// assets/svgs/ic_chat.svg
+  static const String svgsIcChat = "assets/svgs/ic_chat.svg";
+
   /// Assets for svgsIcGogole
   /// assets/svgs/ic_gogole.svg
   static const String svgsIcGogole = "assets/svgs/ic_gogole.svg";
+
+  /// Assets for svgsIcLocation
+  /// assets/svgs/ic_location.svg
+  static const String svgsIcLocation = "assets/svgs/ic_location.svg";
+
+  /// Assets for svgsIcMedal
+  /// assets/svgs/ic_medal.svg
+  static const String svgsIcMedal = "assets/svgs/ic_medal.svg";
+
+  /// Assets for svgsIcMessages
+  /// assets/svgs/ic_messages.svg
+  static const String svgsIcMessages = "assets/svgs/ic_messages.svg";
+
+  /// Assets for svgsIcPatients
+  /// assets/svgs/ic_patients.svg
+  static const String svgsIcPatients = "assets/svgs/ic_patients.svg";
+
+  /// Assets for svgsIcPen
+  /// assets/svgs/ic_pen.svg
+  static const String svgsIcPen = "assets/svgs/ic_pen.svg";
+
+  /// Assets for svgsIcStar
+  /// assets/svgs/ic_star.svg
+  static const String svgsIcStar = "assets/svgs/ic_star.svg";
+
+  /// Assets for svgsIcStarYellow
+  /// assets/svgs/ic_star_yellow.svg
+  static const String svgsIcStarYellow = "assets/svgs/ic_star_yellow.svg";
 
   /// Assets for svgsLogPhone
   /// assets/svgs/log_phone.svg
