@@ -7,16 +7,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class DoctorDetailsView extends StatelessWidget {
-  const DoctorDetailsView({super.key, required this.id});
+  const DoctorDetailsView({super.key, required this.id, required this.image});
 
-  final String id;
+  final num id;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
           DoctorDetailsCubit(doctorDetailsRepo: getIt<DoctorDetailsRepo>())
-            ..getDoctorDetails(doctorId: id),
+            ..getDoctorDetails(doctorId: id.toString()),
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -25,7 +26,7 @@ class DoctorDetailsView extends StatelessWidget {
           ),
           title: const Text('Doctor Deatails'),
         ),
-        body: const DoctorDeatailsViewBody(),
+        body: DoctorDeatailsViewBody(image: image),
       ),
     );
   }

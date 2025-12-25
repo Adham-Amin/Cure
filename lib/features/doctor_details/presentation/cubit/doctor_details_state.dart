@@ -6,10 +6,7 @@ class DoctorDetailsInitial extends DoctorDetailsState {}
 
 class DoctorDetailsLoading extends DoctorDetailsState {}
 
-class DoctorDetailsLoaded extends DoctorDetailsState {
-  final DoctorDetailsEntity doctor;
-  DoctorDetailsLoaded({required this.doctor});
-}
+class DoctorDetailsLoaded extends DoctorDetailsState {}
 
 class DoctorDetailsError extends DoctorDetailsState {
   final String message;

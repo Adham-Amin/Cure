@@ -83,8 +83,10 @@ abstract class AppGoRouter {
       ),
       GoRoute(
         path: AppRoutes.doctorDetails,
-        builder: (context, state) =>
-            DoctorDetailsView(id: state.extra as String),
+        builder: (context, state) {
+          var args = state.extra as Map<String, dynamic>;
+          return DoctorDetailsView(id: args['id'], image: args['image']);
+        },
       ),
     ],
   );

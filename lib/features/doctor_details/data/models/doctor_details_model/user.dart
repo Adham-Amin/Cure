@@ -3,24 +3,15 @@ class User {
   String? name;
   String? email;
   String? mobile;
-  dynamic profilePhoto;
   String? gender;
 
-  User({
-    this.id,
-    this.name,
-    this.email,
-    this.mobile,
-    this.profilePhoto,
-    this.gender,
-  });
+  User({this.id, this.name, this.email, this.mobile, this.gender});
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     id: json['id'] as num?,
     name: json['name'] as String?,
     email: json['email'] as String?,
     mobile: json['mobile'] as String?,
-    profilePhoto: json['profile_photo'] as dynamic,
     gender: json['gender'] as String?,
   );
 
@@ -29,7 +20,6 @@ class User {
     'name': name,
     'email': email,
     'mobile': mobile,
-    'profile_photo': profilePhoto,
     'gender': gender,
   };
 }

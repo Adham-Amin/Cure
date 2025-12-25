@@ -19,8 +19,10 @@ class DoctorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-          context.push(AppRoutes.doctorDetails, extra: doctor.id.toString()),
+      onTap: () => context.push(
+        AppRoutes.doctorDetails,
+        extra: {'id': doctor.id, 'image': image},
+      ),
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.white,
