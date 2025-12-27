@@ -1,21 +1,33 @@
+import 'package:cure/features/change_password/data/datasources/change_password_remote_data_source.dart';
+import 'package:cure/features/change_password/data/repositories/change_password_repo_impl.dart';
+import 'package:cure/features/change_password/domain/repositories/change_password_repo.dart';
 import 'package:cure/features/doctor_details/data/datasources/doctor_details_remote_data_source.dart';
 import 'package:cure/features/doctor_details/data/repositories/doctor_details_repo_impl.dart';
 import 'package:cure/features/doctor_details/domain/repositories/doctor_details_repo.dart';
 import 'package:cure/features/doctors/data/data_source/doctors_remote_data_source.dart';
 import 'package:cure/features/doctors/data/repos/doctors_repo_impl.dart';
 import 'package:cure/features/doctors/domain/repo/doctor_repo.dart';
+import 'package:cure/features/faqs/data/datasources/faq_remote_data_source.dart';
+import 'package:cure/features/faqs/data/repositories/faq_repo_impl.dart';
+import 'package:cure/features/faqs/domain/repositories/faq_repo.dart';
 import 'package:cure/features/favourite/data/datasources/favourite_remote_data_source.dart';
 import 'package:cure/features/favourite/data/repositories/favourite_repo_impl.dart';
 import 'package:cure/features/favourite/domain/repositories/favourite_repo.dart';
 import 'package:cure/features/home/data/data_source/home_remote_data_source.dart';
 import 'package:cure/features/home/data/repos/home_repo_impl.dart';
 import 'package:cure/features/home/domain/repos/home_repo.dart';
+import 'package:cure/features/profile/data/datasources/profile_remote_data_source.dart';
+import 'package:cure/features/profile/data/repositories/profile_repo_impl.dart';
+import 'package:cure/features/profile/domain/repositories/profile_repo.dart';
 import 'package:cure/features/search/data/datasources/search_remote_data_source.dart';
 import 'package:cure/features/search/data/repositories/search_repo_impl.dart';
 import 'package:cure/features/search/domain/repositories/search_repo.dart';
 import 'package:cure/features/specialties/data/data_source/specialties_remote_data_source.dart';
 import 'package:cure/features/specialties/data/repo/specialties_repo_impl.dart';
 import 'package:cure/features/specialties/domain/repo/specialties_repo.dart';
+import 'package:cure/features/update_number/data/datasources/update_number_remote_data_source.dart';
+import 'package:cure/features/update_number/data/repositories/update_number_repo_impl.dart';
+import 'package:cure/features/update_number/domain/repositories/update_number_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:cure/core/services/api_service.dart';
@@ -84,6 +96,40 @@ void serverLocator() {
   getIt.registerLazySingleton<DoctorDetailsRepo>(
     () => DoctorDetailsRepoImpl(
       doctorDetailsRemoteDataSource: getIt<DoctorDetailsRemoteDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<ProfileRepo>(
+    () => ProfileRepoImpl(
+      profileRemoteDataSource: getIt<ProfileRemoteDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<FaqRemoteDataSource>(
+    () => FaqRemoteDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<FaqRepo>(
+    () => FaqRepoImpl(faqRemoteDataSource: getIt<FaqRemoteDataSource>()),
+  );
+
+  getIt.registerLazySingleton<ChangePasswordRemoteDataSource>(
+    () => ChangePasswordRemoteDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<ChangePasswordRepo>(
+    () => ChangePasswordRepoImpl(
+      changePasswordRemoteDataSource: getIt<ChangePasswordRemoteDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<UpdateNumberRemoteDataSource>(
+    () => UpdateNumberRemoteDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<UpdateNumberRepo>(
+    () => UpdateNumberRepoImpl(
+      updateNumberRemoteDataSource: getIt<UpdateNumberRemoteDataSource>(),
     ),
   );
 }

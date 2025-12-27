@@ -42,16 +42,28 @@ class RegisterRequest {
     );
   }
 
-  Future<Map<String, dynamic>> toJson() async => {
-    'name': name,
-    'email': email,
-    'password': password,
-    'birthdate': birthdate,
-    'gender': gender,
-    'mobile': mobile,
-    'location_lat': locationLat,
-    'location_lng': locationLng,
-    'email_otp': emailOtp,
-    'profile_photo': await MultipartFile.fromFile(profilePhoto!.path),
+  Future<Map<String, dynamic>> toJson() async {
+    return {
+      'name': name,
+      'email': email,
+      'password': password,
+      'birthdate': birthdate,
+      'gender': gender,
+      'mobile': mobile,
+      'location_lat': locationLat,
+      'location_lng': locationLng,
+      'email_otp': emailOtp,
+      'profile_photo': await MultipartFile.fromFile(profilePhoto!.path),
+    };
+  }
+
+  Future<Map<String, dynamic>> toUpdate() async => {
+    '_method': 'PUT',
+    if (name != null && name!.isNotEmpty) 'name': name,
+    if (email != null && email!.isNotEmpty) 'email': email,
+    if (birthdate != null && birthdate!.isNotEmpty) 'birthdate': birthdate,
+    if (gender != null && gender!.isNotEmpty) 'gender': gender,
+    if (profilePhoto != null)
+      'profile_photo': await MultipartFile.fromFile(profilePhoto!.path),
   };
 }
