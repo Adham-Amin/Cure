@@ -15,4 +15,9 @@ abstract class AppRoutes {
   static const doctorDetails = '/doctorDetails';
   static const favourite = '/favourite';
   static const notifications = '/notifications';
+  static const faq = '/faq';
+  static const changePassword = '/changePassword';
+  static const updateProfile = '/profile';
+  static const payment = '/payment';
+  static const editProfile = '/editProfile';
 }

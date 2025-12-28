@@ -1,6 +1,6 @@
-import 'package:cure/core/services/shared_preferences_service.dart';
 import 'package:cure/core/utils/app_styles.dart';
 import 'package:cure/features/home/presentation/views/home_view.dart';
+import 'package:cure/features/profile/presentation/pages/profile_view.dart';
 import 'package:cure/features/search/presentation/views/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cure/core/utils/app_colors.dart';
@@ -23,14 +23,7 @@ class MainViewState extends State<MainView> {
     HomeView(),
     SearchView(),
     Center(child: Text('Booking')),
-    Center(
-      child: IconButton(
-        onPressed: () {
-          Prefs.clearUserData();
-        },
-        icon: const Icon(Icons.logout),
-      ),
-    ),
+    ProfileView(),
   ];
 
   void changeTab(int index) {

@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_single_quotes
 class AppAssets {
   AppAssets._();
-
+  
   /// Assets for imagesBanner
   /// assets/images/banner.png
   static const String imagesBanner = "assets/images/banner.png";
@@ -50,6 +50,14 @@ class AppAssets {
   /// assets/svgs/ic_chat.svg
   static const String svgsIcChat = "assets/svgs/ic_chat.svg";
 
+  /// Assets for svgsIcFaq
+  /// assets/svgs/ic_faq.svg
+  static const String svgsIcFaq = "assets/svgs/ic_faq.svg";
+
+  /// Assets for svgsIcFav
+  /// assets/svgs/ic_fav.svg
+  static const String svgsIcFav = "assets/svgs/ic_fav.svg";
+
   /// Assets for svgsIcGogole
   /// assets/svgs/ic_gogole.svg
   static const String svgsIcGogole = "assets/svgs/ic_gogole.svg";
@@ -57,6 +65,10 @@ class AppAssets {
   /// Assets for svgsIcLocation
   /// assets/svgs/ic_location.svg
   static const String svgsIcLocation = "assets/svgs/ic_location.svg";
+
+  /// Assets for svgsIcLogout
+  /// assets/svgs/ic_logout.svg
+  static const String svgsIcLogout = "assets/svgs/ic_logout.svg";
 
   /// Assets for svgsIcMedal
   /// assets/svgs/ic_medal.svg
@@ -66,13 +78,25 @@ class AppAssets {
   /// assets/svgs/ic_messages.svg
   static const String svgsIcMessages = "assets/svgs/ic_messages.svg";
 
+  /// Assets for svgsIcPass
+  /// assets/svgs/ic_pass.svg
+  static const String svgsIcPass = "assets/svgs/ic_pass.svg";
+
   /// Assets for svgsIcPatients
   /// assets/svgs/ic_patients.svg
   static const String svgsIcPatients = "assets/svgs/ic_patients.svg";
 
+  /// Assets for svgsIcPayment
+  /// assets/svgs/ic_payment.svg
+  static const String svgsIcPayment = "assets/svgs/ic_payment.svg";
+
   /// Assets for svgsIcPen
   /// assets/svgs/ic_pen.svg
   static const String svgsIcPen = "assets/svgs/ic_pen.svg";
+
+  /// Assets for svgsIcPerson
+  /// assets/svgs/ic_person.svg
+  static const String svgsIcPerson = "assets/svgs/ic_person.svg";
 
   /// Assets for svgsIcStar
   /// assets/svgs/ic_star.svg
@@ -98,3 +122,4 @@ class AppAssets {
   /// assets/svgs/on_two.svg
   static const String svgsOnTwo = "assets/svgs/on_two.svg";
 }
+

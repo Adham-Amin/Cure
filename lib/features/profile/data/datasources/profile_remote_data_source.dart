@@ -25,6 +25,6 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       endPoint: '/updateProfile',
       data: FormData.fromMap(await data.toUpdate()),
     );
-    return UpdateProfileModel.fromJson(response);
+    return UpdateProfileModel.fromJson(response['data']);
   }
 }

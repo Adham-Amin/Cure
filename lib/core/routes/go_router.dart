@@ -12,6 +12,7 @@ import 'package:cure/features/favourite/presentation/views/fav_view.dart';
 import 'package:cure/features/intro/onbording/presentation/views/onbording_view.dart';
 import 'package:cure/features/intro/splash/presentation/views/splash_view.dart';
 import 'package:cure/features/main/main_view.dart';
+import 'package:cure/features/profile/presentation/pages/edit_profile_view.dart';
 import 'package:cure/features/specialties/presentation/views/doctors_specialty_view.dart';
 import 'package:cure/features/specialties/presentation/views/specialties_view.dart';
 import 'package:go_router/go_router.dart';
@@ -86,6 +87,12 @@ abstract class AppGoRouter {
         builder: (context, state) {
           var args = state.extra as Map<String, dynamic>;
           return DoctorDetailsView(id: args['id'], image: args['image']);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.editProfile,
+        builder: (context, state) {
+          return const EditProfileView();
         },
       ),
     ],
