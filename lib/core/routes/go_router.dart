@@ -9,6 +9,7 @@ import 'package:cure/features/auth/presentation/views/verify_phone_view.dart';
 import 'package:cure/features/change_password/presentation/pages/change_password_view.dart';
 import 'package:cure/features/doctor_details/presentation/pages/doctor_deatails_view.dart';
 import 'package:cure/features/doctors/presentation/views/doctors_view.dart';
+import 'package:cure/features/faqs/presentation/pages/faq_view.dart';
 import 'package:cure/features/favourite/presentation/views/fav_view.dart';
 import 'package:cure/features/intro/onbording/presentation/views/onbording_view.dart';
 import 'package:cure/features/intro/splash/presentation/views/splash_view.dart';
@@ -100,6 +101,12 @@ abstract class AppGoRouter {
         path: AppRoutes.changePassword,
         builder: (context, state) {
           return const ChangePasswordView();
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.faq,
+        builder: (context, state) {
+          return const FaqView();
         },
       ),
     ],
