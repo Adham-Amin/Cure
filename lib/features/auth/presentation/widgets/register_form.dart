@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:cure/core/location/location_handler.dart';
+import 'package:cure/core/helper/location_handler.dart';
 import 'package:cure/core/utils/app_colors.dart';
 import 'package:cure/features/auth/data/models/location_model.dart';
 import 'package:cure/features/auth/data/models/requests/register_request.dart';
