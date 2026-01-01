@@ -61,7 +61,7 @@ class ApiService {
 
   Future<Map<String, dynamic>> put({
     required String endPoint,
-    required Map<String, dynamic> data,
+    Map<String, dynamic>? data,
   }) async {
     final Response response = await _dio.put('$baseUrl$endPoint', data: data);
     return response.data;

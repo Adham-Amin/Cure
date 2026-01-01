@@ -16,6 +16,9 @@ import 'package:cure/features/favourite/domain/repositories/favourite_repo.dart'
 import 'package:cure/features/home/data/data_source/home_remote_data_source.dart';
 import 'package:cure/features/home/data/repos/home_repo_impl.dart';
 import 'package:cure/features/home/domain/repos/home_repo.dart';
+import 'package:cure/features/payment/data/datasources/payment_remote_data_source.dart';
+import 'package:cure/features/payment/data/repositories/payment_repo_impl.dart';
+import 'package:cure/features/payment/domain/repositories/payment_repo.dart';
 import 'package:cure/features/profile/data/datasources/profile_remote_data_source.dart';
 import 'package:cure/features/profile/data/repositories/profile_repo_impl.dart';
 import 'package:cure/features/profile/domain/repositories/profile_repo.dart';
@@ -130,6 +133,15 @@ void serverLocator() {
   getIt.registerLazySingleton<UpdateNumberRepo>(
     () => UpdateNumberRepoImpl(
       updateNumberRemoteDataSource: getIt<UpdateNumberRemoteDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<PaymentRemoteDataSource>(
+    () => PaymentRemoteDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<PaymentRepo>(
+    () => PaymentRepoImpl(
+      paymentRemoteDataSource: getIt<PaymentRemoteDataSource>(),
     ),
   );
 }
