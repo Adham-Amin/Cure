@@ -1,3 +1,4 @@
+import 'package:cure/core/di/service_locator.dart';
 import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:cure/features/auth/presentation/views/login_phone_view.dart';
@@ -14,16 +15,20 @@ import 'package:cure/features/favourite/presentation/views/fav_view.dart';
 import 'package:cure/features/intro/onbording/presentation/views/onbording_view.dart';
 import 'package:cure/features/intro/splash/presentation/views/splash_view.dart';
 import 'package:cure/features/main/main_view.dart';
+import 'package:cure/features/payment/domain/repositories/payment_repo.dart';
+import 'package:cure/features/payment/presentation/cubit/payment_cubit.dart';
+import 'package:cure/features/payment/presentation/pages/add_payment_card_view.dart';
 import 'package:cure/features/payment/presentation/pages/payment_view.dart';
 import 'package:cure/features/profile/presentation/pages/edit_profile_view.dart';
 import 'package:cure/features/specialties/presentation/views/doctors_specialty_view.dart';
 import 'package:cure/features/specialties/presentation/views/specialties_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class AppGoRouter {
   static final router = GoRouter(
     initialLocation: AppRoutes.splash,
-    routes: <GoRoute>[
+    routes: [
       GoRoute(
         path: AppRoutes.splash,
         builder: (context, state) => const SplashView(),
@@ -110,11 +115,27 @@ abstract class AppGoRouter {
           return const FaqView();
         },
       ),
-      GoRoute(
-        path: AppRoutes.payment,
-        builder: (context, state) {
-          return const PaymentView();
-        },
+      ShellRoute(
+        builder: (context, state, child) => BlocProvider(
+          create: (context) =>
+              PaymentCubit(paymentRepo: getIt<PaymentRepo>())
+                ..getPaymentCards(),
+          child: child,
+        ),
+        routes: [
+          GoRoute(
+            path: AppRoutes.payment,
+            builder: (context, state) {
+              return const PaymentView();
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.addPaymentCard,
+            builder: (context, state) {
+              return const AddPaymentCardView();
+            },
+          ),
+        ],
       ),
     ],
   );

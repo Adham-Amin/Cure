@@ -1,10 +1,12 @@
 import 'package:cure/core/functions/extentions.dart';
+import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/core/utils/app_assets.dart';
 import 'package:cure/core/utils/app_colors.dart';
 import 'package:cure/core/utils/app_styles.dart';
 import 'package:cure/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class EmptyPayment extends StatelessWidget {
   const EmptyPayment({super.key});
@@ -30,7 +32,10 @@ class EmptyPayment extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         Spacer(),
-        CustomButton(title: 'Add New Card', onTap: () {}),
+        CustomButton(
+          title: 'Add New Card',
+          onTap: () => context.push(AppRoutes.addPaymentCard),
+        ),
         32.hs,
       ],
     );

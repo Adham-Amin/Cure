@@ -1,8 +1,10 @@
 import 'package:cure/core/functions/extentions.dart';
+import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/core/widgets/custom_button.dart';
 import 'package:cure/features/payment/domain/entities/payment_entity.dart';
 import 'package:cure/features/payment/presentation/widgets/credit_item.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PaymentCardsList extends StatelessWidget {
   const PaymentCardsList({super.key, required this.cards});
@@ -22,7 +24,10 @@ class PaymentCardsList extends StatelessWidget {
             itemBuilder: (context, index) => CreditItem(card: cards[index]),
           ),
         ),
-        CustomButton(title: 'Add New Card', onTap: () {}),
+        CustomButton(
+          title: 'Add New Card',
+          onTap: () => context.push(AppRoutes.addPaymentCard),
+        ),
         32.hs,
       ],
     );
