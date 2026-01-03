@@ -37,6 +37,6 @@ class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource {
 
   @override
   Future<void> setDefaultPaymentCard({required String id}) async {
-    await apiService.put(endPoint: '/payment-methods/25/default');
+    await apiService.put(endPoint: '/payment-methods/$id/default');
   }
 }

@@ -64,10 +64,12 @@ class PaymentModel {
   };
 
   PaymentEntity toEntity() => PaymentEntity(
+    id: id ?? 0,
     token: token ?? '',
     cardHolderName: metadata?.cardholderName ?? '',
     maskedCard: metadata?.maskedCard ?? '',
     expMonth: expMonth ?? 0,
     expYear: expYear ?? 0,
+    isDefault: isDefault ?? false,
   );
 }

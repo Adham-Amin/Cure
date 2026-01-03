@@ -27,7 +27,6 @@ class PaymentCubit extends Cubit<PaymentState> {
   }
 
   Future<void> deletePaymentCard({required String id}) async {
-    emit(PaymentLoading());
     final result = await paymentRepo.deletePaymentCard(id: id);
     result.fold((l) => emit(PaymentError(message: l.message)), (r) async {
       await getPaymentCards();
@@ -35,7 +34,6 @@ class PaymentCubit extends Cubit<PaymentState> {
   }
 
   Future<void> setDefaultPaymentCard({required String id}) async {
-    emit(PaymentLoading());
     final result = await paymentRepo.setDefaultPaymentCard(id: id);
     result.fold((l) => emit(PaymentError(message: l.message)), (r) async {
       await getPaymentCards();

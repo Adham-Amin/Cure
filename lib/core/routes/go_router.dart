@@ -14,6 +14,7 @@ import 'package:cure/features/favourite/presentation/views/fav_view.dart';
 import 'package:cure/features/intro/onbording/presentation/views/onbording_view.dart';
 import 'package:cure/features/intro/splash/presentation/views/splash_view.dart';
 import 'package:cure/features/main/main_view.dart';
+import 'package:cure/features/payment/presentation/pages/payment_view.dart';
 import 'package:cure/features/profile/presentation/pages/edit_profile_view.dart';
 import 'package:cure/features/specialties/presentation/views/doctors_specialty_view.dart';
 import 'package:cure/features/specialties/presentation/views/specialties_view.dart';
@@ -107,6 +108,12 @@ abstract class AppGoRouter {
         path: AppRoutes.faq,
         builder: (context, state) {
           return const FaqView();
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.payment,
+        builder: (context, state) {
+          return const PaymentView();
         },
       ),
     ],

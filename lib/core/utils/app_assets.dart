@@ -1,10 +1,14 @@
 // ignore_for_file: prefer_single_quotes
 class AppAssets {
   AppAssets._();
-
+  
   /// Assets for imagesBanner
   /// assets/images/banner.png
   static const String imagesBanner = "assets/images/banner.png";
+
+  /// Assets for imagesCredit
+  /// assets/images/credit.png
+  static const String imagesCredit = "assets/images/credit.png";
 
   /// Assets for imagesDocOne
   /// assets/images/doc_one.png
@@ -41,6 +45,10 @@ class AppAssets {
   /// Assets for lottiesLoading
   /// assets/lotties/loading.json
   static const String lottiesLoading = "assets/lotties/loading.json";
+
+  /// Assets for svgsBrandicoVisa
+  /// assets/svgs/brandico_visa.svg
+  static const String svgsBrandicoVisa = "assets/svgs/brandico_visa.svg";
 
   /// Assets for svgsEmptyFav
   /// assets/svgs/empty_fav.svg
@@ -122,3 +130,4 @@ class AppAssets {
   /// assets/svgs/on_two.svg
   static const String svgsOnTwo = "assets/svgs/on_two.svg";
 }
+
