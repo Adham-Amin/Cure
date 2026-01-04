@@ -1,3 +1,6 @@
+import 'package:cure/features/booking/data/datasources/booking_remote_data_source.dart';
+import 'package:cure/features/booking/data/repositories/booking_repo_impl.dart';
+import 'package:cure/features/booking/domain/repositories/booking_repo.dart';
 import 'package:cure/features/change_password/data/datasources/change_password_remote_data_source.dart';
 import 'package:cure/features/change_password/data/repositories/change_password_repo_impl.dart';
 import 'package:cure/features/change_password/domain/repositories/change_password_repo.dart';
@@ -142,6 +145,15 @@ void serverLocator() {
   getIt.registerLazySingleton<PaymentRepo>(
     () => PaymentRepoImpl(
       paymentRemoteDataSource: getIt<PaymentRemoteDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<BookingRemoteDataSource>(
+    () => BookingRemoteDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<BookingRepo>(
+    () => BookingRepoImpl(
+      bookingRemoteDataSource: getIt<BookingRemoteDataSource>(),
     ),
   );
 }
