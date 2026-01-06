@@ -1,4 +1,5 @@
 import 'package:cure/core/utils/app_styles.dart';
+import 'package:cure/features/booking/presentation/pages/booking_view.dart';
 import 'package:cure/features/home/presentation/views/home_view.dart';
 import 'package:cure/features/profile/presentation/pages/profile_view.dart';
 import 'package:cure/features/search/presentation/views/search_view.dart';
@@ -22,7 +23,7 @@ class MainViewState extends State<MainView> {
   final List<Widget> _pages = [
     HomeView(),
     SearchView(),
-    Center(child: Text('Booking')),
+    BookingView(),
     ProfileView(),
   ];
 
