@@ -77,5 +77,7 @@ class BookingModel {
     doctorClinicAddress: doctor?.clinicAddress ?? '123, Main Street, New York',
     doctorName: doctor?.user?.name ?? 'Adham Amin',
     doctorSpecialty: doctor?.specialty ?? 'Dentist',
+    doctorId: doctor?.id ?? 0,
+    patientId: patient?.id ?? 0,
   );
 }

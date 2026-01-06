@@ -21,4 +21,5 @@ abstract class AppRoutes {
   static const addPaymentCard = '/addPaymentCard';
   static const payment = '/payment';
   static const editProfile = '/editProfile';
+  static const feedback = '/feedback';
 }

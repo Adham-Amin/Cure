@@ -18,6 +18,8 @@ class BookingLoadingList extends StatelessWidget {
         separatorBuilder: (_, __) => 16.hs,
         itemBuilder: (context, index) => BookingItem(
           booking: BookingEntity(
+            doctorId: 0,
+            patientId: 0,
             id: index,
             dateTimeFormatted: 'Mon, Jun 21 - 10:00 AM',
             statusLabel: 'Pending',

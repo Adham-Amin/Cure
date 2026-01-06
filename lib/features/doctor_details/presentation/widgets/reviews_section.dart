@@ -1,6 +1,5 @@
 import 'package:cure/core/functions/extentions.dart';
 import 'package:cure/core/utils/app_assets.dart';
-import 'package:cure/core/utils/app_colors.dart';
 import 'package:cure/core/utils/app_styles.dart';
 import 'package:cure/features/doctor_details/domain/entities/review_entity.dart';
 import 'package:cure/features/doctor_details/presentation/widgets/review_card.dart';
@@ -24,22 +23,11 @@ class ReviewsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              'Reviews and Rating',
-              style: AppStyles.textRegular20.copyWith(
-                fontFamily: AppStyles.fontGeorgia,
-              ),
-            ),
-            const Spacer(),
-            SvgPicture.asset(AppAssets.svgsIcPen),
-            8.ws,
-            Text(
-              'Add Review',
-              style: AppStyles.textRegular14.copyWith(color: AppColors.primary),
-            ),
-          ],
+        Text(
+          'Reviews and Rating',
+          style: AppStyles.textRegular20.copyWith(
+            fontFamily: AppStyles.fontGeorgia,
+          ),
         ),
         16.hs,
         Row(

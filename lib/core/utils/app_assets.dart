@@ -137,5 +137,9 @@ class AppAssets {
   /// Assets for svgsOnTwo
   /// assets/svgs/on_two.svg
   static const String svgsOnTwo = "assets/svgs/on_two.svg";
+
+  /// Assets for svgsWarning
+  /// assets/svgs/warning.svg
+  static const String svgsWarning = "assets/svgs/warning.svg";
 }
 
