@@ -7,11 +7,13 @@ import 'package:cure/features/auth/presentation/views/otp_view.dart';
 import 'package:cure/features/auth/presentation/views/register_view.dart';
 import 'package:cure/features/auth/presentation/views/reset_password_view.dart';
 import 'package:cure/features/auth/presentation/views/verify_phone_view.dart';
+import 'package:cure/features/booking/domain/entities/booking_entity.dart';
 import 'package:cure/features/change_password/presentation/pages/change_password_view.dart';
 import 'package:cure/features/doctor_details/presentation/pages/doctor_deatails_view.dart';
 import 'package:cure/features/doctors/presentation/views/doctors_view.dart';
 import 'package:cure/features/faqs/presentation/pages/faq_view.dart';
 import 'package:cure/features/favourite/presentation/views/fav_view.dart';
+import 'package:cure/features/feedback/presentation/pages/feedback_view.dart';
 import 'package:cure/features/intro/onbording/presentation/views/onbording_view.dart';
 import 'package:cure/features/intro/splash/presentation/views/splash_view.dart';
 import 'package:cure/features/main/main_view.dart';
@@ -113,6 +115,12 @@ abstract class AppGoRouter {
         path: AppRoutes.faq,
         builder: (context, state) {
           return const FaqView();
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.feedback,
+        builder: (context, state) {
+          return FeedbackView(booking: state.extra as BookingEntity);
         },
       ),
       ShellRoute(
