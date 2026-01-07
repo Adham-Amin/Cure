@@ -28,7 +28,10 @@ class ProfileItem extends StatelessWidget {
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
-        leading: SvgPicture.asset(icon),
+        leading: SvgPicture.asset(
+          icon,
+          colorFilter: ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
+        ),
         title: Text(
           title,
           style: AppStyles.textRegular16.copyWith(color: color),

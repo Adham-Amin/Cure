@@ -18,8 +18,8 @@ abstract class Validators {
   }
 
   static String? phone(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return "Please enter your phone number";
+    if (value == null || value.trim().isEmpty || value.length < 11) {
+      return "Please enter valid phone number";
     }
     return null;
   }

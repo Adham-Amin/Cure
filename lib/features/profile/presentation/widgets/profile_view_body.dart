@@ -29,6 +29,12 @@ class ProfileViewBody extends StatelessWidget {
           ),
           24.hs,
           ProfileItem(
+            title: 'Change Number',
+            icon: AppAssets.svgsIcPen,
+            onTap: () => context.push(AppRoutes.updateNum),
+          ),
+          24.hs,
+          ProfileItem(
             title: 'Payment Methods',
             icon: AppAssets.svgsIcPayment,
             onTap: () => context.push(AppRoutes.payment),

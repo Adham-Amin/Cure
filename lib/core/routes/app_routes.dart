@@ -22,4 +22,6 @@ abstract class AppRoutes {
   static const payment = '/payment';
   static const editProfile = '/editProfile';
   static const feedback = '/feedback';
+  static const updateNum = '/updateNum';
+  static const updateVerifyPhone = '/updateVerifyPhone';
 }
