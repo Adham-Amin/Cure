@@ -8,4 +8,8 @@ class FeedbackLoading extends FeedbackState {}
 
 class FeedbackLoaded extends FeedbackState {}
 
-class FeedbackError extends FeedbackState {}
+class FeedbackError extends FeedbackState {
+  final String message;
+
+  FeedbackError({required this.message});
+}

@@ -16,6 +16,9 @@ import 'package:cure/features/faqs/domain/repositories/faq_repo.dart';
 import 'package:cure/features/favourite/data/datasources/favourite_remote_data_source.dart';
 import 'package:cure/features/favourite/data/repositories/favourite_repo_impl.dart';
 import 'package:cure/features/favourite/domain/repositories/favourite_repo.dart';
+import 'package:cure/features/feedback/data/datasources/feedback_remote_data_source.dart';
+import 'package:cure/features/feedback/data/repositories/feedback_repo_impl.dart';
+import 'package:cure/features/feedback/domain/repositories/feedback_repo.dart';
 import 'package:cure/features/home/data/data_source/home_remote_data_source.dart';
 import 'package:cure/features/home/data/repos/home_repo_impl.dart';
 import 'package:cure/features/home/domain/repos/home_repo.dart';
@@ -154,6 +157,15 @@ void serverLocator() {
   getIt.registerLazySingleton<BookingRepo>(
     () => BookingRepoImpl(
       bookingRemoteDataSource: getIt<BookingRemoteDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<FeedbackRemoteDataSource>(
+    () => FeedbackRemoteDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<FeedbackRepo>(
+    () => FeedbackRepoImpl(
+      feedbackRemoteDataSource: getIt<FeedbackRemoteDataSource>(),
     ),
   );
 }
