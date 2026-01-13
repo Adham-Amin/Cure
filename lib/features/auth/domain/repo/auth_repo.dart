@@ -11,6 +11,8 @@ abstract class AuthRepo {
   Future<Either<Failure, UserEntity>> register({
     required RegisterRequest registerRequest,
   });
+
+  Future<Either<Failure, String>> createCustomStripe({required String email});
   Future<Either<Failure, void>> forgotPassword({required String email});
   Future<Either<Failure, void>> verifyCode({
     required String email,

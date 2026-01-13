@@ -6,6 +6,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class Prefs {
   static SharedPreferences? _prefs;
 
+  static Future<void> setCustomStripe(String value) async {
+    await _prefs?.setString('custom_stripe', value);
+  }
+
+  static String getCustomStripe() {
+    return _prefs?.getString('custom_stripe') ?? '';
+  }
+
   static Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
   }

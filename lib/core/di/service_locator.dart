@@ -4,6 +4,9 @@ import 'package:cure/features/booking/domain/repositories/booking_repo.dart';
 import 'package:cure/features/change_password/data/datasources/change_password_remote_data_source.dart';
 import 'package:cure/features/change_password/data/repositories/change_password_repo_impl.dart';
 import 'package:cure/features/change_password/domain/repositories/change_password_repo.dart';
+import 'package:cure/features/checkout/data/datasource/checkout_remote_data_source.dart';
+import 'package:cure/features/checkout/data/repo/checkout_repo_impl.dart';
+import 'package:cure/features/checkout/domain/repo/checkout_repo.dart';
 import 'package:cure/features/doctor_details/data/datasources/doctor_details_remote_data_source.dart';
 import 'package:cure/features/doctor_details/data/repositories/doctor_details_repo_impl.dart';
 import 'package:cure/features/doctor_details/domain/repositories/doctor_details_repo.dart';
@@ -166,6 +169,15 @@ void serverLocator() {
   getIt.registerLazySingleton<FeedbackRepo>(
     () => FeedbackRepoImpl(
       feedbackRemoteDataSource: getIt<FeedbackRemoteDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<CheckoutRemoteDataSource>(
+    () => CheckoutRemoteDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<CheckoutRepo>(
+    () => CheckoutRepoImpl(
+      checkoutRemoteDataSource: getIt<CheckoutRemoteDataSource>(),
     ),
   );
 }

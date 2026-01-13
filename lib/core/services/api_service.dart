@@ -26,8 +26,8 @@ class ApiService {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          options.headers['Content-Type'] = 'application/json';
-          options.headers['Accept'] = 'application/json';
+          options.headers['Content-Type'] ??= 'application/json';
+          options.headers['Accept'] ??= 'application/json';
           final token = await Prefs.getToken();
           if (token != null && token.isNotEmpty) {
             options.headers['Authorization'] = 'Bearer $token';
@@ -47,12 +47,15 @@ class ApiService {
   }
 
   Future<Map<String, dynamic>> post({
+    String? baseUrl,
     required String endPoint,
     Options? options,
     dynamic data,
   }) async {
+    final String finalBaseUrl = baseUrl ?? this.baseUrl;
+
     final Response response = await _dio.post(
-      '$baseUrl$endPoint',
+      '$finalBaseUrl$endPoint',
       data: data,
       options: options,
     );

@@ -1,4 +1,5 @@
 import 'package:cure/core/services/api_service.dart';
+import 'package:cure/core/utils/app_keys.dart';
 import 'package:cure/features/auth/data/models/auth_response/auth_response.dart';
 import 'package:cure/features/auth/data/models/requests/register_request.dart';
 import 'package:dio/dio.dart';
@@ -6,6 +7,7 @@ import 'package:dio/dio.dart';
 abstract class AuthRemoteDataSource {
   Future<AuthResponse> login({required String email, required String password});
   Future<AuthResponse> register({required RegisterRequest registerRequest});
+  Future<String> createCustomStripe({required String email});
   Future<void> forgotPassword({required String email});
   Future<void> verifyCode({required String email, required String code});
   Future<void> resetPassword({
@@ -114,5 +116,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       data: {'token': token},
     );
     return AuthResponse.fromJson(response);
+  }
+
+  @override
+  Future<String> createCustomStripe({required String email}) async {
+    final response = await apiService.post(
+      baseUrl: 'https://api.stripe.com/v1',
+      endPoint: '/customers',
+      data: {'email': email},
+      options: Options(
+        headers: {
+          'Authorization': "Bearer ${AppKeys.stripeSecreteKey}",
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      ),
+    );
+    return response['id'];
   }
 }

@@ -52,6 +52,10 @@ class AuthRepoImpl implements AuthRepo {
         email: email,
         password: password,
       );
+      var customStripe = await authRemoteDataSource.createCustomStripe(
+        email: email,
+      );
+      await Prefs.setCustomStripe(customStripe);
       await Prefs.setToken(response.token!);
       await Prefs.setUser(response.toEntity());
       return Right(response.toEntity());
@@ -72,6 +76,10 @@ class AuthRepoImpl implements AuthRepo {
       var data = await authRemoteDataSource.register(
         registerRequest: registerRequest,
       );
+      var customStripe = await authRemoteDataSource.createCustomStripe(
+        email: registerRequest.email ?? '',
+      );
+      await Prefs.setCustomStripe(customStripe);
       await Prefs.setToken(data.token!);
       await Prefs.setUser(data.toEntity());
       return Right(data.toEntity());
@@ -130,6 +138,7 @@ class AuthRepoImpl implements AuthRepo {
         phone: phone,
         code: code,
       );
+      await Prefs.setToken(response.token!);
       await Prefs.setUser(response.toEntity());
       return Right(response.toEntity());
     } catch (e) {
@@ -162,6 +171,23 @@ class AuthRepoImpl implements AuthRepo {
       final response = await authRemoteDataSource.googleLogin(token: token);
       await Prefs.setUser(response.toEntity());
       return Right(response.toEntity());
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioException(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> createCustomStripe({
+    required String email,
+  }) async {
+    try {
+      final response = await authRemoteDataSource.createCustomStripe(
+        email: email,
+      );
+      return Right(response);
     } catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioException(e));
