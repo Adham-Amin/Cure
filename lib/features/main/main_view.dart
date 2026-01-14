@@ -20,7 +20,7 @@ class MainView extends StatefulWidget {
 class MainViewState extends State<MainView> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [
+  final List<Widget> _pages = const [
     HomeView(),
     SearchView(),
     BookingView(),
@@ -36,7 +36,7 @@ class MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: _currentIndex, children: _pages),
+      body: _pages[_currentIndex],
       bottomNavigationBar: Container(
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
         decoration: BoxDecoration(

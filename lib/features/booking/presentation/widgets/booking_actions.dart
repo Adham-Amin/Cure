@@ -29,9 +29,12 @@ class BookingActions extends StatelessWidget {
             onTap: isActive
                 ? () => showWarningDialog(
                     context: context,
-                    onTap: () => context.read<BookingCubit>().cancelBooking(
-                      id: booking.id.toString(),
-                    ),
+                    onTap: () {
+                      context.read<BookingCubit>().cancelBooking(
+                        id: booking.id.toString(),
+                      );
+                      context.pop();
+                    },
                   )
                 : () {},
           ),

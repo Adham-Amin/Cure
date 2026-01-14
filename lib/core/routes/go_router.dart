@@ -9,6 +9,8 @@ import 'package:cure/features/auth/presentation/views/reset_password_view.dart';
 import 'package:cure/features/auth/presentation/views/verify_phone_view.dart';
 import 'package:cure/features/booking/domain/entities/booking_entity.dart';
 import 'package:cure/features/change_password/presentation/pages/change_password_view.dart';
+import 'package:cure/features/checkout/domain/entities/doctor_info_entity.dart';
+import 'package:cure/features/checkout/presentation/views/book_appointment_view.dart';
 import 'package:cure/features/doctor_details/presentation/pages/doctor_deatails_view.dart';
 import 'package:cure/features/doctors/presentation/views/doctors_view.dart';
 import 'package:cure/features/faqs/presentation/pages/faq_view.dart';
@@ -159,6 +161,12 @@ abstract class AppGoRouter {
             },
           ),
         ],
+      ),
+      GoRoute(
+        path: AppRoutes.bookAppointment,
+        builder: (context, state) {
+          return BookAppointmentView(doctor: state.extra as DoctorInfoEntity);
+        },
       ),
     ],
   );

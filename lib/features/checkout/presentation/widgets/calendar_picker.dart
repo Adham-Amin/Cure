@@ -1,0 +1,75 @@
+import 'package:cure/core/utils/app_colors.dart';
+import 'package:cure/core/utils/app_styles.dart';
+import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+
+class CalendarPicker extends StatelessWidget {
+  const CalendarPicker({
+    super.key,
+    required this.visible,
+    required this.selectedDate,
+    required this.onDateSelected,
+  });
+
+  final bool visible;
+  final DateTime? selectedDate;
+  final Function(DateTime) onDateSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      child: !visible
+          ? const SizedBox.shrink()
+          : Card(
+              elevation: 4,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: ClipRRect(
+                  clipBehavior: Clip.antiAlias,
+                  borderRadius: BorderRadius.circular(16),
+                  child: SfDateRangePicker(
+                    selectionMode: DateRangePickerSelectionMode.single,
+                    minDate: DateTime.now(),
+                    maxDate: DateTime.now().add(const Duration(days: 30)),
+                    initialSelectedDate: selectedDate ?? DateTime.now(),
+                    showNavigationArrow: true,
+                    backgroundColor: Colors.white,
+                    selectableDayPredicate: (date) {
+                      return date.weekday != DateTime.saturday &&
+                          date.weekday != DateTime.friday;
+                    },
+                    headerStyle: DateRangePickerHeaderStyle(
+                      backgroundColor: AppColors.white,
+                      textAlign: TextAlign.center,
+                      textStyle: AppStyles.textMedium18,
+                    ),
+                    monthViewSettings: const DateRangePickerMonthViewSettings(
+                      firstDayOfWeek: 6,
+                      dayFormat: 'EEE',
+                      viewHeaderHeight: 48,
+                      showTrailingAndLeadingDates: true,
+                    ),
+                    monthCellStyle: DateRangePickerMonthCellStyle(
+                      todayTextStyle: TextStyle(color: AppColors.black),
+                      todayCellDecoration: BoxDecoration(),
+                      cellDecoration: BoxDecoration(
+                        color: AppColors.lightCard,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    selectionShape: DateRangePickerSelectionShape.rectangle,
+                    onSelectionChanged: (args) {
+                      onDateSelected(args.value);
+                    },
+                  ),
+                ),
+              ),
+            ),
+    );
+  }
+}

@@ -1,8 +1,8 @@
 class BookAppointmentRequest {
-  int? doctorId;
-  String? dateTime;
+  final num doctorId;
+  final String dateTime;
 
-  BookAppointmentRequest({this.doctorId, this.dateTime});
+  BookAppointmentRequest({required this.doctorId, required this.dateTime});
 
   Map<String, dynamic> toJson() => {
     'doctor_id': doctorId,

@@ -24,4 +24,6 @@ abstract class AppRoutes {
   static const feedback = '/feedback';
   static const updateNum = '/updateNum';
   static const updateVerifyPhone = '/updateVerifyPhone';
+  static const bookAppointment = '/bookAppointment';
+  static const checkout = '/checkout';
 }
