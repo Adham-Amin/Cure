@@ -1,13 +1,13 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:cure/core/functions/extentions.dart';
+import 'package:cure/core/functions/navigate_to_tab.dart';
 import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/core/utils/app_colors.dart';
 import 'package:cure/core/utils/app_styles.dart';
 import 'package:cure/core/widgets/custom_button.dart';
-import 'package:cure/core/widgets/custom_snack_bar.dart' show customSnackBar;
-import 'package:cure/features/checkout/data/models/book_appointment_request.dart';
+import 'package:cure/core/widgets/custom_snack_bar.dart';
+import 'package:cure/features/booking/presentation/cubit/booking_cubit.dart';
 import 'package:cure/features/checkout/domain/entities/doctor_info_entity.dart';
-import 'package:cure/features/checkout/presentation/cubit/checkout_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,10 +18,12 @@ class ButtonBookAppointment extends StatelessWidget {
     super.key,
     required this.doctor,
     required this.selectedDate,
+    required this.dateFormat,
   });
 
   final DoctorInfoEntity doctor;
   final String selectedDate;
+  final String dateFormat;
 
   @override
   Widget build(BuildContext context) {
@@ -59,22 +61,28 @@ class ButtonBookAppointment extends StatelessWidget {
             ],
           ),
           16.hs,
-          BlocConsumer<CheckoutCubit, CheckoutState>(
+          BlocConsumer<BookingCubit, BookingState>(
             listener: (context, state) {
-              if (state is CheckoutLoaded) {
-                context.push(AppRoutes.checkout, extra: doctor);
-              }
-              if (state is CheckoutError) {
+              if (state is BookingError) {
                 customSnackBar(
                   context: context,
                   message: state.message,
                   type: AnimatedSnackBarType.error,
                 );
               }
+              if (state is BookingLoaded) {
+                customSnackBar(
+                  context: context,
+                  message: 'Appointment Rescheduled Successfully',
+                  type: AnimatedSnackBarType.success,
+                );
+                context.go(AppRoutes.main);
+                navigateToTab(context, 0);
+              }
             },
             builder: (context, state) {
               return CustomButton(
-                isLoading: state is CheckoutLoading,
+                isLoading: state is BookingLoading,
                 title: 'Book Appointment',
                 onTap: () {
                   if (selectedDate.isEmpty) {
@@ -84,12 +92,24 @@ class ButtonBookAppointment extends StatelessWidget {
                       type: AnimatedSnackBarType.warning,
                     );
                   } else {
-                    context.read<CheckoutCubit>().bookAppointment(
-                      book: BookAppointmentRequest(
-                        doctorId: doctor.id,
-                        dateTime: selectedDate,
-                      ),
-                    );
+                    doctor.isReschedule == true
+                        ? context.read<BookingCubit>().rescheduleBooking(
+                            id: doctor.id.toString(),
+                            date: selectedDate,
+                          )
+                        : context.push(
+                            AppRoutes.checkout,
+                            extra: DoctorInfoEntity(
+                              id: doctor.id,
+                              price: doctor.price,
+                              image: doctor.image,
+                              name: doctor.name,
+                              specialty: doctor.specialty,
+                              clinicAddress: doctor.clinicAddress,
+                              timeAppointment: selectedDate,
+                              dateTimeFormatted: dateFormat,
+                            ),
+                          );
                   }
                 },
               );

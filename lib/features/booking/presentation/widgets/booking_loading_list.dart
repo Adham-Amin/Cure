@@ -18,6 +18,8 @@ class BookingLoadingList extends StatelessWidget {
         separatorBuilder: (_, __) => 16.hs,
         itemBuilder: (context, index) => BookingItem(
           booking: BookingEntity(
+            createdAt: '0',
+            price: 0,
             doctorId: 0,
             patientId: 0,
             id: index,

@@ -5,14 +5,16 @@ import 'package:cure/core/widgets/custom_button.dart';
 import 'package:cure/features/booking/domain/entities/booking_entity.dart';
 import 'package:cure/features/booking/presentation/cubit/booking_cubit.dart';
 import 'package:cure/features/booking/presentation/widgets/show_warning_dialog.dart';
+import 'package:cure/features/checkout/domain/entities/doctor_info_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class BookingActions extends StatelessWidget {
-  const BookingActions({super.key, required this.booking});
+  const BookingActions({super.key, required this.booking, required this.image});
 
   final BookingEntity booking;
+  final String image;
 
   bool get isActive =>
       booking.statusLabel == 'Pending' || booking.statusLabel == 'Rescheduled';
@@ -36,7 +38,12 @@ class BookingActions extends StatelessWidget {
                       context.pop();
                     },
                   )
-                : () {},
+                : () {
+                    context.push(
+                      AppRoutes.doctorDetails,
+                      extra: {'id': booking.doctorId, 'image': image},
+                    );
+                  },
           ),
         ),
         16.ws,
@@ -44,7 +51,20 @@ class BookingActions extends StatelessWidget {
           child: CustomButton(
             title: isActive ? 'Re-schedule' : 'Feedback',
             onTap: isActive
-                ? () {}
+                ? () {
+                    context.push(
+                      AppRoutes.bookAppointment,
+                      extra: DoctorInfoEntity(
+                        isReschedule: true,
+                        id: booking.id,
+                        price: booking.price,
+                        image: image,
+                        name: booking.doctorName,
+                        specialty: booking.doctorSpecialty,
+                        clinicAddress: booking.doctorClinicAddress,
+                      ),
+                    );
+                  }
                 : () => context.push(AppRoutes.feedback, extra: booking),
           ),
         ),

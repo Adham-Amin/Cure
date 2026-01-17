@@ -30,7 +30,7 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     );
     result.fold(
       (l) => emit(CheckoutError(message: l.message)),
-      (r) => emit(CheckoutLoaded()),
+      (r) => emit(CheckoutStripeLoaded()),
     );
   }
 }

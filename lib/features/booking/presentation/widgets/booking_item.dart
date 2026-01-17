@@ -39,7 +39,7 @@ class BookingItem extends StatelessWidget {
           8.hs,
           ClinicAddress(address: booking.doctorClinicAddress),
           16.hs,
-          BookingActions(booking: booking),
+          BookingActions(booking: booking, image: image),
         ],
       ),
     );

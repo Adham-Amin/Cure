@@ -8,6 +8,8 @@ final class CheckoutLoading extends CheckoutState {}
 
 final class CheckoutLoaded extends CheckoutState {}
 
+final class CheckoutStripeLoaded extends CheckoutState {}
+
 final class CheckoutError extends CheckoutState {
   final String message;
   CheckoutError({required this.message});

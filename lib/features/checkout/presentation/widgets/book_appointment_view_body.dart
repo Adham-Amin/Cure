@@ -19,6 +19,7 @@ class BookAppointmentViewBody extends StatefulWidget {
 
 class _BookAppointmentViewBodyState extends State<BookAppointmentViewBody> {
   String selectedDate = '';
+  String selectedDateFormat = '';
   @override
   Widget build(BuildContext context) {
     return SizedBox.expand(
@@ -45,6 +46,11 @@ class _BookAppointmentViewBodyState extends State<BookAppointmentViewBody> {
                       selectedDate = dateTime;
                     });
                   },
+                  onDateTimeSelectedFormat: (date) {
+                    setState(() {
+                      selectedDateFormat = date;
+                    });
+                  },
                 ),
                 180.hs,
               ],
@@ -57,6 +63,7 @@ class _BookAppointmentViewBodyState extends State<BookAppointmentViewBody> {
             child: ButtonBookAppointment(
               doctor: widget.doctor,
               selectedDate: selectedDate,
+              dateFormat: selectedDateFormat,
             ),
           ),
         ],

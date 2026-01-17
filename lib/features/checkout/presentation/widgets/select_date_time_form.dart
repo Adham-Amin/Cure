@@ -6,9 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class SelectDateTimeForm extends StatefulWidget {
-  const SelectDateTimeForm({super.key, required this.onDateTimeSelected});
+  const SelectDateTimeForm({
+    super.key,
+    required this.onDateTimeSelected,
+    required this.onDateTimeSelectedFormat,
+  });
 
   final ValueChanged<String> onDateTimeSelected;
+  final ValueChanged<String> onDateTimeSelectedFormat;
 
   @override
   State<SelectDateTimeForm> createState() => _SelectDateTimeFormState();
@@ -17,6 +22,7 @@ class SelectDateTimeForm extends StatefulWidget {
 class _SelectDateTimeFormState extends State<SelectDateTimeForm> {
   void emitDateTimeString() {
     if (selectedDate == null || selectedTime.isEmpty) return;
+
     final timeParts = selectedTime.split(' ');
     final hourMinute = timeParts[0].split(':');
 
@@ -36,11 +42,11 @@ class _SelectDateTimeFormState extends State<SelectDateTimeForm> {
       minute,
     );
 
-    final result =
-        '${combinedDateTime.year}-${combinedDateTime.month}-${combinedDateTime.day} '
-        '${combinedDateTime.hour}:${combinedDateTime.minute}0:00';
+    final result = DateFormat('yyyy-M-d HH:mm:ss').format(combinedDateTime);
+    final displayFormat = dateController.text;
 
     widget.onDateTimeSelected(result);
+    widget.onDateTimeSelectedFormat(displayFormat);
   }
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

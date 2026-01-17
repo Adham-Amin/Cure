@@ -26,12 +26,18 @@ class ApiService {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
+          if (options.path.contains('api.stripe.com')) {
+            return handler.next(options);
+          }
+
           options.headers['Content-Type'] ??= 'application/json';
           options.headers['Accept'] ??= 'application/json';
+
           final token = await Prefs.getToken();
           if (token != null && token.isNotEmpty) {
-            options.headers['Authorization'] = 'Bearer $token';
+            options.headers['Authorization'] ??= 'Bearer $token';
           }
+
           return handler.next(options);
         },
       ),

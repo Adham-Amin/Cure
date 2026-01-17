@@ -11,13 +11,17 @@ class BookingList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sortedBookings = bookings
+      ..sort((a, b) => b.dateTimeFormatted.compareTo(a.dateTimeFormatted));
     return ListView.separated(
       padding: const EdgeInsets.only(top: 24, bottom: 16),
       physics: const BouncingScrollPhysics(),
       itemCount: bookings.length,
       separatorBuilder: (_, __) => 16.hs,
-      itemBuilder: (context, index) =>
-          BookingItem(booking: bookings[index], image: AppAssets.imagesDocOne),
+      itemBuilder: (context, index) => BookingItem(
+        booking: sortedBookings[index],
+        image: AppAssets.imagesDocOne,
+      ),
     );
   }
 }

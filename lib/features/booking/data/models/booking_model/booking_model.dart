@@ -79,5 +79,7 @@ class BookingModel {
     doctorSpecialty: doctor?.specialty ?? 'Dentist',
     doctorId: doctor?.id ?? 0,
     patientId: patient?.id ?? 0,
+    price: price ?? 0,
+    createdAt: createdAt ?? '0',
   );
 }
