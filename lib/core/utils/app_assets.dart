@@ -26,6 +26,10 @@ class AppAssets {
   /// assets/images/logo.png
   static const String imagesLogo = "assets/images/logo.png";
 
+  /// Assets for imagesNotification
+  /// assets/images/notification.png
+  static const String imagesNotification = "assets/images/notification.png";
+
   /// Assets for imagesOnOne
   /// assets/images/on_one.png
   static const String imagesOnOne = "assets/images/on_one.png";
@@ -62,9 +66,17 @@ class AppAssets {
   /// assets/svgs/empty_fav.svg
   static const String svgsEmptyFav = "assets/svgs/empty_fav.svg";
 
+  /// Assets for svgsIcCancel
+  /// assets/svgs/ic_cancel.svg
+  static const String svgsIcCancel = "assets/svgs/ic_cancel.svg";
+
   /// Assets for svgsIcChat
   /// assets/svgs/ic_chat.svg
   static const String svgsIcChat = "assets/svgs/ic_chat.svg";
+
+  /// Assets for svgsIcComplete
+  /// assets/svgs/ic_complete.svg
+  static const String svgsIcComplete = "assets/svgs/ic_complete.svg";
 
   /// Assets for svgsIcFaq
   /// assets/svgs/ic_faq.svg
@@ -113,6 +125,10 @@ class AppAssets {
   /// Assets for svgsIcPen
   /// assets/svgs/ic_pen.svg
   static const String svgsIcPen = "assets/svgs/ic_pen.svg";
+
+  /// Assets for svgsIcPending
+  /// assets/svgs/ic_pending.svg
+  static const String svgsIcPending = "assets/svgs/ic_pending.svg";
 
   /// Assets for svgsIcPerson
   /// assets/svgs/ic_person.svg

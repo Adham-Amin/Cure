@@ -20,6 +20,7 @@ import 'package:cure/features/feedback/presentation/pages/feedback_view.dart';
 import 'package:cure/features/intro/onbording/presentation/views/onbording_view.dart';
 import 'package:cure/features/intro/splash/presentation/views/splash_view.dart';
 import 'package:cure/features/main/main_view.dart';
+import 'package:cure/features/notifications/presentation/pages/notifications_view.dart';
 import 'package:cure/features/payment/domain/repositories/payment_repo.dart';
 import 'package:cure/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:cure/features/payment/presentation/pages/add_payment_card_view.dart';
@@ -173,6 +174,12 @@ abstract class AppGoRouter {
         path: AppRoutes.checkout,
         builder: (context, state) {
           return CheckoutView(doctor: state.extra as DoctorInfoEntity);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.notifications,
+        builder: (context, state) {
+          return NotificationsView();
         },
       ),
     ],
