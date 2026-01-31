@@ -1,4 +1,3 @@
-import 'package:cure/core/helper/open_google_get_token.dart';
 import 'package:cure/features/auth/data/models/requests/register_request.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cure/features/auth/domain/entities/user_entity.dart';
@@ -11,9 +10,9 @@ class AuthCubit extends Cubit<AuthState> {
 
   final AuthRepo authRepo;
 
-  Future<void> login({required String email, required String password}) async {
+  Future<void> login({required String phone, required String password}) async {
     emit(AuthLoading());
-    var result = await authRepo.login(email: email, password: password);
+    var result = await authRepo.login(phone: phone, password: password);
     result.fold(
       (l) => emit(AuthError(message: l.message)),
       (r) => emit(AuthLoaded(user: r)),
@@ -25,22 +24,22 @@ class AuthCubit extends Cubit<AuthState> {
     var result = await authRepo.register(registerRequest: registerRequest);
     result.fold(
       (l) => emit(AuthError(message: l.message)),
-      (r) => emit(AuthLoaded(user: r)),
+      (r) => emit(AuthLoaded()),
     );
   }
 
-  Future<void> forgotPassword({required String email}) async {
+  Future<void> forgotPassword({required String phone}) async {
     emit(AuthLoading());
-    var result = await authRepo.forgotPassword(email: email);
+    var result = await authRepo.forgotPassword(phone: phone);
     result.fold(
       (l) => emit(AuthError(message: l.message)),
       (r) => emit(AuthLoaded()),
     );
   }
 
-  Future<void> verifyCode({required String email, required String code}) async {
+  Future<void> verifyCode({required String phone, required String code}) async {
     emit(AuthLoading());
-    var result = await authRepo.verifyCode(email: email, code: code);
+    var result = await authRepo.verifyCode(phone: phone, code: code);
     result.fold(
       (l) => emit(AuthError(message: l.message)),
       (r) => emit(AuthLoaded()),
@@ -48,62 +47,19 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> resetPassword({
-    required String email,
+    required String phone,
     required String password,
-    required String code,
+    required String confirmPassword,
   }) async {
     emit(AuthLoading());
     var result = await authRepo.resetPassword(
-      email: email,
-      code: code,
+      phone: phone,
+      confirmPassword: confirmPassword,
       password: password,
     );
     result.fold(
       (l) => emit(AuthError(message: l.message)),
       (r) => emit(AuthLoaded()),
     );
-  }
-
-  Future<void> loginWithPhone({required String phone}) async {
-    emit(AuthLoading());
-    var result = await authRepo.loginWithPhone(phone: phone);
-    result.fold(
-      (l) => emit(AuthError(message: l.message)),
-      (r) => emit(AuthLoaded()),
-    );
-  }
-
-  Future<void> verifyCodeWithPhone({
-    required String phone,
-    required String code,
-  }) async {
-    emit(AuthLoading());
-    var result = await authRepo.verifyCodeWithPhone(phone: phone, code: code);
-    result.fold(
-      (l) => emit(AuthError(message: l.message)),
-      (r) => emit(AuthLoaded(user: r)),
-    );
-  }
-
-  Future<void> loginWithGoogle() async {
-    emit(AuthLoading());
-
-    final urlResult = await authRepo.getGoogleAuthUrl();
-
-    urlResult.fold((l) => emit(AuthError(message: l.message)), (url) async {
-      final resultToken = await openGoogleAndGetToken(url);
-
-      if (resultToken == null) {
-        emit(AuthError(message: 'Google login canceled'));
-        return;
-      }
-
-      final loginResult = await authRepo.googleLogin(token: resultToken);
-
-      loginResult.fold(
-        (l) => emit(AuthError(message: l.message)),
-        (user) => emit(AuthLoaded(user: user)),
-      );
-    });
   }
 }

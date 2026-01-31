@@ -17,15 +17,4 @@ class DoctorsCubit extends Cubit<DoctorsState> {
       (doctors) => emit(DoctorsLoaded(doctors: doctors)),
     );
   }
-
-  Future<void> getDoctorsbySpecialties({required String specialties}) async {
-    emit(DoctorsLoading());
-    final result = await doctorsRepo.getDoctorsbySpecialties(
-      specialties: specialties,
-    );
-    result.fold(
-      (failure) => emit(DoctorsError(message: failure.message)),
-      (doctors) => emit(DoctorsLoaded(doctors: doctors)),
-    );
-  }
 }

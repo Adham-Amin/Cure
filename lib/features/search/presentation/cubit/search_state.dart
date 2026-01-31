@@ -11,10 +11,6 @@ class SearchLoaded extends SearchState {
   SearchLoaded({required this.doctors});
 }
 
-class SearchHistoryLoading extends SearchState {}
-
-class SearchHistoryLoaded extends SearchState {}
-
 class SearchError extends SearchState {
   final String message;
   SearchError({required this.message});

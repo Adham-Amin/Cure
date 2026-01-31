@@ -1,12 +1,9 @@
 import 'package:cure/core/services/api_service.dart';
-import 'package:cure/features/home/data/model/doctor_model/doctor_model.dart';
+import 'package:cure/features/home/data/model/doctor_response/doctor_response.dart';
 import 'package:cure/features/home/domain/entities/doctor_entity.dart';
 
 abstract class DoctorsRemoteDataSource {
   Future<List<DoctorEntity>> getDoctors();
-  Future<List<DoctorEntity>> getDoctorsbySpecialties({
-    required String specialties,
-  });
 }
 
 class DoctorsRemoteDataSourceImpl implements DoctorsRemoteDataSource {
@@ -19,22 +16,7 @@ class DoctorsRemoteDataSourceImpl implements DoctorsRemoteDataSource {
     List<DoctorEntity> doctors = [];
 
     for (var doctor in response['data']) {
-      doctors.add(DoctorModel.fromJson(doctor).toEntity());
-    }
-    return doctors;
-  }
-
-  @override
-  Future<List<DoctorEntity>> getDoctorsbySpecialties({
-    required String specialties,
-  }) async {
-    final response = await apiService.post(
-      endPoint: '/search/history?search_query=$specialties',
-    );
-    List<DoctorEntity> doctors = [];
-
-    for (var doctor in response['data']) {
-      doctors.add(DoctorModel.fromJson(doctor).toEntity());
+      doctors.add(DoctorResponse.fromJson(doctor).toEntity());
     }
     return doctors;
   }

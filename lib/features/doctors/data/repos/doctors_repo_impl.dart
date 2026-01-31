@@ -21,21 +21,4 @@ class DoctorsRepoImpl implements DoctorsRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
-
-  @override
-  Future<Either<Failure, List<DoctorEntity>>> getDoctorsbySpecialties({
-    required String specialties,
-  }) async {
-    try {
-      final doctors = await doctorsRemoteDataSource.getDoctorsbySpecialties(
-        specialties: specialties,
-      );
-      return Right(doctors);
-    } catch (e) {
-      if (e is DioException) {
-        return Left(ServerFailure.fromDioException(e));
-      }
-      return Left(ServerFailure(e.toString()));
-    }
-  }
 }

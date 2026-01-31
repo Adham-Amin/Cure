@@ -7,9 +7,9 @@ import 'package:cure/features/auth/presentation/widgets/reset_password_view_body
 import 'package:go_router/go_router.dart';
 
 class ResetPasswordView extends StatelessWidget {
-  const ResetPasswordView({super.key, required this.email});
+  const ResetPasswordView({super.key, required this.phone});
 
-  final String email;
+  final String phone;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ResetPasswordView extends StatelessWidget {
             onPressed: () => context.pop(),
           ),
         ),
-        body: ResetPasswordViewBody(email: email),
+        body: ResetPasswordViewBody(phone: phone),
       ),
     );
   }

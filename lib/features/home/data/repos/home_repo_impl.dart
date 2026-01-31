@@ -1,7 +1,6 @@
 import 'package:cure/core/errors/failure.dart';
 import 'package:cure/features/home/data/data_source/home_remote_data_source.dart';
 import 'package:cure/features/home/domain/entities/doctor_entity.dart';
-import 'package:cure/features/home/domain/entities/home_entity.dart';
 import 'package:cure/features/home/domain/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -14,7 +13,20 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, List<DoctorEntity>>> getDoctors() async {
     try {
       final data = await homeRemoteDataSource.getDoctors();
-      return Right(data);
+      return Right(data.map((e) => e.toEntity()).toList());
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioException(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+  
+  @override
+  Future<Either<Failure, List<DoctorEntity>>> getTopExperiencedDoctors() async {
+    try {
+      final data = await homeRemoteDataSource.getTopExperiencedDoctors();
+      return Right(data.map((e) => e.toEntity()).toList());
     } catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioException(e));
@@ -23,16 +35,4 @@ class HomeRepoImpl implements HomeRepo {
     }
   }
 
-  @override
-  Future<Either<Failure, HomeEntity>> getHomeData() async {
-    try {
-      final data = await homeRemoteDataSource.getHomeData();
-      return Right(data.toEntity());
-    } catch (e) {
-      if (e is DioException) {
-        return Left(ServerFailure.fromDioException(e));
-      }
-      return Left(ServerFailure(e.toString()));
-    }
-  }
 }

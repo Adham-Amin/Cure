@@ -3,7 +3,6 @@ import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/core/services/shared_preferences_service.dart';
 import 'package:cure/core/utils/app_colors.dart';
 import 'package:cure/core/utils/app_styles.dart';
-import 'package:cure/features/home/domain/entities/home_entity.dart';
 import 'package:cure/features/home/presentation/widgets/container_with_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,9 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class HeaderHome extends StatelessWidget {
-  const HeaderHome({super.key, required this.home});
-
-  final HomeEntity home;
+  const HeaderHome({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +24,7 @@ class HeaderHome extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: NetworkImage(Prefs.getUser()!.imageUrl),
+                image: NetworkImage(Prefs.getUser()?.imageUrl ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -38,7 +35,7 @@ class HeaderHome extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  home.greeting,
+                  'Welcome ${Prefs.getUser()!.name}',
                   style: AppStyles.textRegular14.copyWith(
                     fontFamily: AppStyles.fontGeorgia,
                   ),
@@ -53,7 +50,7 @@ class HeaderHome extends StatelessWidget {
                     ),
                     4.ws,
                     Text(
-                      home.address,
+                      Prefs.getUser()?.address ?? '',
                       style: AppStyles.textRegular12.copyWith(
                         color: AppColors.darkGrey,
                       ),

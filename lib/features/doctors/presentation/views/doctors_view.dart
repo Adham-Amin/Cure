@@ -7,9 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class DoctorsView extends StatelessWidget {
-  const DoctorsView({super.key, required this.specialties});
-
-  final List<String> specialties;
+  const DoctorsView({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class DoctorsView extends StatelessWidget {
           ),
           title: const Text('Doctors'),
         ),
-        body: DoctorsViewBody(specialties: specialties),
+        body: DoctorsViewBody(),
       ),
     );
   }

@@ -6,7 +6,6 @@ import 'package:cure/features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:cure/features/home/presentation/widgets/doctors_near_list.dart';
 import 'package:cure/features/home/presentation/widgets/doctors_top_rated_list.dart';
 import 'package:cure/features/home/presentation/widgets/header_home.dart';
-import 'package:cure/features/home/presentation/widgets/specialties_list.dart';
 import 'package:cure/features/home/presentation/widgets/title_and_see_all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +26,7 @@ class HomeLoadind extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             24.hs,
-            HeaderHome(home: context.read<HomeCubit>().home),
+            HeaderHome(),
             24.hs,
             CustomTextFormField(
               onTap: () {},
@@ -35,10 +34,6 @@ class HomeLoadind extends StatelessWidget {
               hintText: 'Search for specialty, doctor',
               prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass),
             ),
-            24.hs,
-            TitleAndSeeAll(onTap: () {}, title: 'Specialties'),
-            16.hs,
-            SpecialtiesList(),
             24.hs,
             ClipRRect(
               borderRadius: BorderRadius.circular(16.r),
@@ -56,7 +51,7 @@ class HomeLoadind extends StatelessWidget {
               ),
             ),
             16.hs,
-            DoctorsNearList(doctors: context.read<HomeCubit>().home.doctors),
+            DoctorsExperiencedList(doctors: context.read<HomeCubit>().topExperiencedDoctors),
             24.hs,
             TitleAndSeeAll(onTap: () {}, title: 'Top Rated Doctors'),
             16.hs,

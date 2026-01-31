@@ -53,11 +53,10 @@ class UpdateProfileModel {
   };
 
   UserEntity toEntity() => UserEntity(
-    id: id ?? 0,
     name: name ?? '',
     email: email ?? '',
     imageUrl: profilePhoto ?? '',
     phone: mobile ?? '',
-    patientId: patient?.patientId ?? 0,
+    address: '',
   );
 }

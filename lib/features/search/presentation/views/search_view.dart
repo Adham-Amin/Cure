@@ -12,7 +12,7 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          SearchCubit(searchRepo: getIt<SearchRepo>())..getSearchHistory(),
+          SearchCubit(searchRepo: getIt<SearchRepo>()),
       child: Scaffold(
         appBar: AppBar(title: Text('Search')),
         body: const SearchViewBody(),

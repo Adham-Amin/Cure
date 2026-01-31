@@ -10,7 +10,6 @@ import 'package:cure/features/home/presentation/widgets/doctors_near_list.dart';
 import 'package:cure/features/home/presentation/widgets/doctors_top_rated_list.dart';
 import 'package:cure/features/home/presentation/widgets/header_home.dart';
 import 'package:cure/features/home/presentation/widgets/home_loadind.dart';
-import 'package:cure/features/home/presentation/widgets/specialties_list.dart';
 import 'package:cure/features/home/presentation/widgets/title_and_see_all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +33,7 @@ class HomeViewBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 24.hs,
-                HeaderHome(home: context.read<HomeCubit>().home),
+                HeaderHome(),
                 24.hs,
                 CustomTextFormField(
                   onTap: () {
@@ -45,16 +44,6 @@ class HomeViewBody extends StatelessWidget {
                   prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass),
                 ),
                 24.hs,
-                TitleAndSeeAll(
-                  onTap: () => context.push(
-                    AppRoutes.specialties,
-                    extra: context.read<HomeCubit>().home.specialities,
-                  ),
-                  title: 'Specialties',
-                ),
-                16.hs,
-                SpecialtiesList(),
-                24.hs,
                 Image.asset(
                   AppAssets.imagesBanner,
                   fit: BoxFit.cover,
@@ -62,24 +51,23 @@ class HomeViewBody extends StatelessWidget {
                 ),
                 24.hs,
                 Text(
-                  'Doctors Near You',
+                  'Top Experienced Doctors',
                   style: AppStyles.textRegular20.copyWith(
                     fontFamily: AppStyles.fontGeorgia,
                   ),
                 ),
                 16.hs,
-                DoctorsNearList(
-                  doctors: context.read<HomeCubit>().home.doctors,
+                DoctorsExperiencedList(
+                  doctors: context.read<HomeCubit>().topExperiencedDoctors,
                 ),
                 24.hs,
                 TitleAndSeeAll(
                   onTap: () {
                     context.push(
                       AppRoutes.doctors,
-                      extra: context.read<HomeCubit>().home.specialities,
                     );
                   },
-                  title: 'Top Rated Doctors',
+                  title: 'Doctors',
                 ),
                 16.hs,
                 DoctorsTopRatedList(doctors: context.read<HomeCubit>().doctors),

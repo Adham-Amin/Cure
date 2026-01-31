@@ -6,8 +6,8 @@ import 'package:cure/core/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DoctorsNearList extends StatelessWidget {
-  const DoctorsNearList({super.key, required this.doctors});
+class DoctorsExperiencedList extends StatelessWidget {
+  const DoctorsExperiencedList({super.key, required this.doctors});
 
   final List<DoctorEntity> doctors;
 

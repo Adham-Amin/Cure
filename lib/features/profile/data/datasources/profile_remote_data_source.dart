@@ -1,7 +1,6 @@
 import 'package:cure/core/services/api_service.dart';
 import 'package:cure/features/auth/data/models/requests/register_request.dart';
 import 'package:cure/features/profile/data/models/update_profile/update_profile.dart';
-import 'package:dio/dio.dart';
 
 abstract class ProfileRemoteDataSource {
   Future<UpdateProfileModel> updateProfile({required RegisterRequest data});
@@ -23,7 +22,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   }) async {
     final response = await apiService.post(
       endPoint: '/updateProfile',
-      data: FormData.fromMap(await data.toUpdate()),
+      data: '',
     );
     return UpdateProfileModel.fromJson(response['data']);
   }

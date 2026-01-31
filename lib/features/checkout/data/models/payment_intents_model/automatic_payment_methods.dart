@@ -12,7 +12,7 @@ class AutomaticPaymentMethods {
   }
 
   Map<String, dynamic> toJson() => {
-        'allow_redirects': allowRedirects,
-        'enabled': enabled,
-      };
+    'allow_redirects': allowRedirects,
+    'enabled': enabled,
+  };
 }

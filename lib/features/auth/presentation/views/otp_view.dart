@@ -7,8 +7,8 @@ import 'package:cure/features/auth/presentation/widgets/otp_view_body.dart';
 import 'package:go_router/go_router.dart';
 
 class OtpView extends StatelessWidget {
-  final String email;
-  const OtpView({super.key, required this.email});
+  final String phone;
+  const OtpView({super.key, required this.phone});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,7 @@ class OtpView extends StatelessWidget {
             onPressed: () => context.pop(),
           ),
         ),
-        body: OtpViewBody(email: email),
-      ),
+        body: OtpViewBody(phone: phone)),
     );
   }
 }

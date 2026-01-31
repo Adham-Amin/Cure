@@ -4,7 +4,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiService {
   final Dio _dio;
-  final String baseUrl = 'https://round7-cure.huma-volve.com/api';
+  final String baseUrl = 'https://round8-backend-team-one.huma-volve.com/api';
 
   ApiService(this._dio) {
     addInterceptors();

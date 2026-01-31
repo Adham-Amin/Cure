@@ -22,17 +22,17 @@ class ForgetPasswordViewBody extends StatefulWidget {
 
 class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late TextEditingController _emailController;
+  late TextEditingController phone;
 
   @override
   void initState() {
-    _emailController = TextEditingController();
+    phone = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _emailController.dispose();
+    phone.dispose();
     super.dispose();
   }
 
@@ -50,10 +50,10 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
         if (state is AuthLoaded) {
           customSnackBar(
             context: context,
-            message: 'Check your email',
+            message: 'Check your Phone',
             type: AnimatedSnackBarType.success,
           );
-          context.push(AppRoutes.otp, extra: _emailController.text);
+          context.push(AppRoutes.otp, extra: phone.text);
         }
       },
       builder: (context, state) {
@@ -68,7 +68,8 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                 Text('Forgot Password?', style: AppStyles.textSemiBold18),
                 16.hs,
                 Text(
-                  'please enter your email to reset that password',
+                  'please enter your Phone number to reset that password',
+                  textAlign: TextAlign.center,
                   style: AppStyles.textRegular14.copyWith(
                     color: AppColors.grey,
                   ),
@@ -76,14 +77,15 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                 32.hs,
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('Email', style: AppStyles.textRegular14),
+                  child: Text('Phone', style: AppStyles.textRegular14),
                 ),
                 4.hs,
                 CustomTextFormField(
-                  validator: Validators.email,
-                  controller: _emailController,
-                  hintText: 'eng.adham@example.com',
-                  prefixIcon: Icon(Icons.email_outlined),
+                  validator: Validators.phone,
+                  controller: phone,
+                  hintText: 'Phone',
+                  keyboardType: TextInputType.phone,
+                  prefixIcon: Icon(Icons.phone_outlined),
                 ),
                 16.hs,
                 CustomButton(
@@ -93,7 +95,7 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
                       context.read<AuthCubit>().forgotPassword(
-                        email: _emailController.text,
+                        phone: phone.text,
                       );
                     }
                   },

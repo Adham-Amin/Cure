@@ -14,7 +14,7 @@ class DoctorsTopRatedList extends StatelessWidget {
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: doctors.length,
+      itemCount: 3,
       separatorBuilder: (context, index) => 16.hs,
       itemBuilder: (context, index) {
         final sortedDoctors = doctors

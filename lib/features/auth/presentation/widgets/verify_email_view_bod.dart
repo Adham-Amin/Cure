@@ -32,7 +32,7 @@ class _VerifyPhoneViewBodyState extends State<VerifyPhoneViewBody> {
         key: formKey,
         child: Column(
           children: [
-            Icon(Icons.email_outlined, color: Color(0xffAFAFAF), size: 32.w),
+            Icon(Icons.phone_outlined, color: Color(0xffAFAFAF), size: 32.w),
             24.hs,
             Text('Verify Code', style: AppStyles.textSemiBold18),
             16.hs,
@@ -53,6 +53,7 @@ class _VerifyPhoneViewBodyState extends State<VerifyPhoneViewBody> {
                   message: 'Successfully Send again',
                   type: AnimatedSnackBarType.success,
                 );
+                setState(() {});
               },
             ),
             16.hs,
@@ -68,10 +69,10 @@ class _VerifyPhoneViewBodyState extends State<VerifyPhoneViewBody> {
                 if (state is AuthLoaded) {
                   customSnackBar(
                     context: context,
-                    message: 'Welcome Back',
+                    message: 'Successfully Verify',
                     type: AnimatedSnackBarType.success,
                   );
-                  context.go(AppRoutes.main);
+                  context.go(AppRoutes.login);
                 }
               },
               builder: (context, state) => CustomButton(
@@ -80,7 +81,7 @@ class _VerifyPhoneViewBodyState extends State<VerifyPhoneViewBody> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    context.read<AuthCubit>().verifyCodeWithPhone(
+                    context.read<AuthCubit>().verifyCode(
                       phone: widget.phone,
                       code: '1234',
                     );

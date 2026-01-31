@@ -34,9 +34,6 @@ import 'package:cure/features/profile/domain/repositories/profile_repo.dart';
 import 'package:cure/features/search/data/datasources/search_remote_data_source.dart';
 import 'package:cure/features/search/data/repositories/search_repo_impl.dart';
 import 'package:cure/features/search/domain/repositories/search_repo.dart';
-import 'package:cure/features/specialties/data/data_source/specialties_remote_data_source.dart';
-import 'package:cure/features/specialties/data/repo/specialties_repo_impl.dart';
-import 'package:cure/features/specialties/domain/repo/specialties_repo.dart';
 import 'package:cure/features/update_number/data/datasources/update_number_remote_data_source.dart';
 import 'package:cure/features/update_number/data/repositories/update_number_repo_impl.dart';
 import 'package:cure/features/update_number/domain/repositories/update_number_repo.dart';
@@ -65,15 +62,6 @@ void serverLocator() {
   );
   getIt.registerLazySingleton<HomeRepo>(
     () => HomeRepoImpl(homeRemoteDataSource: getIt<HomeRemoteDataSource>()),
-  );
-
-  getIt.registerLazySingleton<SpecialtiesRemoteDataSource>(
-    () => SpecialtiesRemoteDataSourceImpl(apiService: getIt<ApiService>()),
-  );
-  getIt.registerLazySingleton<SpecialtiesRepo>(
-    () => SpecialtiesRepoImpl(
-      specialtiesRemoteDataSource: getIt<SpecialtiesRemoteDataSource>(),
-    ),
   );
 
   getIt.registerLazySingleton<DoctorsRemoteDataSource>(

@@ -1,13 +1,5 @@
-import 'dart:developer';
-import 'dart:io';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:cure/core/helper/location_handler.dart';
-import 'package:cure/core/utils/app_colors.dart';
-import 'package:cure/features/auth/data/models/location_model.dart';
 import 'package:cure/features/auth/data/models/requests/register_request.dart';
-import 'package:cure/features/auth/presentation/widgets/profile_image_picker.dart';
-import 'package:cure/features/auth/presentation/widgets/select_birth_date.dart';
-import 'package:cure/features/auth/presentation/widgets/select_gender.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,27 +21,21 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-  File? file;
-  LocationModel? location;
   final formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   late TextEditingController _emailController,
       _passController,
+      _confirmPassController,
       _nameController,
-      _genderController,
-      _bithdateController,
-      _phoneController,
-      _locationController;
+      _phoneController;
 
   @override
   void initState() {
     _emailController = TextEditingController();
     _passController = TextEditingController();
     _nameController = TextEditingController();
-    _genderController = TextEditingController();
-    _bithdateController = TextEditingController();
+    _confirmPassController = TextEditingController();
     _phoneController = TextEditingController();
-    _locationController = TextEditingController();
     super.initState();
   }
 
@@ -58,10 +44,8 @@ class _RegisterFormState extends State<RegisterForm> {
     _emailController.dispose();
     _passController.dispose();
     _nameController.dispose();
-    _genderController.dispose();
-    _bithdateController.dispose();
     _phoneController.dispose();
-    _locationController.dispose();
+    _confirmPassController.dispose();
     super.dispose();
   }
 
@@ -73,31 +57,11 @@ class _RegisterFormState extends State<RegisterForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfileImagePicker(
-            onPick: (file) {
-              setState(() => this.file = file);
-            },
-            file: file,
-          ),
-          24.hs,
           CustomTextFormField(
             validator: Validators.name,
             hintText: 'Ex: Adham Amin',
             prefixIcon: Icon(Icons.person),
             controller: _nameController,
-          ),
-          16.hs,
-          CustomTextFormField(
-            validator: Validators.email,
-            controller: _emailController,
-            hintText: 'eng.adham@example.com',
-            prefixIcon: Icon(Icons.email_outlined),
-          ),
-          16.hs,
-          CustomTextFormFieldPassword(
-            hintText: '********',
-            controller: _passController,
-            validator: Validators.password,
           ),
           16.hs,
           CustomTextFormField(
@@ -111,25 +75,30 @@ class _RegisterFormState extends State<RegisterForm> {
             prefixIcon: Icon(Icons.phone_outlined),
           ),
           16.hs,
-          SelectGender(controller: _genderController),
-          16.hs,
-          SelectBirthDate(controller: _bithdateController),
-          16.hs,
           CustomTextFormField(
-            hintText: 'Location',
-            controller: _locationController,
-            readOnly: true,
-            suffixIcon: IconButton(
-              onPressed: () async {
-                final loc = await determinePosition();
-                setState(() {
-                  location = loc;
-                  _locationController.text = loc.fullAddress;
-                });
-              },
-              icon: Icon(Icons.location_on_outlined, color: AppColors.primary),
-            ),
+            validator: Validators.email,
+            controller: _emailController,
+            hintText: 'eng.adham@example.com',
+            prefixIcon: Icon(Icons.email_outlined),
           ),
+          16.hs,
+          CustomTextFormFieldPassword(
+            hintText: 'Password',
+            controller: _passController,
+            validator: Validators.password,
+          ),
+          16.hs,
+          CustomTextFormFieldPassword(
+            hintText: 'Confirm Password',
+            controller: _confirmPassController,
+            validator: (value){
+              if(value != _passController.text){
+                return 'Password does not match';
+              }
+              return null;
+            },
+          ),
+
           24.hs,
           BlocConsumer<AuthCubit, AuthState>(
             listener: (context, state) {
@@ -141,10 +110,10 @@ class _RegisterFormState extends State<RegisterForm> {
                 );
               }
               if (state is AuthLoaded) {
-                context.go(AppRoutes.main);
+                context.go(AppRoutes.verifyPhone, extra: _phoneController.text);
                 customSnackBar(
                   context: context,
-                  message: 'Welcome ${state.user!.name}',
+                  message: 'Please verify your phone number',
                   type: AnimatedSnackBarType.success,
                 );
               }
@@ -156,29 +125,15 @@ class _RegisterFormState extends State<RegisterForm> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    if (file != null && location != null) {
-                      log(file.toString());
-                      context.read<AuthCubit>().register(
-                        registerRequest: RegisterRequest(
-                          emailOtp: '1234',
-                          locationLat: location?.locationLat.toString() ?? '',
-                          locationLng: location?.locationLng.toString() ?? '',
-                          profilePhoto: file,
-                          email: _emailController.text,
-                          password: _passController.text,
-                          name: _nameController.text,
-                          gender: _genderController.text,
-                          birthdate: _bithdateController.text,
-                          mobile: _phoneController.text,
-                        ),
-                      );
-                    } else {
-                      customSnackBar(
-                        context: context,
-                        message: 'Please select image and location',
-                        type: AnimatedSnackBarType.warning,
-                      );
-                    }
+                    context.read<AuthCubit>().register(
+                      registerRequest: RegisterRequest(
+                        email: _emailController.text,
+                        password: _passController.text,
+                        name: _nameController.text,
+                        phone: _phoneController.text,
+                        passwordConfirmation: _passController.text,
+                      ),
+                    );
                   } else {
                     setState(() {
                       autovalidateMode = AutovalidateMode.always;

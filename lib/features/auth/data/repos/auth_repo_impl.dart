@@ -13,11 +13,11 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Either<Failure, void>> verifyCode({
-    required String email,
+    required String phone,
     required String code,
   }) async {
     try {
-      await authRemoteDataSource.verifyCode(email: email, code: code);
+      await authRemoteDataSource.verifyCode(phone: phone, code: code);
       return const Right(null);
     } catch (e) {
       if (e is DioException) {
@@ -29,9 +29,9 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> forgotPassword({required String email}) async {
+  Future<Either<Failure, void>> forgotPassword({required String phone}) async {
     try {
-      await authRemoteDataSource.forgotPassword(email: email);
+      await authRemoteDataSource.forgotPassword(phone: phone);
       return const Right(null);
     } catch (e) {
       if (e is DioException) {
@@ -44,21 +44,22 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Either<Failure, UserEntity>> login({
-    required String email,
+    required String phone,
     required String password,
   }) async {
     try {
       final response = await authRemoteDataSource.login(
-        email: email,
+        phone: phone,
         password: password,
       );
+      await Prefs.setToken(response.data?.token ?? '');
+      var userInfo = await authRemoteDataSource.getUserInfo();
+      await Prefs.setUser(userInfo.toEntity());
       var customStripe = await authRemoteDataSource.createCustomStripe(
-        email: email,
+        email: userInfo.email ?? '',
       );
       await Prefs.setCustomStripe(customStripe);
-      await Prefs.setToken(response.token!);
-      await Prefs.setUser(response.toEntity());
-      return Right(response.toEntity());
+      return Right(userInfo.toEntity());
     } catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioException(e));
@@ -69,20 +70,12 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> register({
+  Future<Either<Failure, void>> register({
     required RegisterRequest registerRequest,
   }) async {
     try {
-      var data = await authRemoteDataSource.register(
-        registerRequest: registerRequest,
-      );
-      var customStripe = await authRemoteDataSource.createCustomStripe(
-        email: registerRequest.email ?? '',
-      );
-      await Prefs.setCustomStripe(customStripe);
-      await Prefs.setToken(data.token!);
-      await Prefs.setUser(data.toEntity());
-      return Right(data.toEntity());
+      await authRemoteDataSource.register(registerRequest: registerRequest);
+      return const Right(null);
     } catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioException(e));
@@ -94,88 +87,23 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Either<Failure, void>> resetPassword({
-    required String email,
-    required String code,
+    required String phone,
     required String password,
+    required String confirmPassword,
   }) async {
     try {
       await authRemoteDataSource.resetPassword(
-        email: email,
-        code: code,
-        password: password,
-      );
-      return const Right(null);
-    } catch (e) {
-      if (e is DioException) {
-        return Left(ServerFailure.fromDioException(e));
-      } else {
-        return Left(ServerFailure(e.toString()));
-      }
-    }
-  }
-
-  @override
-  Future<Either<Failure, void>> loginWithPhone({required String phone}) async {
-    try {
-      await authRemoteDataSource.loginWithPhone(phone: phone);
-      return const Right(null);
-    } catch (e) {
-      if (e is DioException) {
-        return Left(ServerFailure.fromDioException(e));
-      } else {
-        return Left(ServerFailure(e.toString()));
-      }
-    }
-  }
-
-  @override
-  Future<Either<Failure, UserEntity>> verifyCodeWithPhone({
-    required String phone,
-    required String code,
-  }) async {
-    try {
-      final response = await authRemoteDataSource.verifyCodeWithPhone(
         phone: phone,
-        code: code,
+        password: password,
+        confirmPassword: confirmPassword,
       );
-      await Prefs.setToken(response.token!);
-      await Prefs.setUser(response.toEntity());
-      return Right(response.toEntity());
+      return const Right(null);
     } catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioException(e));
       } else {
         return Left(ServerFailure(e.toString()));
       }
-    }
-  }
-
-  @override
-  Future<Either<Failure, String>> getGoogleAuthUrl() async {
-    try {
-      final url = await authRemoteDataSource.getGoogleAuthUrl();
-      return Right(url);
-    } catch (e) {
-      if (e is DioException) {
-        return Left(ServerFailure.fromDioException(e));
-      }
-      return Left(ServerFailure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, UserEntity>> googleLogin({
-    required String token,
-  }) async {
-    try {
-      final response = await authRemoteDataSource.googleLogin(token: token);
-      await Prefs.setUser(response.toEntity());
-      return Right(response.toEntity());
-    } catch (e) {
-      if (e is DioException) {
-        return Left(ServerFailure.fromDioException(e));
-      }
-      return Left(ServerFailure(e.toString()));
     }
   }
 

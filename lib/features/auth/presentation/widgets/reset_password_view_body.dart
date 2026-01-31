@@ -14,9 +14,9 @@ import 'package:cure/core/widgets/custom_text_form_field_password.dart';
 import 'package:cure/features/auth/presentation/manager/cubit/auth_cubit.dart';
 
 class ResetPasswordViewBody extends StatefulWidget {
-  const ResetPasswordViewBody({super.key, required this.email});
+  const ResetPasswordViewBody({super.key, required this.phone});
 
-  final String email;
+  final String phone;
 
   @override
   State<ResetPasswordViewBody> createState() => _ResetPasswordViewBodyState();
@@ -121,9 +121,9 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
                       context.read<AuthCubit>().resetPassword(
-                        email: widget.email,
+                        phone: widget.phone,
                         password: _passController.text,
-                        code: '1234',
+                        confirmPassword: _confirmPassController.text,
                       );
                     } else {
                       setState(() {

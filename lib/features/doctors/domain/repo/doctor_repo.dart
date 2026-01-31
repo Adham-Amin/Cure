@@ -4,7 +4,4 @@ import 'package:dartz/dartz.dart';
 
 abstract class DoctorsRepo {
   Future<Either<Failure, List<DoctorEntity>>> getDoctors();
-  Future<Either<Failure, List<DoctorEntity>>> getDoctorsbySpecialties({
-    required String specialties,
-  });
 }

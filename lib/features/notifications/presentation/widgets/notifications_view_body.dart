@@ -6,10 +6,6 @@ class NotificationsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        NotificationItem(),
-      ],
-    );
+    return Column(children: [NotificationItem()]);
   }
 }

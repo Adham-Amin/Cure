@@ -1,12 +1,13 @@
 import 'package:cure/core/functions/extentions.dart';
 import 'package:cure/core/utils/app_assets.dart';
+import 'package:cure/core/utils/app_colors.dart';
+import 'package:cure/core/utils/app_styles.dart';
 import 'package:cure/core/widgets/custom_error.dart';
 import 'package:cure/core/widgets/custom_text_form_field.dart';
 import 'package:cure/core/widgets/empty_doctors.dart';
 import 'package:cure/core/widgets/loading_doctor.dart';
 import 'package:cure/core/widgets/doctor_card.dart';
 import 'package:cure/features/search/presentation/cubit/search_cubit.dart';
-import 'package:cure/features/search/presentation/widgets/search_history_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,30 +48,13 @@ class _SearchViewBodyState extends State<SearchViewBody> {
             hintText: 'Search for specialty, doctor',
             prefixIcon: const Icon(FontAwesomeIcons.magnifyingGlass),
             onChanged: (value) {
-              if (value.trim().isEmpty &&
-                  context.read<SearchCubit>().state is! SearchHistoryLoaded) {
-                context.read<SearchCubit>().getSearchHistory();
-              }
-            },
-            onFieldSubmitted: (value) {
-              if (value.trim().isEmpty) return;
-              context.read<SearchCubit>().getSearchData(query: value);
+              context.read<SearchCubit>().getDoctors(query: value);
             },
           ),
           24.hs,
           BlocBuilder<SearchCubit, SearchState>(
             builder: (context, state) {
-              if (state is SearchHistoryLoaded) {
-                return SearchHistorySection(
-                  isLoading: false,
-                  controller: _searchController,
-                );
-              } else if (state is SearchHistoryLoading) {
-                return SearchHistorySection(
-                  isLoading: true,
-                  controller: _searchController,
-                );
-              } else if (state is SearchLoaded) {
+              if (state is SearchLoaded) {
                 if (state.doctors.isEmpty) {
                   return const Expanded(child: EmptyDoctors());
                 }
@@ -90,7 +74,18 @@ class _SearchViewBodyState extends State<SearchViewBody> {
               } else if (state is SearchError) {
                 return CustomError(message: state.message);
               } else {
-                return const Center(child: Text('Something went wrong'));
+                return Expanded(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.magnifyingGlass, size: 64, color: AppColors.darkGrey,),
+                        24.hs,
+                        Text('Search for doctors', style: AppStyles.textRegular14,),
+                      ],
+                    ),
+                  ),
+                );
               }
             },
           ),

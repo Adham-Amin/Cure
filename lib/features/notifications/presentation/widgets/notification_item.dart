@@ -7,9 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class NotificationItem extends StatelessWidget {
-  const NotificationItem({
-    super.key,
-  });
+  const NotificationItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class NotificationItem extends StatelessWidget {
                     Text(
                       'Upcoming Appointment',
                       style: AppStyles.textRegular16.copyWith(
-                        fontFamily: AppStyles.fontGeorgia
+                        fontFamily: AppStyles.fontGeorgia,
                       ),
                     ),
                     Spacer(),
@@ -56,7 +54,7 @@ class NotificationItem extends StatelessWidget {
                 ),
               ],
             ),
-                  )
+          ),
         ],
       ),
     );

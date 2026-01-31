@@ -1,7 +1,6 @@
 import 'package:cure/core/di/service_locator.dart';
 import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/features/auth/presentation/views/forgot_password_view.dart';
-import 'package:cure/features/auth/presentation/views/login_phone_view.dart';
 import 'package:cure/features/auth/presentation/views/login_view.dart';
 import 'package:cure/features/auth/presentation/views/otp_view.dart';
 import 'package:cure/features/auth/presentation/views/register_view.dart';
@@ -26,8 +25,6 @@ import 'package:cure/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:cure/features/payment/presentation/pages/add_payment_card_view.dart';
 import 'package:cure/features/payment/presentation/pages/payment_view.dart';
 import 'package:cure/features/profile/presentation/pages/edit_profile_view.dart';
-import 'package:cure/features/specialties/presentation/views/doctors_specialty_view.dart';
-import 'package:cure/features/specialties/presentation/views/specialties_view.dart';
 import 'package:cure/features/update_number/presentation/pages/update_num_otp_view.dart';
 import 'package:cure/features/update_number/presentation/pages/update_num_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,16 +56,12 @@ abstract class AppGoRouter {
       ),
       GoRoute(
         path: AppRoutes.otp,
-        builder: (context, state) => OtpView(email: state.extra as String),
+        builder: (context, state) => OtpView(phone: state.extra as String),
       ),
       GoRoute(
         path: AppRoutes.resetPassword,
         builder: (context, state) =>
-            ResetPasswordView(email: state.extra as String),
-      ),
-      GoRoute(
-        path: AppRoutes.phoneLogin,
-        builder: (context, state) => LoginPhoneView(),
+            ResetPasswordView(phone: state.extra as String),
       ),
       GoRoute(
         path: AppRoutes.verifyPhone,
@@ -80,19 +73,8 @@ abstract class AppGoRouter {
         builder: (context, state) => MainView(key: MainView.mainViewKey),
       ),
       GoRoute(
-        path: AppRoutes.specialties,
-        builder: (context, state) =>
-            SpecialtiesView(specialties: state.extra as List<String>),
-      ),
-      GoRoute(
-        path: AppRoutes.doctorsBySpecialties,
-        builder: (context, state) =>
-            DoctorsBySpecialtyView(specialty: state.extra as String),
-      ),
-      GoRoute(
         path: AppRoutes.doctors,
-        builder: (context, state) =>
-            DoctorsView(specialties: state.extra as List<String>),
+        builder: (context, state) => DoctorsView(),
       ),
       GoRoute(
         path: AppRoutes.favourite,

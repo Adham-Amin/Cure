@@ -110,9 +110,9 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                         context.read<ProfileCubit>().updateProfile(
                           data: RegisterRequest(
                             name: _nameController.text,
-                            birthdate: _bithdateController.text,
+                            // birthdate: _bithdateController.text,
                             email: _emailController.text,
-                            profilePhoto: file,
+                            // profilePhoto: file,
                           ),
                         );
                       } else {

@@ -9,12 +9,7 @@ class PaymentMethodOptions {
   Klarna? klarna;
   Link? link;
 
-  PaymentMethodOptions({
-    this.amazonPay,
-    this.card,
-    this.klarna,
-    this.link,
-  });
+  PaymentMethodOptions({this.amazonPay, this.card, this.klarna, this.link});
 
   factory PaymentMethodOptions.fromJson(Map<String, dynamic> json) {
     return PaymentMethodOptions(
@@ -34,9 +29,9 @@ class PaymentMethodOptions {
   }
 
   Map<String, dynamic> toJson() => {
-        'amazon_pay': amazonPay?.toJson(),
-        'card': card?.toJson(),
-        'klarna': klarna?.toJson(),
-        'link': link?.toJson(),
-      };
+    'amazon_pay': amazonPay?.toJson(),
+    'card': card?.toJson(),
+    'klarna': klarna?.toJson(),
+    'link': link?.toJson(),
+  };
 }

@@ -22,19 +22,19 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final formKey = GlobalKey<FormState>();
-  late TextEditingController emailController, passController;
+  late TextEditingController phone, passController;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   @override
   void initState() {
-    emailController = TextEditingController();
+    phone = TextEditingController();
     passController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    emailController.dispose();
+    phone.dispose();
     passController.dispose();
     super.dispose();
   }
@@ -68,16 +68,22 @@ class _LoginFormState extends State<LoginForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomTextFormField(
-                controller: emailController,
-                validator: Validators.email,
-                hintText: 'eng.adham@example.com',
-                prefixIcon: Icon(Icons.email_outlined),
+                controller: phone,
+                validator: Validators.phone,
+                hintText: 'Ex: 01000000000',
+                keyboardType: TextInputType.phone,
+                prefixIcon: Icon(Icons.phone),
               ),
               16.hs,
               CustomTextFormFieldPassword(
                 hintText: '********',
                 controller: passController,
-                validator: Validators.password,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter password';
+                  }
+                  return null;
+                },
               ),
               8.hs,
               ForgetButton(),
@@ -89,7 +95,7 @@ class _LoginFormState extends State<LoginForm> {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
                     context.read<AuthCubit>().login(
-                      email: emailController.text,
+                      phone: phone.text,
                       password: passController.text,
                     );
                   } else {
