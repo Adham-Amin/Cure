@@ -1,11 +1,10 @@
 import 'package:cure/core/services/api_service.dart';
-import 'package:cure/core/services/shared_preferences_service.dart';
-import 'package:dio/dio.dart';
 
 abstract class ChangePasswordRemoteDataSource {
   Future<void> changePassword({
     required String oldPassword,
     required String newPassword,
+    required String newConfirmPassword,
   });
 }
 
@@ -18,14 +17,15 @@ class ChangePasswordRemoteDataSourceImpl
   Future<void> changePassword({
     required String oldPassword,
     required String newPassword,
+    required String newConfirmPassword,
   }) async {
-    await apiService.post(
-      endPoint: '/forgot-password/reset',
-      data: FormData.fromMap({
-        'email': Prefs.getUser()!.email,
-        'otp': '1234',
-        'password': newPassword,
-      }),
+    await apiService.put(
+      endPoint: '/profile/change-password',
+      data: {
+        "current_password": oldPassword,
+        "new_password": newPassword,
+        "new_password_confirmation": newConfirmPassword,
+      },
     );
   }
 }

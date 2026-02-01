@@ -47,5 +47,7 @@ class UserInfoResponse {
     phone: phone ?? '',
     imageUrl: image,
     address: address,
+    birthdate:
+        '${extraData?.birthdate?.day}/${extraData?.birthdate?.month}/${extraData?.birthdate?.year}',
   );
 }

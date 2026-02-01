@@ -11,11 +11,13 @@ class ChangePasswordRepoImpl extends ChangePasswordRepo {
   Future<Either<Failure, void>> changePassword({
     required String oldPassword,
     required String newPassword,
+    required String newConfirmPassword,
   }) async {
     try {
       await changePasswordRemoteDataSource.changePassword(
         oldPassword: oldPassword,
         newPassword: newPassword,
+        newConfirmPassword: newConfirmPassword,
       );
       return const Right(null);
     } catch (e) {

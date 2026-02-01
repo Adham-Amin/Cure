@@ -8,9 +8,11 @@ import 'package:dio/dio.dart';
 class SearchRepoImpl implements SearchRepo {
   final SearchRemoteDataSource searchRemoteDataSource;
   SearchRepoImpl({required this.searchRemoteDataSource});
-  
+
   @override
-  Future<Either<Failure, List<DoctorEntity>>> getDoctors({required String query}) async {
+  Future<Either<Failure, List<DoctorEntity>>> getDoctors({
+    required String query,
+  }) async {
     try {
       final data = await searchRemoteDataSource.getDoctors(query: query);
       return Right(data.map((e) => e.toEntity()).toList());
@@ -21,5 +23,4 @@ class SearchRepoImpl implements SearchRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
-
 }

@@ -25,8 +25,6 @@ import 'package:cure/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:cure/features/payment/presentation/pages/add_payment_card_view.dart';
 import 'package:cure/features/payment/presentation/pages/payment_view.dart';
 import 'package:cure/features/profile/presentation/pages/edit_profile_view.dart';
-import 'package:cure/features/update_number/presentation/pages/update_num_otp_view.dart';
-import 'package:cure/features/update_number/presentation/pages/update_num_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -109,19 +107,6 @@ abstract class AppGoRouter {
         path: AppRoutes.feedback,
         builder: (context, state) {
           return FeedbackView(booking: state.extra as BookingEntity);
-        },
-      ),
-      GoRoute(
-        path: AppRoutes.updateNum,
-        builder: (context, state) {
-          return UpdateNumView();
-        },
-      ),
-      GoRoute(
-        path: AppRoutes.updateVerifyPhone,
-        builder: (context, state) {
-          final args = state.extra as Map<String, dynamic>;
-          return ChangeNumOtpView(num: args['num'], newNum: args['newNum']);
         },
       ),
       ShellRoute(

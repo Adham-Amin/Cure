@@ -4,9 +4,11 @@ class UserEntity {
   final String email;
   final String phone;
   final String? address;
+  final String? birthdate;
 
   UserEntity({
     this.imageUrl,
+    this.birthdate,
     required this.name,
     required this.email,
     required this.phone,
@@ -15,6 +17,7 @@ class UserEntity {
 
   factory UserEntity.fromJson(Map<String, dynamic> json) {
     return UserEntity(
+      birthdate: json['birthdate'],
       imageUrl: json['imageUrl'],
       name: json['name'],
       email: json['email'],
@@ -30,6 +33,7 @@ class UserEntity {
       'email': email,
       'phone': phone,
       'address': address,
+      'birthdate': birthdate,
     };
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cure/core/services/shared_preferences_service.dart';
 import 'package:cure/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,8 +33,12 @@ class ProfileImagePicker extends StatelessWidget {
             CircleAvatar(
               radius: 60,
               backgroundColor: Colors.grey.shade200,
-              backgroundImage: file != null ? FileImage(file!) : null,
-              child: file == null
+              backgroundImage: file != null
+                  ? FileImage(file!)
+                  : Prefs.getUser()!.imageUrl == null
+                  ? null
+                  : Image.network(Prefs.getUser()!.imageUrl!).image,
+              child: Prefs.getUser()!.imageUrl == null
                   ? Icon(Icons.person, size: 60, color: Colors.grey)
                   : null,
             ),

@@ -8,11 +8,12 @@ abstract class SearchRemoteDataSource {
 class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
   final ApiService apiService;
   SearchRemoteDataSourceImpl({required this.apiService});
-  
+
   @override
   Future<List<DoctorResponse>> getDoctors({required String query}) async {
     final response = await apiService.get(endPoint: '/doctors?search=$query');
-    return (response['data'] as List).map((e) => DoctorResponse.fromJson(e)).toList();
+    return (response['data'] as List)
+        .map((e) => DoctorResponse.fromJson(e))
+        .toList();
   }
-
 }

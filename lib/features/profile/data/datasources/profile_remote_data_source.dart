@@ -1,9 +1,10 @@
 import 'package:cure/core/services/api_service.dart';
-import 'package:cure/features/auth/data/models/requests/register_request.dart';
-import 'package:cure/features/profile/data/models/update_profile/update_profile.dart';
+import 'package:cure/features/profile/data/models/edit_profile_request.dart';
+import 'package:cure/features/profile/data/models/edit_profile_response/edit_profile_response.dart';
+import 'package:dio/dio.dart';
 
 abstract class ProfileRemoteDataSource {
-  Future<UpdateProfileModel> updateProfile({required RegisterRequest data});
+  Future<EditProfileResponse> editProfile({required EditProfileRequest data});
   Future<void> deleteAccount();
 }
 
@@ -13,17 +14,18 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
   @override
   Future<void> deleteAccount() async {
-    await apiService.post(endPoint: '/delete-account');
+    await apiService.post(endPoint: '/profile/delete');
   }
 
   @override
-  Future<UpdateProfileModel> updateProfile({
-    required RegisterRequest data,
+  Future<EditProfileResponse> editProfile({
+    required EditProfileRequest data,
   }) async {
+    final formData = FormData.fromMap(await data.toJson());
     final response = await apiService.post(
-      endPoint: '/updateProfile',
-      data: '',
+      endPoint: '/profile/edit',
+      data: formData,
     );
-    return UpdateProfileModel.fromJson(response['data']);
+    return EditProfileResponse.fromJson(response);
   }
 }

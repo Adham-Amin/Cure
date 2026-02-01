@@ -1,3 +1,5 @@
+import 'package:cure/core/services/shared_preferences_service.dart';
+import 'package:cure/core/utils/app_colors.dart';
 import 'package:cure/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -25,10 +27,14 @@ class SelectBirthDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
-      hintText: 'Select Birth Date',
+      hintText: Prefs.getUser()!.birthdate ?? 'Select Birth Date',
       controller: controller,
       readOnly: true,
-      suffixIcon: const Icon(Icons.calendar_month_outlined),
+      prefixIcon: const Icon(Icons.calendar_month_outlined),
+      suffixIcon: const Icon(
+        Icons.open_in_new_rounded,
+        color: AppColors.primary,
+      ),
       onTap: () => _selectDate(context),
     );
   }

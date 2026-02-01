@@ -9,17 +9,22 @@ abstract class HomeRemoteDataSource {
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   final ApiService apiService;
   HomeRemoteDataSourceImpl({required this.apiService});
-  
+
   @override
   Future<List<DoctorResponse>> getDoctors() async {
     final response = await apiService.get(endPoint: '/doctors');
-    return (response['data'] as List).map((e) => DoctorResponse.fromJson(e)).toList();
-  }
-  
-  @override
-  Future<List<DoctorResponse>> getTopExperiencedDoctors() async {
-    final response = await apiService.get(endPoint: '/doctors?sort_by=experience&sort_order=desc');
-    return (response['data'] as List).map((e) => DoctorResponse.fromJson(e)).toList();
+    return (response['data'] as List)
+        .map((e) => DoctorResponse.fromJson(e))
+        .toList();
   }
 
+  @override
+  Future<List<DoctorResponse>> getTopExperiencedDoctors() async {
+    final response = await apiService.get(
+      endPoint: '/doctors?sort_by=experience&sort_order=desc',
+    );
+    return (response['data'] as List)
+        .map((e) => DoctorResponse.fromJson(e))
+        .toList();
+  }
 }

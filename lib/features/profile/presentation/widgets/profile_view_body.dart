@@ -29,12 +29,6 @@ class ProfileViewBody extends StatelessWidget {
           ),
           24.hs,
           ProfileItem(
-            title: 'Change Number',
-            icon: AppAssets.svgsIcPen,
-            onTap: () => context.push(AppRoutes.updateNum),
-          ),
-          24.hs,
-          ProfileItem(
             title: 'Payment Methods',
             icon: AppAssets.svgsIcPayment,
             onTap: () => context.push(AppRoutes.payment),
@@ -46,11 +40,7 @@ class ProfileViewBody extends StatelessWidget {
             onTap: () => context.push(AppRoutes.favourite),
           ),
           24.hs,
-          ProfileItem(
-            title: 'FAQs',
-            icon: AppAssets.svgsIcFaq,
-            onTap: () => context.push(AppRoutes.faq),
-          ),
+          ProfileItem(title: 'FAQs', icon: AppAssets.svgsIcFaq, onTap: () {}),
           24.hs,
           DeleteAccountSection(),
           24.hs,

@@ -1,5 +1,5 @@
-import 'package:cure/features/auth/data/models/requests/register_request.dart';
 import 'package:cure/features/auth/domain/entities/user_entity.dart';
+import 'package:cure/features/profile/data/models/edit_profile_request.dart';
 import 'package:cure/features/profile/domain/repositories/profile_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'profile_state.dart';
@@ -9,9 +9,9 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   final ProfileRepo profileRepo;
 
-  Future<void> updateProfile({required RegisterRequest data}) async {
+  Future<void> updateProfile({required EditProfileRequest data}) async {
     emit(ProfileLoading());
-    final result = await profileRepo.updateProfile(data: data);
+    final result = await profileRepo.editProfile(data: data);
     result.fold(
       (l) => emit(ProfileError(message: l.message)),
       (r) => emit(ProfileLoaded(user: r)),

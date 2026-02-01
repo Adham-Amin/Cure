@@ -1,7 +1,7 @@
 import 'package:cure/core/errors/failure.dart';
 import 'package:cure/features/payment/data/datasources/payment_remote_data_source.dart';
 import 'package:cure/features/payment/data/models/add_payment_request.dart';
-import 'package:cure/features/payment/domain/entities/payment_entity.dart';
+import 'package:cure/features/payment/data/models/payment_resposne.dart';
 import 'package:cure/features/payment/domain/repositories/payment_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -38,10 +38,10 @@ class PaymentRepoImpl implements PaymentRepo {
   }
 
   @override
-  Future<Either<Failure, List<PaymentEntity>>> getPaymentCards() async {
+  Future<Either<Failure, List<PaymentResposne>>> getPaymentCards() async {
     try {
       final cards = await paymentRemoteDataSource.getPaymentCards();
-      return Right(cards.map((e) => e.toEntity()).toList());
+      return Right(cards);
     } catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioException(e));

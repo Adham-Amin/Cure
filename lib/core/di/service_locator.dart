@@ -34,9 +34,6 @@ import 'package:cure/features/profile/domain/repositories/profile_repo.dart';
 import 'package:cure/features/search/data/datasources/search_remote_data_source.dart';
 import 'package:cure/features/search/data/repositories/search_repo_impl.dart';
 import 'package:cure/features/search/domain/repositories/search_repo.dart';
-import 'package:cure/features/update_number/data/datasources/update_number_remote_data_source.dart';
-import 'package:cure/features/update_number/data/repositories/update_number_repo_impl.dart';
-import 'package:cure/features/update_number/domain/repositories/update_number_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:cure/core/services/api_service.dart';
@@ -121,15 +118,6 @@ void serverLocator() {
   getIt.registerLazySingleton<ChangePasswordRepo>(
     () => ChangePasswordRepoImpl(
       changePasswordRemoteDataSource: getIt<ChangePasswordRemoteDataSource>(),
-    ),
-  );
-
-  getIt.registerLazySingleton<UpdateNumberRemoteDataSource>(
-    () => UpdateNumberRemoteDataSourceImpl(apiService: getIt<ApiService>()),
-  );
-  getIt.registerLazySingleton<UpdateNumberRepo>(
-    () => UpdateNumberRepoImpl(
-      updateNumberRemoteDataSource: getIt<UpdateNumberRemoteDataSource>(),
     ),
   );
 

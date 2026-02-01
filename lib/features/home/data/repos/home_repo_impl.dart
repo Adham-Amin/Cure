@@ -21,7 +21,7 @@ class HomeRepoImpl implements HomeRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
-  
+
   @override
   Future<Either<Failure, List<DoctorEntity>>> getTopExperiencedDoctors() async {
     try {
@@ -34,5 +34,4 @@ class HomeRepoImpl implements HomeRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
-
 }

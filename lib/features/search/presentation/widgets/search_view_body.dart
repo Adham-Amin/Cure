@@ -79,9 +79,16 @@ class _SearchViewBodyState extends State<SearchViewBody> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(FontAwesomeIcons.magnifyingGlass, size: 64, color: AppColors.darkGrey,),
+                        Icon(
+                          FontAwesomeIcons.magnifyingGlass,
+                          size: 64,
+                          color: AppColors.darkGrey,
+                        ),
                         24.hs,
-                        Text('Search for doctors', style: AppStyles.textRegular14,),
+                        Text(
+                          'Search for doctors',
+                          style: AppStyles.textRegular14,
+                        ),
                       ],
                     ),
                   ),

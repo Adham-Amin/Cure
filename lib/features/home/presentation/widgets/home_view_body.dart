@@ -63,9 +63,7 @@ class HomeViewBody extends StatelessWidget {
                 24.hs,
                 TitleAndSeeAll(
                   onTap: () {
-                    context.push(
-                      AppRoutes.doctors,
-                    );
+                    context.push(AppRoutes.doctors);
                   },
                   title: 'Doctors',
                 ),

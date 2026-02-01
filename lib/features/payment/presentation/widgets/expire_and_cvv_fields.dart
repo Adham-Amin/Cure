@@ -1,5 +1,4 @@
 import 'package:cure/core/functions/extentions.dart';
-import 'package:cure/core/functions/validators.dart';
 import 'package:cure/core/utils/app_styles.dart';
 import 'package:cure/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +40,12 @@ class ExpireAndCvvFields extends StatelessWidget {
                 hintText: 'MM',
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
-                validator: Validators.phone,
+                validator: (value){
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter expiration month';
+                  }
+                  return null;
+                },
                 onChanged: (_) => onChanged(),
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
@@ -56,7 +60,12 @@ class ExpireAndCvvFields extends StatelessWidget {
                 hintText: 'YY',
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
-                validator: Validators.phone,
+                validator: (value){
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter expiration year';
+                  }
+                  return null;
+                },
                 onChanged: (_) => onChanged(),
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
@@ -72,7 +81,12 @@ class ExpireAndCvvFields extends StatelessWidget {
                 hintText: 'CVV',
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
-                validator: Validators.phone,
+                validator: (value){
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter CVV number';
+                  }
+                  return null;
+                },
                 onChanged: (_) => onChanged(),
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,

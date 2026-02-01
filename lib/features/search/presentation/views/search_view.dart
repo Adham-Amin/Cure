@@ -11,8 +11,7 @@ class SearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          SearchCubit(searchRepo: getIt<SearchRepo>()),
+      create: (context) => SearchCubit(searchRepo: getIt<SearchRepo>()),
       child: Scaffold(
         appBar: AppBar(title: Text('Search')),
         body: const SearchViewBody(),

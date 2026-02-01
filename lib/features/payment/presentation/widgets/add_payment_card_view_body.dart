@@ -80,9 +80,7 @@ class _AddPaymentCardViewBodyState extends State<AddPaymentCardViewBody> {
                 });
               },
               getCardData: () => AddPaymentRequest(
-                cardholderName: _cardholderNameController.text,
-                cardNumber: _cardNumberController.text.replaceAll(' ', ''),
-                cvv: _cvvController.text,
+                lastFour: _cardNumberController.text.substring(15, 19),
                 expMonth: int.parse(_expireMonthController.text),
                 expYear: int.parse('20${_expireYearController.text}'),
               ),

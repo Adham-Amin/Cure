@@ -1,25 +1,23 @@
 class AddPaymentRequest {
-  String? cardholderName;
-  String? cardNumber;
+  String? lastFour;
   int? expMonth;
   int? expYear;
-  String? cvv;
+  AddPaymentRequest({this.lastFour, this.expMonth, this.expYear});
 
-  AddPaymentRequest({
-    this.cardholderName,
-    this.cardNumber,
-    this.expMonth,
-    this.expYear,
-    this.cvv,
-  });
+  factory AddPaymentRequest.fromJson(Map<String, dynamic> json) {
+    return AddPaymentRequest(
+      lastFour: json['last_four'] as String?,
+      expMonth: json['exp_month'] as int?,
+      expYear: json['exp_year'] as int?,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
-    'cardholder_name': cardholderName,
-    'card_number': cardNumber,
+    'provider_token': 'pm_card_mastercard',
+    'brand': 'MasterCard',
+    'last_four': lastFour,
     'exp_month': expMonth,
     'exp_year': expYear,
-    'cvv': cvv,
-    'brand': 'VISA',
-    'gateway': 'stripe',
+    'is_default': true,
   };
 }

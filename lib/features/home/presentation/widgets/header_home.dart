@@ -10,7 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class HeaderHome extends StatelessWidget {
-  const HeaderHome({super.key,});
+  const HeaderHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,10 @@ class HeaderHome extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: NetworkImage(Prefs.getUser()?.imageUrl ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
+                image: NetworkImage(
+                  Prefs.getUser()?.imageUrl ??
+                      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+                ),
                 fit: BoxFit.cover,
               ),
             ),

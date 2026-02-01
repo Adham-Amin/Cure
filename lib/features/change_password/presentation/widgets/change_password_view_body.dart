@@ -110,6 +110,7 @@ class _ChangePasswordViewBodyState extends State<ChangePasswordViewBody> {
                       context.read<ChangePasswordCubit>().changePassword(
                         oldPassword: _currentPassword.text,
                         newPassword: _newPassword.text,
+                        newConfirmPassword: _confirmPassword.text,
                       );
                     } else {
                       setState(() {

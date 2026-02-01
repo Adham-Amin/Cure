@@ -51,7 +51,9 @@ class HomeLoadind extends StatelessWidget {
               ),
             ),
             16.hs,
-            DoctorsExperiencedList(doctors: context.read<HomeCubit>().topExperiencedDoctors),
+            DoctorsExperiencedList(
+              doctors: context.read<HomeCubit>().topExperiencedDoctors,
+            ),
             24.hs,
             TitleAndSeeAll(onTap: () {}, title: 'Top Rated Doctors'),
             16.hs,

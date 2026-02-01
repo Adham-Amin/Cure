@@ -1,5 +1,5 @@
 import 'package:cure/features/payment/data/models/add_payment_request.dart';
-import 'package:cure/features/payment/domain/entities/payment_entity.dart';
+import 'package:cure/features/payment/data/models/payment_resposne.dart';
 import 'package:cure/features/payment/domain/repositories/payment_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'payment_state.dart';

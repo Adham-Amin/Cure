@@ -21,7 +21,8 @@ class OtpView extends StatelessWidget {
             onPressed: () => context.pop(),
           ),
         ),
-        body: OtpViewBody(phone: phone)),
+        body: OtpViewBody(phone: phone),
+      ),
     );
   }
 }

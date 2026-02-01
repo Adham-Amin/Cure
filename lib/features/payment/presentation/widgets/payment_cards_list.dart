@@ -1,7 +1,7 @@
 import 'package:cure/core/functions/extentions.dart';
 import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/core/widgets/custom_button.dart';
-import 'package:cure/features/payment/domain/entities/payment_entity.dart';
+import 'package:cure/features/payment/data/models/payment_resposne.dart';
 import 'package:cure/features/payment/presentation/widgets/credit_item.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 class PaymentCardsList extends StatelessWidget {
   const PaymentCardsList({super.key, required this.cards});
 
-  final List<PaymentEntity> cards;
+  final List<PaymentResposne> cards;
 
   @override
   Widget build(BuildContext context) {

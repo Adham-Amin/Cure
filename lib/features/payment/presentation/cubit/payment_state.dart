@@ -7,7 +7,7 @@ class PaymentInitial extends PaymentState {}
 class PaymentLoading extends PaymentState {}
 
 class PaymentLoaded extends PaymentState {
-  final List<PaymentEntity> cards;
+  final List<PaymentResposne> cards;
   PaymentLoaded({required this.cards});
 }
 

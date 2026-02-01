@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class DoctorsView extends StatelessWidget {
-  const DoctorsView({super.key,});
+  const DoctorsView({super.key});
 
   @override
   Widget build(BuildContext context) {

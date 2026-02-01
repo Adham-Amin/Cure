@@ -91,8 +91,8 @@ class _RegisterFormState extends State<RegisterForm> {
           CustomTextFormFieldPassword(
             hintText: 'Confirm Password',
             controller: _confirmPassController,
-            validator: (value){
-              if(value != _passController.text){
+            validator: (value) {
+              if (value != _passController.text) {
                 return 'Password does not match';
               }
               return null;

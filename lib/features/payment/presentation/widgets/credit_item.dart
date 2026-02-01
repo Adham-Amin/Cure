@@ -4,7 +4,7 @@ import 'package:cure/core/utils/app_assets.dart';
 import 'package:cure/core/utils/app_colors.dart';
 import 'package:cure/core/utils/app_styles.dart';
 import 'package:cure/core/widgets/custom_snack_bar.dart';
-import 'package:cure/features/payment/domain/entities/payment_entity.dart';
+import 'package:cure/features/payment/data/models/payment_resposne.dart';
 import 'package:cure/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,7 @@ import 'package:flutter_svg/svg.dart';
 class CreditItem extends StatelessWidget {
   const CreditItem({super.key, required this.card});
 
-  final PaymentEntity card;
+  final PaymentResposne card;
 
   @override
   Widget build(BuildContext context) {
@@ -69,11 +69,11 @@ class CreditItem extends StatelessWidget {
             SvgPicture.asset(AppAssets.svgsBrandicoVisa),
             8.ws,
             Text(
-              'Axis Bank ${card.maskedCard}',
+              '${card.brand} •••• ${card.lastFour}',
               style: AppStyles.textRegular16,
             ),
             const Spacer(),
-            if (card.isDefault)
+            if (card.isDefault == true)
               Text(
                 'Primary',
                 style: AppStyles.textRegular16.copyWith(
