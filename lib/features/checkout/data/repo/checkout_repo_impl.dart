@@ -1,6 +1,7 @@
 import 'package:cure/features/checkout/data/datasource/checkout_remote_data_source.dart';
 import 'package:cure/core/errors/failure.dart';
 import 'package:cure/features/checkout/data/models/book_appointment_request.dart';
+import 'package:cure/features/checkout/data/models/slot_available_response.dart';
 import 'package:cure/features/checkout/domain/entities/book_appointment_entity.dart';
 import 'package:cure/features/checkout/domain/repo/checkout_repo.dart';
 import 'package:dartz/dartz.dart';
@@ -57,6 +58,19 @@ class CheckoutRepoImpl extends CheckoutRepo {
     } on StripeException catch (e) {
       return Left(ServerFailure(e.error.message.toString()));
     } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<SlotAvailableResponse>>> getSlotsDoctor({required String doctorId}) async {
+    try {
+      final response = await checkoutRemoteDataSource.getSlotsDoctor(doctorId: doctorId);
+      return Right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioException(e));
+      }
       return Left(ServerFailure(e.toString()));
     }
   }

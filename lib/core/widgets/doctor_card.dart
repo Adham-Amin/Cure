@@ -74,7 +74,8 @@ class DoctorCard extends StatelessWidget {
                       Text(
                         doctor.averageRating.toString(),
                         style: AppStyles.textMedium14.copyWith(
-                      color: AppColors.black,),
+                          color: AppColors.black,
+                        ),
                       ),
                       16.ws,
                       Icon(
@@ -83,8 +84,12 @@ class DoctorCard extends StatelessWidget {
                         color: AppColors.darkGrey,
                       ),
                       8.ws,
-                      Text('9:00 AM - 3:00 PM', style: AppStyles.textMedium14.copyWith(
-                      color: AppColors.black,)),
+                      Text(
+                        '9:00 AM - 3:00 PM',
+                        style: AppStyles.textMedium14.copyWith(
+                          color: AppColors.black,
+                        ),
+                      ),
                     ],
                   ),
                 ],

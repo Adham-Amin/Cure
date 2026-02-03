@@ -1,10 +1,12 @@
 import 'package:cure/core/functions/extentions.dart';
 import 'package:cure/core/utils/app_styles.dart';
 import 'package:cure/features/checkout/domain/entities/doctor_info_entity.dart';
+import 'package:cure/features/checkout/presentation/cubit/checkout_cubit.dart';
 import 'package:cure/features/checkout/presentation/widgets/button_book_appointment.dart';
 import 'package:cure/features/checkout/presentation/widgets/header_checkout.dart';
 import 'package:cure/features/checkout/presentation/widgets/select_date_time_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BookAppointmentViewBody extends StatefulWidget {
@@ -18,7 +20,14 @@ class BookAppointmentViewBody extends StatefulWidget {
 }
 
 class _BookAppointmentViewBodyState extends State<BookAppointmentViewBody> {
-  String selectedDate = '';
+
+  @override
+  void initState() {
+    context.read<CheckoutCubit>().getSlotsDoctor(doctorId: widget.doctor.id.toString());
+    super.initState();
+  }
+  String selectedDateAppointment = '';
+  String selectedSlotAppointment = '';
   String selectedDateFormat = '';
   @override
   Widget build(BuildContext context) {
@@ -41,11 +50,12 @@ class _BookAppointmentViewBodyState extends State<BookAppointmentViewBody> {
                 ),
                 16.hs,
                 SelectDateTimeForm(
-                  onDateTimeSelected: (dateTime) {
-                    setState(() {
-                      selectedDate = dateTime;
-                    });
-                  },
+                  onDateSelected: (value) => setState(() {
+                    selectedDateAppointment = value;
+                  }),
+                  onSoltSelected: (value) => setState(() {
+                    selectedSlotAppointment = value;
+                  }),
                   onDateTimeSelectedFormat: (date) {
                     setState(() {
                       selectedDateFormat = date;
@@ -62,7 +72,8 @@ class _BookAppointmentViewBodyState extends State<BookAppointmentViewBody> {
             bottom: 0,
             child: ButtonBookAppointment(
               doctor: widget.doctor,
-              selectedDate: selectedDate,
+              dateAppointment: selectedDateAppointment,
+              slotAppointment: selectedSlotAppointment,
               dateFormat: selectedDateFormat,
             ),
           ),

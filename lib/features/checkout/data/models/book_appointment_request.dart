@@ -1,14 +1,19 @@
 class BookAppointmentRequest {
   final num doctorId;
-  final String dateTime;
+  final String appointmentDate;
+  final String appointmentTime;
 
-  BookAppointmentRequest({required this.doctorId, required this.dateTime});
+  BookAppointmentRequest({
+    required this.doctorId,
+    required this.appointmentDate,
+    required this.appointmentTime,
+  });
 
   Map<String, dynamic> toJson() => {
-    'doctor_id': doctorId,
-    'date_time': dateTime,
-    'payment_method': "cash",
-    'return_url': "https://app.example.com/stripe/return",
-    'cancel_url': "https://app.example.com/stripe/cancel",
+    "doctor_id": doctorId,
+    "appointment_date": appointmentDate,
+    "appointment_time": appointmentTime,
+    "payment_method": "stripe",
+    "notes": "",
   };
 }

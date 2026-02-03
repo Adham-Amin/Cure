@@ -32,7 +32,8 @@ class ButtonPayment extends StatelessWidget {
     context.read<CheckoutCubit>().bookAppointment(
       book: BookAppointmentRequest(
         doctorId: doctor.id,
-        dateTime: doctor.timeAppointment!,
+        appointmentTime: doctor.soltAppointment!,
+        appointmentDate: doctor.dateAppointment!,
       ),
     );
   }

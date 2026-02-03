@@ -17,12 +17,14 @@ class ButtonBookAppointment extends StatelessWidget {
   const ButtonBookAppointment({
     super.key,
     required this.doctor,
-    required this.selectedDate,
+    required this.slotAppointment,
+    required this.dateAppointment,
     required this.dateFormat,
   });
 
   final DoctorInfoEntity doctor;
-  final String selectedDate;
+  final String slotAppointment;
+  final String dateAppointment;
   final String dateFormat;
 
   @override
@@ -45,7 +47,10 @@ class ButtonBookAppointment extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text('Price', style: AppStyles.textMedium24.copyWith(color: Colors.black)),
+              Text(
+                'Price',
+                style: AppStyles.textMedium24.copyWith(color: Colors.black),
+              ),
               6.ws,
               Text(
                 r'\hour',
@@ -85,19 +90,20 @@ class ButtonBookAppointment extends StatelessWidget {
                 isLoading: state is BookingLoading,
                 title: 'Book Appointment',
                 onTap: () {
-                  if (selectedDate.isEmpty) {
+                  if (slotAppointment.isEmpty) {
                     customSnackBar(
                       context: context,
                       message: 'Please select date',
                       type: AnimatedSnackBarType.warning,
                     );
                   } else {
-                    doctor.isReschedule == true
-                        ? context.read<BookingCubit>().rescheduleBooking(
-                            id: doctor.id.toString(),
-                            date: selectedDate,
-                          )
-                        : context.push(
+                    // doctor.isReschedule == true
+                        // ? context.read<BookingCubit>().rescheduleBooking(
+                        //     id: doctor.id.toString(),
+                        //     date: ,
+                        //   )
+                        // :
+                         context.push(
                             AppRoutes.checkout,
                             extra: DoctorInfoEntity(
                               id: doctor.id,
@@ -106,7 +112,8 @@ class ButtonBookAppointment extends StatelessWidget {
                               name: doctor.name,
                               specialty: doctor.specialty,
                               clinicAddress: doctor.clinicAddress,
-                              timeAppointment: selectedDate,
+                              dateAppointment: dateAppointment,
+                              soltAppointment: slotAppointment,
                               dateTimeFormatted: dateFormat,
                             ),
                           );

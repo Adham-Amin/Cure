@@ -1,58 +1,25 @@
-import 'location.dart';
-import 'user.dart';
-
 class Doctor {
   num? id;
-  String? specialty;
-  String? licenseNumber;
-  String? clinicAddress;
-  Location? location;
-  num? sessionPrice;
-  num? averageRating;
-  num? reviewsCount;
-  String? consultation;
-  User? user;
+  String? name;
+  String? speciality;
+  dynamic image;
+  String? address;
 
-  Doctor({
-    this.id,
-    this.specialty,
-    this.licenseNumber,
-    this.clinicAddress,
-    this.location,
-    this.sessionPrice,
-    this.averageRating,
-    this.reviewsCount,
-    this.consultation,
-    this.user,
-  });
+  Doctor({this.id, this.name, this.speciality, this.image, this.address});
 
   factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
     id: json['id'] as num?,
-    specialty: json['specialty'] as String?,
-    licenseNumber: json['license_number'] as String?,
-    clinicAddress: json['clinic_address'] as String?,
-    location: json['location'] == null
-        ? null
-        : Location.fromJson(json['location'] as Map<String, dynamic>),
-    sessionPrice: json['session_price'] as num?,
-    averageRating: json['average_rating'] as num?,
-    reviewsCount: json['reviews_count'] as num?,
-    consultation: json['consultation'] as String?,
-    user: json['user'] == null
-        ? null
-        : User.fromJson(json['user'] as Map<String, dynamic>),
+    name: json['name'] as String?,
+    speciality: json['speciality'] as String?,
+    image: json['image'] as dynamic,
+    address: json['address'] as String?,
   );
 
   Map<String, dynamic> toJson() => {
     'id': id,
-    'specialty': specialty,
-    'license_number': licenseNumber,
-    'clinic_address': clinicAddress,
-    'location': location?.toJson(),
-    'session_price': sessionPrice,
-    'average_rating': averageRating,
-    'reviews_count': reviewsCount,
-    'consultation': consultation,
-    'user': user?.toJson(),
+    'name': name,
+    'speciality': speciality,
+    'image': image,
+    'address': address,
   };
 }

@@ -70,9 +70,7 @@ class CreditItem extends StatelessWidget {
             8.ws,
             Text(
               '${card.brand} •••• ${card.lastFour}',
-              style: AppStyles.textRegular16.copyWith(
-                 color: AppColors.black,
-                ),
+              style: AppStyles.textRegular16.copyWith(color: AppColors.black),
             ),
             const Spacer(),
             if (card.isDefault == true)

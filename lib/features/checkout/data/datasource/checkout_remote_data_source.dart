@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:cure/features/checkout/data/models/ephermeral_keys_model/ephermeral_keys_model.dart';
 import 'package:cure/features/checkout/data/models/payment_intents_model/payment_intents_model.dart';
+import 'package:cure/features/checkout/data/models/slot_available_response.dart';
 import 'package:cure/features/checkout/domain/entities/ephermeral_keys_entity.dart';
 import 'package:cure/features/checkout/domain/entities/payment_intents_entity.dart';
 import 'package:cure/core/services/api_service.dart';
@@ -14,6 +15,7 @@ abstract class CheckoutRemoteDataSource {
   Future<BookAppointmentResponse> bookAppointment({
     required BookAppointmentRequest book,
   });
+  Future<List<SlotAvailableResponse>> getSlotsDoctor({required String doctorId});
   Future<EphermeralKeysEntity> getEphermeralkey({required String customerId});
   Future<PaymentIntentsEntity> createPaymentIntent({
     required String amount,
@@ -37,7 +39,7 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
     required BookAppointmentRequest book,
   }) async {
     var response = await apiService.post(
-      endPoint: '/patient/bookings',
+      endPoint: '/bookings',
       data: book.toJson(),
     );
     return BookAppointmentResponse.fromJson(response['data']);
@@ -106,5 +108,11 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
   @override
   Future<void> showPaymentSheet() async {
     await Stripe.instance.presentPaymentSheet();
+  }
+  
+  @override
+  Future<List<SlotAvailableResponse>> getSlotsDoctor({required String doctorId}) async {
+    final response = await apiService.get(endPoint: '/doctors/$doctorId/availability');
+    return (response['data'] as List).map((e) => SlotAvailableResponse.fromJson(e)).toList();
   }
 }

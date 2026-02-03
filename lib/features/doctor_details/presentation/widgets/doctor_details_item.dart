@@ -21,7 +21,12 @@ class DoctorDetailsItem extends StatelessWidget {
     var isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       children: [
-        SvgPicture.asset(image, colorFilter: isDark ? const ColorFilter.mode(AppColors.white, BlendMode.srcIn) : null),
+        SvgPicture.asset(
+          image,
+          colorFilter: isDark
+              ? const ColorFilter.mode(AppColors.white, BlendMode.srcIn)
+              : null,
+        ),
         12.hs,
         Text(
           title,

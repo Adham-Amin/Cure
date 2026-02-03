@@ -36,7 +36,10 @@ class ButtonCheckout extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text('Price', style: AppStyles.textMedium24.copyWith(color: Colors.black)),
+              Text(
+                'Price',
+                style: AppStyles.textMedium24.copyWith(color: Colors.black),
+              ),
               6.ws,
               Text(
                 r'\hour',

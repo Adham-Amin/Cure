@@ -76,7 +76,17 @@ class HeaderHome extends StatelessWidget {
                 onTap: () {
                   context.read<ThemeCubit>().toggleTheme();
                 },
-                child: state == ThemeMode.dark ? Icon(Icons.wb_sunny_outlined, color: AppColors.black, size: 20) : Icon(Icons.dark_mode_outlined, color: AppColors.black, size: 20),
+                child: state == ThemeMode.dark
+                    ? Icon(
+                        Icons.wb_sunny_outlined,
+                        color: AppColors.black,
+                        size: 20,
+                      )
+                    : Icon(
+                        Icons.dark_mode_outlined,
+                        color: AppColors.black,
+                        size: 20,
+                      ),
               );
             },
           ),
@@ -85,14 +95,22 @@ class HeaderHome extends StatelessWidget {
             onTap: () {
               context.push(AppRoutes.favourite);
             },
-            child: Icon(FontAwesomeIcons.heart, color: AppColors.black, size: 20),
+            child: Icon(
+              FontAwesomeIcons.heart,
+              color: AppColors.black,
+              size: 20,
+            ),
           ),
           16.ws,
           ContainerWithShadow(
             onTap: () {
               context.push(AppRoutes.notifications);
             },
-            child: Icon(FontAwesomeIcons.bell, color: AppColors.black, size: 20),
+            child: Icon(
+              FontAwesomeIcons.bell,
+              color: AppColors.black,
+              size: 20,
+            ),
           ),
         ],
       ),

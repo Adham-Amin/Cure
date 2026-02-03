@@ -1,18 +1,24 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:cure/core/functions/extentions.dart';
+import 'package:cure/core/widgets/custom_snack_bar.dart';
+import 'package:cure/features/checkout/presentation/cubit/checkout_cubit.dart';
 import 'package:cure/features/checkout/presentation/widgets/calendar_picker.dart';
 import 'package:cure/features/checkout/presentation/widgets/date_field_widget.dart';
 import 'package:cure/features/checkout/presentation/widgets/time_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class SelectDateTimeForm extends StatefulWidget {
   const SelectDateTimeForm({
     super.key,
-    required this.onDateTimeSelected,
+    required this.onSoltSelected,
     required this.onDateTimeSelectedFormat,
+    required this.onDateSelected,
   });
 
-  final ValueChanged<String> onDateTimeSelected;
+  final ValueChanged<String> onSoltSelected;
+  final ValueChanged<String> onDateSelected;
   final ValueChanged<String> onDateTimeSelectedFormat;
 
   @override
@@ -23,29 +29,11 @@ class _SelectDateTimeFormState extends State<SelectDateTimeForm> {
   void emitDateTimeString() {
     if (selectedDate == null || selectedTime.isEmpty) return;
 
-    final timeParts = selectedTime.split(' ');
-    final hourMinute = timeParts[0].split(':');
+    final formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate!);
 
-    int hour = int.parse(hourMinute[0]);
-    int minute = int.parse(hourMinute[1]);
-
-    final isPm = timeParts[1] == 'PM';
-
-    if (isPm && hour != 12) hour += 12;
-    if (!isPm && hour == 12) hour = 0;
-
-    final combinedDateTime = DateTime(
-      selectedDate!.year,
-      selectedDate!.month,
-      selectedDate!.day,
-      hour,
-      minute,
-    );
-
-    final result = DateFormat('yyyy-M-d HH:mm:ss').format(combinedDateTime);
+    widget.onDateSelected(formattedDate);
+    widget.onSoltSelected(selectedTime);
     final displayFormat = dateController.text;
-
-    widget.onDateTimeSelected(result);
     widget.onDateTimeSelectedFormat(displayFormat);
   }
 
@@ -56,17 +44,7 @@ class _SelectDateTimeFormState extends State<SelectDateTimeForm> {
   DateTime? selectedDate;
   String selectedTime = '';
 
-  final List<String> times = const [
-    '9:00 AM',
-    '10:00 AM',
-    '11:00 AM',
-    '12:00 PM',
-    '1:00 PM',
-    '2:00 PM',
-    '3:00 PM',
-    '4:00 PM',
-    '5:00 PM',
-  ];
+  List<String> availableTimes = [];
 
   @override
   void initState() {
@@ -85,6 +63,17 @@ class _SelectDateTimeFormState extends State<SelectDateTimeForm> {
       selectedDate = date;
       selectedTime = '';
       dateController.text = DateFormat('EEEE, MMMM d').format(date);
+      final selectedDateString = DateFormat('yyyy-MM-dd').format(date);
+      availableTimes = context
+          .read<CheckoutCubit>()
+          .slots
+          .where((element) => element.date == selectedDateString)
+          .map((e) => e.startTime!)
+          .toList();
+          if(availableTimes.isEmpty){
+            showDatePicker = false;
+            customSnackBar(context: context, message: 'No slots available', type: AnimatedSnackBarType.error);
+          }
       showDatePicker = false;
     });
   }
@@ -112,8 +101,8 @@ class _SelectDateTimeFormState extends State<SelectDateTimeForm> {
           ),
           24.hs,
           TimePickerWidget(
-            visible: selectedDate != null,
-            times: times,
+            visible: selectedDate != null && availableTimes.isNotEmpty,
+            times: availableTimes,
             selectedTime: selectedTime,
             onTimeSelected: (time) {
               setState(() {

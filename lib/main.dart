@@ -27,13 +27,15 @@ class Cure extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider(create: (context) => ThemeCubit()),
-      BlocProvider(
-      create: (context) =>
-          FavouriteCubit(favouriteRepo: getIt<FavouriteRepo>())..getFavourite(),
-    ),
-    ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ThemeCubit()),
+        BlocProvider(
+          create: (context) =>
+              FavouriteCubit(favouriteRepo: getIt<FavouriteRepo>())
+                ..getFavourite(),
+        ),
+      ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, state) {
           return ScreenUtilInit(

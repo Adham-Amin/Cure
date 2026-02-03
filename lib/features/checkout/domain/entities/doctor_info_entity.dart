@@ -5,7 +5,8 @@ class DoctorInfoEntity {
   final String specialty;
   final String clinicAddress;
   final num price;
-  String? timeAppointment;
+  String? dateAppointment;
+  String? soltAppointment; 
   String? dateTimeFormatted;
   bool? isReschedule;
 
@@ -18,6 +19,7 @@ class DoctorInfoEntity {
     required this.name,
     required this.specialty,
     required this.clinicAddress,
-    this.timeAppointment,
+    this.dateAppointment,
+    this.soltAppointment
   });
 }
