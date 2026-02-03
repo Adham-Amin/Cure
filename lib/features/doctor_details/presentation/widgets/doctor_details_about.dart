@@ -22,7 +22,9 @@ class DoctorDetailsAbout extends StatelessWidget {
         ),
         8.hs,
         Text(
-          'Dr. ${doctor.name}, a board-certified ${doctor.specialty} with over ${doctor.experience} years of experience in diagnosing and treating a wide range of respiratory',
+          doctor.aboutMe.isEmpty || doctor.aboutMe == 'null'
+              ? 'Dr. ${doctor.name}, a board-certified ${doctor.specialty} with over ${doctor.experience} years of experience in diagnosing and treating a wide range of respiratory'
+              : doctor.aboutMe,
           style: AppStyles.textRegular14.copyWith(color: AppColors.darkGrey),
         ),
       ],

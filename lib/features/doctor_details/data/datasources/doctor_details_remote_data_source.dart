@@ -1,8 +1,10 @@
 import 'package:cure/core/services/api_service.dart';
-import 'package:cure/features/doctor_details/data/models/doctor_details_model/doctor_details_model.dart';
+import 'package:cure/features/doctor_details/data/models/doctor_details_response/doctor_details_response.dart';
+import 'package:cure/features/doctor_details/data/models/reviews_response/reviews_response.dart';
 
 abstract class DoctorDetailsRemoteDataSource {
-  Future<DoctorDetailsModel> getDoctorDetails({required String id});
+  Future<DoctorDetailsResponse> getDoctorDetails({required String id});
+  Future<List<ReviewsResponse>> getReviews({required String id});
 }
 
 class DoctorDetailsRemoteDataSourceImpl
@@ -11,8 +13,14 @@ class DoctorDetailsRemoteDataSourceImpl
   DoctorDetailsRemoteDataSourceImpl({required this.apiService});
 
   @override
-  Future<DoctorDetailsModel> getDoctorDetails({required String id}) async {
+  Future<DoctorDetailsResponse> getDoctorDetails({required String id}) async {
     final response = await apiService.get(endPoint: '/doctors/$id');
-    return DoctorDetailsModel.fromJson(response['data']);
+    return DoctorDetailsResponse.fromJson(response['data']);
+  }
+  
+  @override
+  Future<List<ReviewsResponse>> getReviews({required String id}) async {
+    final response = await apiService.get(endPoint: '/reviews/doctor/$id');
+    return (response['data'] as List).map((e) => ReviewsResponse.fromJson(e)).toList();
   }
 }

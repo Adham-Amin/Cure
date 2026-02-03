@@ -40,7 +40,7 @@ class ExpireAndCvvFields extends StatelessWidget {
                 hintText: 'MM',
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
-                validator: (value){
+                validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter expiration month';
                   }
@@ -60,7 +60,7 @@ class ExpireAndCvvFields extends StatelessWidget {
                 hintText: 'YY',
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
-                validator: (value){
+                validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter expiration year';
                   }
@@ -81,7 +81,7 @@ class ExpireAndCvvFields extends StatelessWidget {
                 hintText: 'CVV',
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
-                validator: (value){
+                validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter CVV number';
                   }

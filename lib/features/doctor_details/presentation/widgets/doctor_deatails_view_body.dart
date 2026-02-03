@@ -33,6 +33,7 @@ class DoctorDeatailsViewBody extends StatelessWidget {
                 child: SingleChildScrollView(
                   padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 140.h),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       DoctorDetailsHeader(doctor: doctor, image: image),
                       24.hs,

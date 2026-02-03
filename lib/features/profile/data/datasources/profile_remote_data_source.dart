@@ -14,7 +14,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
   @override
   Future<void> deleteAccount() async {
-    await apiService.post(endPoint: '/profile/delete');
+    await apiService.delete(endPoint: '/profile/delete');
   }
 
   @override
