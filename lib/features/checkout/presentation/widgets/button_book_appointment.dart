@@ -97,26 +97,27 @@ class ButtonBookAppointment extends StatelessWidget {
                       type: AnimatedSnackBarType.warning,
                     );
                   } else {
-                    // doctor.isReschedule == true
-                        // ? context.read<BookingCubit>().rescheduleBooking(
-                        //     id: doctor.id.toString(),
-                        //     date: ,
-                        //   )
-                        // :
-                         context.push(
-                            AppRoutes.checkout,
-                            extra: DoctorInfoEntity(
-                              id: doctor.id,
-                              price: doctor.price,
-                              image: doctor.image,
-                              name: doctor.name,
-                              specialty: doctor.specialty,
-                              clinicAddress: doctor.clinicAddress,
-                              dateAppointment: dateAppointment,
-                              soltAppointment: slotAppointment,
-                              dateTimeFormatted: dateFormat,
-                            ),
-                          );
+                    doctor.isReschedule == true
+                    ? context.read<BookingCubit>().rescheduleBooking(
+                        id: doctor.rescheduleId.toString(),
+                        appointmentDate: dateAppointment,
+                        appointmentTime: slotAppointment,
+                      )
+                    :
+                    context.push(
+                      AppRoutes.checkout,
+                      extra: DoctorInfoEntity(
+                        id: doctor.id,
+                        price: doctor.price,
+                        image: doctor.image,
+                        name: doctor.name,
+                        specialty: doctor.specialty,
+                        clinicAddress: doctor.clinicAddress,
+                        dateAppointment: dateAppointment,
+                        soltAppointment: slotAppointment,
+                        dateTimeFormatted: dateFormat,
+                      ),
+                    );
                   }
                 },
               );

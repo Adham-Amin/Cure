@@ -14,6 +14,7 @@ class BookingList extends StatelessWidget {
     final sortedBookings = bookings
       ..sort((a, b) => b.dateTimeFormatted.compareTo(a.dateTimeFormatted));
     return ListView.separated(
+      reverse: true,
       padding: const EdgeInsets.only(top: 24, bottom: 16),
       physics: const BouncingScrollPhysics(),
       itemCount: bookings.length,

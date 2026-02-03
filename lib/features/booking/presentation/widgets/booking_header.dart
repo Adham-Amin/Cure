@@ -25,9 +25,9 @@ class BookingHeader extends StatelessWidget {
         Text(
           booking.statusLabel,
           style: AppStyles.textRegular14.copyWith(
-            color: booking.statusLabel == 'Cancelled'
+            color: booking.statusLabel == 'cancelled'
                 ? Colors.red
-                : booking.statusLabel == 'Rescheduled'
+                : booking.statusLabel == 'rescheduled'
                 ? Colors.green
                 : AppColors.primary,
           ),

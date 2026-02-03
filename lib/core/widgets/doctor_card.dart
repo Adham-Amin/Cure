@@ -2,10 +2,9 @@ import 'package:cure/core/functions/extentions.dart';
 import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/core/utils/app_colors.dart';
 import 'package:cure/core/utils/app_styles.dart';
-import 'package:cure/features/favourite/presentation/cubit/favourite_cubit.dart';
+import 'package:cure/core/widgets/fav_button.dart';
 import 'package:cure/features/home/domain/entities/doctor_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -99,37 +98,6 @@ class DoctorCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class FavButton extends StatelessWidget {
-  const FavButton({super.key, required this.doctorId});
-
-  final num doctorId;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocSelector<FavouriteCubit, FavouriteState, bool>(
-      selector: (state) {
-        if (state is FavouriteLoaded) {
-          return state.doctors.any((e) => e.id == doctorId);
-        }
-        return false;
-      },
-      builder: (context, isFav) {
-        return IconButton(
-          onPressed: () {
-            context.read<FavouriteCubit>().toggleFavourite(
-              doctorId: doctorId.toString(),
-            );
-          },
-          icon: Icon(
-            isFav ? Icons.favorite : Icons.favorite_border,
-            color: isFav ? Colors.red : AppColors.darkGrey,
-          ),
-        );
-      },
     );
   }
 }

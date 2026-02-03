@@ -28,10 +28,11 @@ class BookingCubit extends Cubit<BookingState> {
 
   Future<void> rescheduleBooking({
     required String id,
-    required String date,
+    required String appointmentDate,
+    required String appointmentTime,
   }) async {
     emit(BookingLoading());
-    final result = await bookingRepo.rescheduleBooking(id: id, date: date);
+    final result = await bookingRepo.rescheduleBooking(id: id, appointmentDate: appointmentDate, appointmentTime: appointmentTime);
     result.fold(
       (l) => emit(BookingError(message: l.message)),
       (r) async => await getBookings(),

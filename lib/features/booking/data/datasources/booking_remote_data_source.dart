@@ -1,10 +1,14 @@
 import 'package:cure/core/services/api_service.dart';
-import 'package:cure/features/booking/data/models/booking_model/booking_model.dart';
+import 'package:cure/features/booking/data/models/booking_response/booking_response.dart';
 
 abstract class BookingRemoteDataSource {
-  Future<List<BookingModel>> getBookings();
+  Future<List<BookingResponse>> getBookings();
   Future<void> cancelBooking({required String id});
-  Future<void> rescheduleBooking({required String id, required String date});
+  Future<void> rescheduleBooking({
+    required String id,
+    required String appointmentDate,
+    required String appointmentTime,
+  });
 }
 
 class BookingRemoteDataSourceImpl implements BookingRemoteDataSource {
@@ -12,17 +16,20 @@ class BookingRemoteDataSourceImpl implements BookingRemoteDataSource {
   BookingRemoteDataSourceImpl({required this.apiService});
   @override
   Future<void> cancelBooking({required String id}) async {
-    await apiService.delete(endPoint: '/patient/bookings/$id/cancel');
+    await apiService.post(
+      endPoint: '/bookings/$id/cancel',
+      data: {"cancellation_reason": "N/A"},
+    );
   }
 
   @override
-  Future<List<BookingModel>> getBookings() async {
-    final response = await apiService.get(endPoint: '/patient/bookings');
+  Future<List<BookingResponse>> getBookings() async {
+    final response = await apiService.get(endPoint: '/bookings');
 
-    List<BookingModel> bookings = [];
+    List<BookingResponse> bookings = [];
 
-    for (var booking in response['data']['data']) {
-      bookings.add(BookingModel.fromJson(booking));
+    for (var booking in response['data']) {
+      bookings.add(BookingResponse.fromJson(booking));
     }
     return bookings;
   }
@@ -30,11 +37,16 @@ class BookingRemoteDataSourceImpl implements BookingRemoteDataSource {
   @override
   Future<void> rescheduleBooking({
     required String id,
-    required String date,
+    required String appointmentDate,
+    required String appointmentTime,
   }) async {
     await apiService.put(
-      endPoint: '/patient/bookings/$id/reschedule',
-      data: {'date_time': date},
+      endPoint: '/bookings/$id',
+      data: {
+        "appointment_date": appointmentDate,
+        "appointment_time": appointmentTime,
+        "notes": "Rescheduled for now"
+      },
     );
   }
 }

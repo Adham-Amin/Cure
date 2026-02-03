@@ -17,7 +17,7 @@ class BookingActions extends StatelessWidget {
   final String image;
 
   bool get isActive =>
-      booking.statusLabel == 'Pending' || booking.statusLabel == 'Rescheduled';
+      booking.statusLabel == 'pending' || booking.statusLabel == 'rescheduled';
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,8 @@ class BookingActions extends StatelessWidget {
                       AppRoutes.bookAppointment,
                       extra: DoctorInfoEntity(
                         isReschedule: true,
-                        id: booking.id,
+                        id: booking.doctorId,
+                        rescheduleId: booking.id.toString(),
                         price: booking.price,
                         image: image,
                         name: booking.doctorName,

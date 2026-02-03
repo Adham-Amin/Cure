@@ -70,10 +70,14 @@ class _SelectDateTimeFormState extends State<SelectDateTimeForm> {
           .where((element) => element.date == selectedDateString)
           .map((e) => e.startTime!)
           .toList();
-          if(availableTimes.isEmpty){
-            showDatePicker = false;
-            customSnackBar(context: context, message: 'No slots available', type: AnimatedSnackBarType.error);
-          }
+      if (availableTimes.isEmpty) {
+        showDatePicker = false;
+        customSnackBar(
+          context: context,
+          message: 'No slots available',
+          type: AnimatedSnackBarType.error,
+        );
+      }
       showDatePicker = false;
     });
   }

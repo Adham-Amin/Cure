@@ -15,7 +15,9 @@ abstract class CheckoutRemoteDataSource {
   Future<BookAppointmentResponse> bookAppointment({
     required BookAppointmentRequest book,
   });
-  Future<List<SlotAvailableResponse>> getSlotsDoctor({required String doctorId});
+  Future<List<SlotAvailableResponse>> getSlotsDoctor({
+    required String doctorId,
+  });
   Future<EphermeralKeysEntity> getEphermeralkey({required String customerId});
   Future<PaymentIntentsEntity> createPaymentIntent({
     required String amount,
@@ -109,10 +111,16 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
   Future<void> showPaymentSheet() async {
     await Stripe.instance.presentPaymentSheet();
   }
-  
+
   @override
-  Future<List<SlotAvailableResponse>> getSlotsDoctor({required String doctorId}) async {
-    final response = await apiService.get(endPoint: '/doctors/$doctorId/availability');
-    return (response['data'] as List).map((e) => SlotAvailableResponse.fromJson(e)).toList();
+  Future<List<SlotAvailableResponse>> getSlotsDoctor({
+    required String doctorId,
+  }) async {
+    final response = await apiService.get(
+      endPoint: '/doctors/$doctorId/availability',
+    );
+    return (response['data'] as List)
+        .map((e) => SlotAvailableResponse.fromJson(e))
+        .toList();
   }
 }

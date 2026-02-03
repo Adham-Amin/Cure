@@ -9,7 +9,9 @@ abstract class CheckoutRepo {
     required BookAppointmentRequest book,
   });
 
-  Future<Either<Failure, List<SlotAvailableResponse>>> getSlotsDoctor({required String doctorId});
+  Future<Either<Failure, List<SlotAvailableResponse>>> getSlotsDoctor({
+    required String doctorId,
+  });
 
   Future<Either<Failure, void>> paymentWithStripe({
     required String amount,

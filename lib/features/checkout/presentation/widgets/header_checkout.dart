@@ -2,7 +2,7 @@ import 'package:cure/core/functions/extentions.dart';
 import 'package:cure/core/utils/app_assets.dart';
 import 'package:cure/core/utils/app_colors.dart';
 import 'package:cure/core/utils/app_styles.dart';
-import 'package:cure/core/widgets/doctor_card.dart';
+import 'package:cure/core/widgets/fav_button.dart';
 import 'package:cure/features/checkout/domain/entities/doctor_info_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

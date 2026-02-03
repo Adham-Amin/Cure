@@ -23,13 +23,10 @@ class CheckoutCubit extends Cubit<CheckoutState> {
   Future<void> getSlotsDoctor({required String doctorId}) async {
     emit(CheckoutLoading());
     final result = await checkoutRepo.getSlotsDoctor(doctorId: doctorId);
-    result.fold(
-      (l) => emit(CheckoutError(message: l.message)),
-      (r) {
-        slots = r;
-        emit(CheckoutLoaded());
-      },
-    );
+    result.fold((l) => emit(CheckoutError(message: l.message)), (r) {
+      slots = r;
+      emit(CheckoutLoaded());
+    });
   }
 
   Future<void> paymentWithStripe({

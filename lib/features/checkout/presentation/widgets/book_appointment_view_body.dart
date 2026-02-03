@@ -20,12 +20,14 @@ class BookAppointmentViewBody extends StatefulWidget {
 }
 
 class _BookAppointmentViewBodyState extends State<BookAppointmentViewBody> {
-
   @override
   void initState() {
-    context.read<CheckoutCubit>().getSlotsDoctor(doctorId: widget.doctor.id.toString());
+    context.read<CheckoutCubit>().getSlotsDoctor(
+      doctorId: widget.doctor.id.toString(),
+    );
     super.initState();
   }
+
   String selectedDateAppointment = '';
   String selectedSlotAppointment = '';
   String selectedDateFormat = '';

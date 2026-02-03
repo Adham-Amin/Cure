@@ -63,9 +63,13 @@ class CheckoutRepoImpl extends CheckoutRepo {
   }
 
   @override
-  Future<Either<Failure, List<SlotAvailableResponse>>> getSlotsDoctor({required String doctorId}) async {
+  Future<Either<Failure, List<SlotAvailableResponse>>> getSlotsDoctor({
+    required String doctorId,
+  }) async {
     try {
-      final response = await checkoutRemoteDataSource.getSlotsDoctor(doctorId: doctorId);
+      final response = await checkoutRemoteDataSource.getSlotsDoctor(
+        doctorId: doctorId,
+      );
       return Right(response);
     } catch (e) {
       if (e is DioException) {

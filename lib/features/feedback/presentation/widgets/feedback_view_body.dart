@@ -116,8 +116,6 @@ class _FeedbackViewBodyState extends State<FeedbackViewBody> {
                       context.read<FeedbackCubit>().sendFeedback(
                         feedbackRequest: FeedbackRequest(
                           bookingId: widget.booking.id,
-                          doctorId: widget.booking.doctorId,
-                          patientId: widget.booking.patientId,
                           rating: _currentRating,
                           comment: feedbackController.text,
                         ),

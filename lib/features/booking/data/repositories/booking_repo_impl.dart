@@ -37,10 +37,11 @@ class BookingRepoImpl extends BookingRepo {
   @override
   Future<Either<Failure, void>> rescheduleBooking({
     required String id,
-    required String date,
+    required String appointmentDate,
+    required String appointmentTime,
   }) async {
     try {
-      await bookingRemoteDataSource.rescheduleBooking(id: id, date: date);
+      await bookingRemoteDataSource.rescheduleBooking(id: id, appointmentDate: appointmentDate, appointmentTime: appointmentTime);
       return const Right(null);
     } catch (e) {
       if (e is DioException) {

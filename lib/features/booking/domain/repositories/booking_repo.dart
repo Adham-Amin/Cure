@@ -7,6 +7,7 @@ abstract class BookingRepo {
   Future<Either<Failure, void>> cancelBooking({required String id});
   Future<Either<Failure, void>> rescheduleBooking({
     required String id,
-    required String date,
+    required String appointmentDate,
+    required String appointmentTime,
   });
 }
