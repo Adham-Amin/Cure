@@ -1,10 +1,9 @@
 import 'package:cure/core/services/api_service.dart';
-import 'package:cure/features/favourite/data/models/favourite_model/favourite_model.dart';
+import 'package:cure/features/favourite/data/models/favourite_response/favourite_response.dart';
 
 abstract class FavouriteRemoteDataSource {
-  Future<FavouriteModel> getFavourite();
+  Future<List<FavouriteResponse>> getFavourite();
   Future<void> toggleFavourite({required String doctorId});
-  Future<bool> checkFavourite({required String doctorId});
 }
 
 class FavouriteRemoteDataSourceImpl implements FavouriteRemoteDataSource {
@@ -12,21 +11,16 @@ class FavouriteRemoteDataSourceImpl implements FavouriteRemoteDataSource {
   FavouriteRemoteDataSourceImpl({required this.apiService});
 
   @override
-  Future<bool> checkFavourite({required String doctorId}) async {
-    final response = await apiService.get(
-      endPoint: '/favorites/check/$doctorId',
-    );
-    return response['status'];
-  }
-
-  @override
-  Future<FavouriteModel> getFavourite() async {
-    final response = await apiService.get(endPoint: '/favorites');
-    return FavouriteModel.fromJson(response['data']);
+  Future<List<FavouriteResponse>> getFavourite() async {
+    final response = await apiService.get(endPoint: '/profile/favorites');
+    if (response['data'] == null) return [];
+    return (response['data'] as List)
+        .map((e) => FavouriteResponse.fromJson(e))
+        .toList();
   }
 
   @override
   Future<void> toggleFavourite({required String doctorId}) async {
-    await apiService.post(endPoint: '/favorites/toggle/$doctorId');
+    await apiService.post(endPoint: '/doctors/$doctorId/favorite');
   }
 }

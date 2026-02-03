@@ -32,12 +32,4 @@ class FavouriteCubit extends Cubit<FavouriteState> {
       });
     }
   }
-
-  Future<void> checkFavourite({required String doctorId}) async {
-    final result = await favouriteRepo.checkFavourite(doctorId: doctorId);
-    result.fold(
-      (l) => emit(FavouriteError(message: l.message)),
-      (r) => emit(FavouriteCheckLoaded(isFavourite: r)),
-    );
-  }
 }

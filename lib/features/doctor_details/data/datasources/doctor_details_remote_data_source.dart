@@ -17,10 +17,12 @@ class DoctorDetailsRemoteDataSourceImpl
     final response = await apiService.get(endPoint: '/doctors/$id');
     return DoctorDetailsResponse.fromJson(response['data']);
   }
-  
+
   @override
   Future<List<ReviewsResponse>> getReviews({required String id}) async {
     final response = await apiService.get(endPoint: '/reviews/doctor/$id');
-    return (response['data'] as List).map((e) => ReviewsResponse.fromJson(e)).toList();
+    return (response['data'] as List)
+        .map((e) => ReviewsResponse.fromJson(e))
+        .toList();
   }
 }

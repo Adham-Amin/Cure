@@ -27,7 +27,9 @@ class DoctorDetailsRepoImpl implements DoctorDetailsRepo {
           totalPatient: docDetailsResponse.patientCount ?? 0,
           aboutMe: docDetailsResponse.aboutMe ?? '',
           experience: docDetailsResponse.experienceYears ?? 0,
-          rating: double.tryParse(docDetailsResponse.ratingAvg ?? '0')?.toInt() ?? 0,
+          rating:
+              double.tryParse(docDetailsResponse.ratingAvg ?? '0')?.toInt() ??
+              0,
           clinicAddress: docDetailsResponse.clinicAddress ?? '',
           email: docDetailsResponse.email ?? '',
           mobile: docDetailsResponse.mobile ?? '',

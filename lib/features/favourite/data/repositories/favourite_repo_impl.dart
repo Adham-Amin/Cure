@@ -10,27 +10,10 @@ class FavouriteRepoImpl implements FavouriteRepo {
   FavouriteRepoImpl({required this.favouriteRemoteDataSource});
 
   @override
-  Future<Either<Failure, bool>> checkFavourite({
-    required String doctorId,
-  }) async {
-    try {
-      final data = await favouriteRemoteDataSource.checkFavourite(
-        doctorId: doctorId,
-      );
-      return Right(data);
-    } catch (e) {
-      if (e is DioException) {
-        return Left(ServerFailure.fromDioException(e));
-      }
-      return Left(ServerFailure(e.toString()));
-    }
-  }
-
-  @override
   Future<Either<Failure, List<DoctorEntity>>> getFavourite() async {
     try {
       final data = await favouriteRemoteDataSource.getFavourite();
-      return Right(data.toEntity());
+      return Right(data.map((e) => e.toEntity()).toList());
     } catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioException(e));
