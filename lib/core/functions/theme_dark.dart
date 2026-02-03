@@ -20,11 +20,11 @@ ThemeData themeDark() {
       hintStyle: AppStyles.textRegular14.copyWith(color: AppColors.grey),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.r),
-        borderSide: BorderSide.none,
+        borderSide: BorderSide(color: AppColors.grey),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.r),
-        borderSide: BorderSide.none,
+        borderSide: BorderSide(color: AppColors.grey),
       ),
       prefixIconColor: AppColors.grey,
       suffixIconColor: AppColors.grey,

@@ -34,7 +34,7 @@ class ProfileItem extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: AppStyles.textRegular16.copyWith(color: color),
+          style: AppStyles.textRegular16.copyWith(color: color ?? AppColors.black),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios,

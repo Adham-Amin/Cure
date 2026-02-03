@@ -8,7 +8,6 @@ import 'package:cure/core/utils/app_keys.dart';
 import 'package:cure/features/checkout/data/models/book_appointment_request.dart';
 import 'package:cure/features/checkout/data/models/book_appointment_response/book_appointment_response.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 abstract class CheckoutRemoteDataSource {
@@ -96,7 +95,6 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
           paymentIntentClientSecret: clinicSecret,
           customerEphemeralKeySecret: ephemeralKey,
           customerId: customerId,
-          style: ThemeMode.dark,
         ),
       );
     } catch (e) {

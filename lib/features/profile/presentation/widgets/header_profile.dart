@@ -48,6 +48,7 @@ class _HeaderProfileState extends State<HeaderProfile> {
           Prefs.getUser()!.name,
           style: AppStyles.textMedium18.copyWith(
             fontFamily: AppStyles.fontGeorgia,
+            color: AppColors.black,
           ),
         ),
         subtitle: Text(

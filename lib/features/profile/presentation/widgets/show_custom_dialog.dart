@@ -27,10 +27,11 @@ Future<dynamic> showCustomDialog({
               textAlign: TextAlign.center,
               style: AppStyles.textRegular24.copyWith(
                 fontFamily: AppStyles.fontGeorgia,
+                color: AppColors.black,
               ),
             ),
             16.hs,
-            const Divider(),
+            const Divider(height: 1, color: AppColors.darkGrey),
             16.hs,
             Text(
               message,

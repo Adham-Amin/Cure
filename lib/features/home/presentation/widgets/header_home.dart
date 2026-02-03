@@ -1,3 +1,4 @@
+import 'package:cure/core/cubits/theme_cubit/theme_cubit.dart';
 import 'package:cure/core/functions/extentions.dart';
 import 'package:cure/core/routes/app_routes.dart';
 import 'package:cure/core/services/shared_preferences_service.dart';
@@ -5,6 +6,7 @@ import 'package:cure/core/utils/app_colors.dart';
 import 'package:cure/core/utils/app_styles.dart';
 import 'package:cure/features/home/presentation/widgets/container_with_shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -52,10 +54,14 @@ class HeaderHome extends StatelessWidget {
                       color: AppColors.darkGrey,
                     ),
                     4.ws,
-                    Text(
-                      Prefs.getUser()?.address ?? '',
-                      style: AppStyles.textRegular12.copyWith(
-                        color: AppColors.darkGrey,
+                    Expanded(
+                      child: Text(
+                        Prefs.getUser()?.address ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppStyles.textRegular12.copyWith(
+                          color: AppColors.darkGrey,
+                        ),
                       ),
                     ),
                   ],
@@ -63,18 +69,30 @@ class HeaderHome extends StatelessWidget {
               ],
             ),
           ),
+          8.ws,
+          BlocBuilder<ThemeCubit, ThemeMode>(
+            builder: (context, state) {
+              return ContainerWithShadow(
+                onTap: () {
+                  context.read<ThemeCubit>().toggleTheme();
+                },
+                child: state == ThemeMode.dark ? Icon(Icons.wb_sunny_outlined, color: AppColors.black, size: 20) : Icon(Icons.dark_mode_outlined, color: AppColors.black, size: 20),
+              );
+            },
+          ),
+          16.ws,
           ContainerWithShadow(
             onTap: () {
               context.push(AppRoutes.favourite);
             },
-            child: Icon(FontAwesomeIcons.heart, size: 20),
+            child: Icon(FontAwesomeIcons.heart, color: AppColors.black, size: 20),
           ),
           16.ws,
           ContainerWithShadow(
             onTap: () {
               context.push(AppRoutes.notifications);
             },
-            child: Icon(FontAwesomeIcons.bell, size: 20),
+            child: Icon(FontAwesomeIcons.bell, color: AppColors.black, size: 20),
           ),
         ],
       ),

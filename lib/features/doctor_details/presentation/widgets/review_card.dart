@@ -45,6 +45,7 @@ class ReviewCard extends StatelessWidget {
                     review.name,
                     style: AppStyles.textRegular16.copyWith(
                       fontFamily: AppStyles.fontGeorgia,
+                      color: AppColors.black,
                     ),
                   ),
                   4.hs,
@@ -79,7 +80,10 @@ class ReviewCard extends StatelessWidget {
             ],
           ),
           8.hs,
-          Text(review.review, style: AppStyles.textRegular14),
+          Text(
+            review.review,
+            style: AppStyles.textRegular14.copyWith(color: AppColors.black),
+          ),
         ],
       ),
     );

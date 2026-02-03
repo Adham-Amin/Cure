@@ -1,3 +1,4 @@
+import 'package:cure/core/cubits/theme_cubit/theme_cubit.dart';
 import 'package:cure/core/di/service_locator.dart';
 import 'package:cure/core/functions/theme_dark.dart';
 import 'package:cure/core/functions/theme_light.dart';
@@ -26,19 +27,28 @@ class Cure extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (context) => ThemeCubit()),
+      BlocProvider(
       create: (context) =>
           FavouriteCubit(favouriteRepo: getIt<FavouriteRepo>())..getFavourite(),
-      child: ScreenUtilInit(
-        designSize: const Size(428, 926),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, child) => MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          theme: themeLight(),
-          darkTheme: themeDark(),
-          routerConfig: AppGoRouter.router,
-        ),
+    ),
+    ],
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, state) {
+          return ScreenUtilInit(
+            designSize: const Size(428, 926),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (context, child) => MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              themeMode: state,
+              theme: themeLight(),
+              darkTheme: themeDark(),
+              routerConfig: AppGoRouter.router,
+            ),
+          );
+        },
       ),
     );
   }
