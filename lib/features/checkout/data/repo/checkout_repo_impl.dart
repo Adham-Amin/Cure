@@ -13,11 +13,11 @@ class CheckoutRepoImpl extends CheckoutRepo {
   CheckoutRepoImpl({required this.checkoutRemoteDataSource});
 
   @override
-  Future<Either<Failure, BookAppointmentEntity>> bookAppointment({
+  Future<Either<Failure, BookAppointmentEntity>> bookCashAppointment({
     required BookAppointmentRequest book,
   }) async {
     try {
-      final response = await checkoutRemoteDataSource.bookAppointment(
+      final response = await checkoutRemoteDataSource.bookCashAppointment(
         book: book,
       );
       return Right(response.toEntity());
@@ -71,6 +71,19 @@ class CheckoutRepoImpl extends CheckoutRepo {
         doctorId: doctorId,
       );
       return Right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioException(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+  
+  @override
+  Future<Either<Failure, BookAppointmentEntity>> bookAppointment({required BookAppointmentRequest book}) async {
+    try {
+      final response = await checkoutRemoteDataSource.bookAppointment(book: book);
+      return Right(response.toEntity());
     } catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioException(e));

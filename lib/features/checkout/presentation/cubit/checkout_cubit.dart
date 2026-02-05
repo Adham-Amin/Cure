@@ -11,6 +11,15 @@ class CheckoutCubit extends Cubit<CheckoutState> {
 
   List<SlotAvailableResponse> slots = [];
 
+  Future<void> bookCashAppointment({required BookAppointmentRequest book}) async {
+    emit(CheckoutLoading());
+    final result = await checkoutRepo.bookCashAppointment(book: book);
+    result.fold(
+      (l) => emit(CheckoutError(message: l.message)),
+      (r) => emit(CheckoutLoaded()),
+    );
+  }
+
   Future<void> bookAppointment({required BookAppointmentRequest book}) async {
     emit(CheckoutLoading());
     final result = await checkoutRepo.bookAppointment(book: book);

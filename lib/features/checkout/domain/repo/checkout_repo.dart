@@ -5,6 +5,10 @@ import 'package:cure/features/checkout/domain/entities/book_appointment_entity.d
 import 'package:dartz/dartz.dart';
 
 abstract class CheckoutRepo {
+  Future<Either<Failure, BookAppointmentEntity>> bookCashAppointment({
+    required BookAppointmentRequest book,
+  });
+
   Future<Either<Failure, BookAppointmentEntity>> bookAppointment({
     required BookAppointmentRequest book,
   });

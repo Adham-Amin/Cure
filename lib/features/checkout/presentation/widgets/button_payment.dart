@@ -110,7 +110,13 @@ class ButtonPayment extends StatelessWidget {
       case 1:
         return () => _payWithPaypal(context);
       default:
-        return () => _bookDirect(context);
+        return () => context.read<CheckoutCubit>().bookCashAppointment(
+          book: BookAppointmentRequest(
+            doctorId: doctor.id,
+            appointmentTime: doctor.soltAppointment!,
+            appointmentDate: doctor.dateAppointment!,
+          ),
+        );
     }
   }
 

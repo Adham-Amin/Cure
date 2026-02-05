@@ -12,6 +12,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 abstract class CheckoutRemoteDataSource {
+  Future<BookAppointmentResponse> bookCashAppointment({
+    required BookAppointmentRequest book,
+  });
   Future<BookAppointmentResponse> bookAppointment({
     required BookAppointmentRequest book,
   });
@@ -37,7 +40,7 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
   CheckoutRemoteDataSourceImpl({required this.apiService});
 
   @override
-  Future<BookAppointmentResponse> bookAppointment({
+  Future<BookAppointmentResponse> bookCashAppointment({
     required BookAppointmentRequest book,
   }) async {
     var response = await apiService.post(
@@ -122,5 +125,22 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
     return (response['data'] as List)
         .map((e) => SlotAvailableResponse.fromJson(e))
         .toList();
+  }
+
+  @override
+  Future<BookAppointmentResponse> bookAppointment({
+    required BookAppointmentRequest book,
+  }) async {
+    var response = await apiService.post(
+      endPoint: '/bookings',
+      data: book.toJson(),
+    );
+
+    var bookAppointment = BookAppointmentResponse.fromJson(response['data']);
+    await apiService.post(
+      endPoint: '/payments/process',
+      data: {"booking_id": bookAppointment.id, "gateway": "stripe"},
+    );
+    return bookAppointment;
   }
 }
