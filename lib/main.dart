@@ -15,6 +15,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
   Stripe.publishableKey = AppKeys.stripePublishableKey;
   await Prefs.init();
   serverLocator();
