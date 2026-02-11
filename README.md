@@ -1,16 +1,33 @@
-# cure
+# 🩺 Healthcare Booking App (Flutter)
 
-A new Flutter project.
+A production-ready mobile application that connects patients with doctors and enables seamless appointment booking and online payments.
 
-## Getting Started
+## ✨ Features
+- OTP Authentication (Phone Number Login)
+- Browse Doctors & Doctor Profiles
+- Search Doctors
+- Add to Favorites
+- Book, Reschedule & Cancel Appointments
+- Online Payments (Stripe & PayPal)
+- Profile Management
+- Reviews & Ratings
+- Secure Authentication & Validation
+- Clean & Responsive UI
 
-This project is a starting point for a Flutter application.
+## 🧱 Architecture
+This project follows Clean Architecture with feature-based structure:
+- Presentation Layer (UI + Cubit)
+- Domain Layer (Use Cases + Entities)
+- Data Layer (Repositories + Data Sources)
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠 Tech Stack
+- Flutter & Dart  
+- State Management: Cubit (Flutter Bloc)  
+- Dependency Injection: GetIt  
+- Local Storage: SharedPreferences  
+- Secure Storage for tokens  
+- RESTful APIs  
+- Payments: Stripe & PayPal  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📱 Dimo
+> 
